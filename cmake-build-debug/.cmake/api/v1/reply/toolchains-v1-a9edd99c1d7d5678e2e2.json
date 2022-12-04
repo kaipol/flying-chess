@@ -1,0 +1,77 @@
+{
+	"kind" : "toolchains",
+	"toolchains" : 
+	[
+		{
+			"compiler" : 
+			{
+				"id" : "GNU",
+				"implicit" : 
+				{
+					"includeDirectories" : 
+					[
+						"C:/Users/35238/Desktop/mingw(CLion+VSC)/SDL2-2.26.0-allinone/x86_64-w64-mingw32/include",
+						"C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include",
+						"C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/mingw/include",
+						"C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0/include-fixed",
+						"C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/mingw/x86_64-w64-mingw32/include"
+					],
+					"linkDirectories" : 
+					[
+						"C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/mingw/lib/gcc/x86_64-w64-mingw32/11.2.0",
+						"C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/mingw/lib/gcc",
+						"C:/Users/35238/Desktop/mingw(CLion+VSC)/SDL2-2.26.0-allinone/x86_64-w64-mingw32/lib",
+						"C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/mingw/x86_64-w64-mingw32/lib",
+						"C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/mingw/lib"
+					],
+					"linkFrameworkDirectories" : [],
+					"linkLibraries" : 
+					[
+						"mingw32",
+						"gcc",
+						"moldname",
+						"mingwex",
+						"kernel32",
+						"pthread",
+						"advapi32",
+						"shell32",
+						"user32",
+						"kernel32",
+						"iconv",
+						"mingw32",
+						"gcc",
+						"moldname",
+						"mingwex",
+						"kernel32"
+					]
+				},
+				"path" : "C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/mingw/bin/gcc.exe",
+				"version" : "11.2.0"
+			},
+			"language" : "C",
+			"sourceFileExtensions" : 
+			[
+				"c",
+				"m"
+			]
+		},
+		{
+			"compiler" : 
+			{
+				"implicit" : {},
+				"path" : "C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/mingw/bin/windres.exe"
+			},
+			"language" : "RC",
+			"sourceFileExtensions" : 
+			[
+				"rc",
+				"RC"
+			]
+		}
+	],
+	"version" : 
+	{
+		"major" : 1,
+		"minor" : 0
+	}
+}
