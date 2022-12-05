@@ -70,6 +70,67 @@ SDL_Rect pc3BackGroundRect;               //显示画笔图形信息，如长宽
 SDL_Surface *pc4BackGroundSurface = NULL; //图形区域
 SDL_Texture *pc4BackGroundTexture = NULL; //画笔识别图形区域
 SDL_Rect pc4BackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *oneBackGroundSurface = NULL; //图形区域
+SDL_Texture *oneBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect oneBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *twoBackGroundSurface = NULL; //图形区域
+SDL_Texture *twoBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect twoBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *threeBackGroundSurface = NULL; //图形区域
+SDL_Texture *threeBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect threeBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *fourBackGroundSurface = NULL; //图形区域
+SDL_Texture *fourBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect fourBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *fiveBackGroundSurface = NULL; //图形区域
+SDL_Texture *fiveBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect fiveBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *sixBackGroundSurface = NULL; //图形区域
+SDL_Texture *sixBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect sixBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *yellowplayBackGroundSurface = NULL; //图形区域
+SDL_Texture *yellowplayBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect yellowplayBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *greenplayBackGroundSurface = NULL; //图形区域
+SDL_Texture *greenplayBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect greenplayBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *blueplayBackGroundSurface = NULL; //图形区域
+SDL_Texture *blueplayBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect blueplayBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *redplayBackGroundSurface = NULL; //图形区域
+SDL_Texture *redplayBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect redplayBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *nowBackGroundSurface = NULL; //图形区域
+SDL_Texture *nowBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect nowBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *ywinBackGroundSurface = NULL; //图形区域
+SDL_Texture *ywinBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect ywinBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *bwinBackGroundSurface = NULL; //图形区域
+SDL_Texture *bwinBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect bwinBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *gwinBackGroundSurface = NULL; //图形区域
+SDL_Texture *gwinBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect gwinBackGroundRect;               //显示画笔图形信息，如长宽高
+
+SDL_Surface *rwinBackGroundSurface = NULL; //图形区域
+SDL_Texture *rwinBackGroundTexture = NULL; //画笔识别图形区域
+SDL_Rect rwinBackGroundRect;               //显示画笔图形信息，如长宽高
+//声明图形库区
 //声明图形库区
 
 //声明字体
@@ -88,9 +149,9 @@ void start();                   //开始游戏
 void rule();                    //游戏规则
 void quit();                    //退出游戏
 void type_chose();              //游戏模式选择
-void p_c_fight();               //人机对战
-void p_p_fight();               //人人对战
-void begin2();                  //进入棋盘 二人
+int p_c_fight();                //人机对战
+int p_p_fight();                //人人对战
+void begin2(int);               //进入棋盘 二人
 void begin3();                  //进入棋盘 三人
 void begin4();                  //进入棋盘 四人
 void load_chess();              //初始棋子位置
@@ -104,14 +165,14 @@ void pp4(); // 4玩家名称
 void pc2(); // 2电脑名称
 void pc3(); // 3电脑名称
 void pc4(); // 4电脑名称
-int dice_point();
+int Dice_point(const char *);
+void Load_dice(int, const char *);
 void startchess(char *); //起步
-void reload(char *, int, int);
-void moveyellow();
-void movegreen();
-void movered();
-void moveblue();
-int endgame();
+void reload(const char *, int, int);
+int CmpName(const char *);
+void MoveChess(const char *);
+int EndGame();
+void originorder();
 //函数声明
 struct yellow
 {
@@ -120,7 +181,7 @@ struct yellow
     int yellow3[2];
     int yellow4[2];
 
-} yellowplayer{{85, 68}, {163, 68}, {85, 145}, {163, 145}};
+} yellowplayer = {{85, 68}, {163, 68}, {85, 145}, {163, 145}};
 struct blue
 {
     int blue1[2];
@@ -128,7 +189,7 @@ struct blue
     int blue3[2];
     int blue4[2];
 
-} blueplayer{{800, 75}, {800, 145}, {875, 75}, {875, 145}};
+} blueplayer = {{800, 75}, {800, 145}, {875, 75}, {875, 145}};
 struct red
 {
     int red1[2];
@@ -136,7 +197,7 @@ struct red
     int red3[2];
     int red4[2];
 
-} redplayer{{795, 710}, {795, 790}, {880, 710}, {880, 790}};
+} redplayer = {{795, 710}, {795, 790}, {880, 710}, {880, 790}};
 struct green
 {
     int green1[2];
@@ -144,14 +205,21 @@ struct green
     int green3[2];
     int green4[2];
 
-} greenplayer{{85, 710}, {85, 790}, {165, 710}, {165, 790}};
+} greenplayer = {{85, 710}, {85, 790}, {165, 710}, {165, 790}};
 struct EndChess
 {
     int endyellowchess;
     int endbluechess;
     int endredchess;
     int endgreenchess;
-} EndChessNum{0, 0, 0, 0};
+} EndChessNum = {0, 0, 0, 0};
+const struct SpecPoint
+{                           // 1,2为黄；3,4为蓝；5，6为绿；7,8为红
+    int ChessEndPoint[8];   //终点坐标
+    int ChessFlyPoint[8];   //跳跃坐标
+    int ChessEnterPoint[8]; //进入最终行坐标
+    int ChessStartPoint[8]; //起飞坐标
+};
 //主函数
 #undef main
 int main(int argc, char *argv[]) //主函数
@@ -303,8 +371,113 @@ void load() //加载图片
     pc4BackGroundRect.x = 155;                                                           //同下
     pc4BackGroundRect.y = 230;                                                           //加载图片起始点是以窗口x=0，y=0为坐标系开始的
     pc4BackGroundRect.w = 690;                                                           //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
-    pc4BackGroundRect.h = 530;                                                           //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
-}
+    pc4BackGroundRect.h = 530;
+
+    oneBackGroundSurface = IMG_Load("one.png");                                          //("/*图片文件名*/")//规则界面
+    oneBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, oneBackGroundSurface); //将画笔放在窗口上
+    oneBackGroundRect.x = 1000;                                                          //同下
+    oneBackGroundRect.y = 400;                                                           //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    oneBackGroundRect.w = 200;                                                           //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    oneBackGroundRect.h = 200;                                                           //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    twoBackGroundSurface = IMG_Load("two.png");                                          //("/*图片文件名*/")//规则界面
+    twoBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, twoBackGroundSurface); //将画笔放在窗口上
+    twoBackGroundRect.x = 1000;                                                          //同下
+    twoBackGroundRect.y = 400;                                                           //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    twoBackGroundRect.w = 200;                                                           //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    twoBackGroundRect.h = 200;                                                           //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    threeBackGroundSurface = IMG_Load("three.png");                                          //("/*图片文件名*/")//规则界面
+    threeBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, threeBackGroundSurface); //将画笔放在窗口上
+    threeBackGroundRect.x = 1000;                                                            //同下
+    threeBackGroundRect.y = 400;                                                             //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    threeBackGroundRect.w = 200;                                                             //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    threeBackGroundRect.h = 200;                                                             //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    fourBackGroundSurface = IMG_Load("four.png");                                          //("/*图片文件名*/")//规则界面
+    fourBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, fourBackGroundSurface); //将画笔放在窗口上
+    fourBackGroundRect.x = 1000;                                                           //同下
+    fourBackGroundRect.y = 400;                                                            //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    fourBackGroundRect.w = 200;                                                            //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    fourBackGroundRect.h = 200;                                                            //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    fiveBackGroundSurface = IMG_Load("five.png");                                          //("/*图片文件名*/")//规则界面
+    fiveBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, fiveBackGroundSurface); //将画笔放在窗口上
+    fiveBackGroundRect.x = 1000;                                                           //同下
+    fiveBackGroundRect.y = 400;                                                            //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    fiveBackGroundRect.w = 200;                                                            //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    fiveBackGroundRect.h = 200;                                                            //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    sixBackGroundSurface = IMG_Load("six.png");                                          //("/*图片文件名*/")//规则界面
+    sixBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, sixBackGroundSurface); //将画笔放在窗口上
+    sixBackGroundRect.x = 1000;                                                          //同下
+    sixBackGroundRect.y = 400;                                                           //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    sixBackGroundRect.w = 200;                                                           //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    sixBackGroundRect.h = 200;                                                           //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    nowBackGroundSurface = IMG_Load("now.png");                                          //("/*图片文件名*/")//规则界面
+    nowBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, nowBackGroundSurface); //将画笔放在窗口上
+    nowBackGroundRect.x = 1000;                                                          //同下
+    nowBackGroundRect.y = 0;                                                             //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    nowBackGroundRect.w = 200;                                                           //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    nowBackGroundRect.h = 200;                                                           //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    yellowplayBackGroundSurface = IMG_Load("yellowplay.png");                                          //("/*图片文件名*/")//规则界面
+    yellowplayBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, yellowplayBackGroundSurface); //将画笔放在窗口上
+    yellowplayBackGroundRect.x = 1000;                                                                 //同下
+    yellowplayBackGroundRect.y = 200;                                                                  //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    yellowplayBackGroundRect.w = 200;                                                                  //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    yellowplayBackGroundRect.h = 200;                                                                  //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    blueplayBackGroundSurface = IMG_Load("blueplay.png");                                          //("/*图片文件名*/")//规则界面
+    blueplayBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, blueplayBackGroundSurface); //将画笔放在窗口上
+    blueplayBackGroundRect.x = 1000;                                                               //同下
+    blueplayBackGroundRect.y = 200;                                                                //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    blueplayBackGroundRect.w = 200;                                                                //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    blueplayBackGroundRect.h = 200;                                                                //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    greenplayBackGroundSurface = IMG_Load("greenplay.png");                                          //("/*图片文件名*/")//规则界面
+    greenplayBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, greenplayBackGroundSurface); //将画笔放在窗口上
+    greenplayBackGroundRect.x = 1000;                                                                //同下
+    greenplayBackGroundRect.y = 200;                                                                 //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    greenplayBackGroundRect.w = 200;                                                                 //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    greenplayBackGroundRect.h = 200;                                                                 //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    redplayBackGroundSurface = IMG_Load("redplay.png");                                          //("/*图片文件名*/")//规则界面
+    redplayBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, redplayBackGroundSurface); //将画笔放在窗口上
+    redplayBackGroundRect.x = 1000;                                                              //同下
+    redplayBackGroundRect.y = 200;                                                               //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    redplayBackGroundRect.w = 200;                                                               //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    redplayBackGroundRect.h = 200;                                                               //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    ywinBackGroundSurface = IMG_Load("ywin.png");                                          //("/*图片文件名*/")//规则界面
+    ywinBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, ywinBackGroundSurface); //将画笔放在窗口上
+    ywinBackGroundRect.x = 155;                                                            //同下
+    ywinBackGroundRect.y = 230;                                                            //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    ywinBackGroundRect.w = 690;                                                            //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    ywinBackGroundRect.h = 530;                                                            //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    bwinBackGroundSurface = IMG_Load("bwin.png");                                          //("/*图片文件名*/")//规则界面
+    bwinBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, bwinBackGroundSurface); //将画笔放在窗口上
+    bwinBackGroundRect.x = 155;                                                            //同下
+    bwinBackGroundRect.y = 230;                                                            //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    bwinBackGroundRect.w = 690;                                                            //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    bwinBackGroundRect.h = 530;                                                            //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    gwinBackGroundSurface = IMG_Load("gwin.png");                                          //("/*图片文件名*/")//规则界面
+    gwinBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, gwinBackGroundSurface); //将画笔放在窗口上
+    gwinBackGroundRect.x = 155;                                                            //同下
+    gwinBackGroundRect.y = 230;                                                            //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    gwinBackGroundRect.w = 690;                                                            //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    gwinBackGroundRect.h = 530;                                                            //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+
+    rwinBackGroundSurface = IMG_Load("rwin.png");                                          //("/*图片文件名*/")//规则界面
+    rwinBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, rwinBackGroundSurface); //将画笔放在窗口上
+    rwinBackGroundRect.x = 155;                                                            //同下
+    rwinBackGroundRect.y = 230;                                                            //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    rwinBackGroundRect.w = 690;                                                            //数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
+    rwinBackGroundRect.h = 530;                                                            //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
+} //数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 void load_yellowchess(int x, int y)
 {
     YellowBackGroundRect.x = x;                                                     //同下
@@ -444,7 +617,7 @@ void type_chose() //游戏模式
 t:
     return;
 }
-void p_c_fight() //人机大战
+int p_c_fight() //人机大战人数选择
 {
     SDL_RenderClear(Renderer);                                                //清空画笔
     SDL_RenderCopy(Renderer, NumBackGroundTexture, NULL, &NumBackGroundRect); //复制画笔
@@ -492,7 +665,7 @@ void p_c_fight() //人机大战
 t:
     return;
 }
-void p_p_fight() //人人对战
+int p_p_fight() //人人对战人数选择
 {
     SDL_RenderClear(Renderer);                                                //清空画笔
     SDL_RenderCopy(Renderer, NumBackGroundTexture, NULL, &NumBackGroundRect); //复制画笔
@@ -539,12 +712,16 @@ void p_p_fight() //人人对战
 t:
     return;
 }
-void begin2() //进入棋盘 二人
+void begin2(int number) //进入棋盘 二人
 {
     SDL_RenderClear(Renderer);                                                //清空画笔
     SDL_RenderCopy(Renderer, TapBackGroundTexture, NULL, &TapBackGroundRect); //复制画笔
-    SDL_RenderPresent(Renderer);                                              //刷新画笔 打印人数界面
+    SDL_RenderPresent(Renderer);
+    originorder(); //刷新画笔 打印人数界面
     load_chess();
+    int dice_result = 0;
+    const char *name[4] = {"yellow", "blue", "green", "red"};
+    int count = 0;
     SDL_Event begin2Event; //主事件
     while (SDL_WaitEvent(&begin2Event))
     {
@@ -561,18 +738,21 @@ void begin2() //进入棋盘 二人
                 goto t;
                 // 返回上一层
             }
+            else if (begin2Event.button.x > 1000 && begin2Event.button.x < 1200 && begin2Event.button.y > 400 &&
+                     begin2Event.button.y < 600)
+            {
+                if (count == 1)
+                {
+                    dice_result = Dice_point(name[0]);
+                    count = 0;
+                }
+                else
+                {
+                    dice_result = Dice_point(name[1]);
+                    count = 1;
+                }
+            }
             printf("(%d,%d)\n", begin2Event.button.x, begin2Event.button.y); //在命令行打印鼠标坐标
-            break;
-        default:
-            break;
-        }
-        switch (endgame())
-        {
-        case 1:
-            quit();
-            break;
-        case 2:
-            quit();
             break;
         default:
             break;
@@ -585,7 +765,8 @@ void begin3() //进入棋盘 三人
 {
     SDL_RenderClear(Renderer);                                                //清空画笔
     SDL_RenderCopy(Renderer, TapBackGroundTexture, NULL, &TapBackGroundRect); //复制画笔
-    SDL_RenderPresent(Renderer);                                              //刷新画笔 打印人数界面
+    SDL_RenderPresent(Renderer);
+    originorder(); //刷新画笔 打印人数界面
     load_chess();
     SDL_Event begin3Event; //主事件
     while (SDL_WaitEvent(&begin3Event))
@@ -608,7 +789,7 @@ void begin3() //进入棋盘 三人
         default:
             break;
         }
-        switch (endgame())
+        switch (EndGame())
         {
         case 1:
             quit();
@@ -630,7 +811,8 @@ void begin4() //进入棋盘 四人
 {
     SDL_RenderClear(Renderer);                                                //清空画笔
     SDL_RenderCopy(Renderer, TapBackGroundTexture, NULL, &TapBackGroundRect); //复制画笔
-    SDL_RenderPresent(Renderer);                                              //刷新画笔 打印人数界面
+    SDL_RenderPresent(Renderer);
+    originorder(); //刷新画笔 打印人数界面
     load_chess();
     SDL_Event begin4Event; //主事件
     while (SDL_WaitEvent(&begin4Event))
@@ -653,7 +835,7 @@ void begin4() //进入棋盘 四人
         default:
             break;
         }
-        switch (endgame())
+        switch (EndGame())
         {
         case 1:
             quit();
@@ -707,82 +889,82 @@ void load_chess() //加载棋子
 }
 void reload(const char name[10], int x, int y) //改变棋子位置并重新加载
 {
-    if (strcmp(name, "yellow1" == 0))
+    if (CmpName(name) == 1)
     {
         yellowplayer.yellow1[0] = x;
         yellowplayer.yellow1[1] = y;
     }
-    else if (strcmp(name, "yellow2") == 0)
+    else if (CmpName(name) == 2)
     {
         yellowplayer.yellow2[0] = x;
         yellowplayer.yellow2[1] = y;
     }
-    else if (strcmp(name, "yellow3") == 0)
+    else if (CmpName(name) == 3)
     {
         yellowplayer.yellow3[0] = x;
         yellowplayer.yellow3[1] = y;
     }
-    else if (strcmp(name, "yellow4") == 0)
+    else if (CmpName(name) == 4)
     {
         yellowplayer.yellow4[0] = x;
         yellowplayer.yellow4[1] = y;
     }
-    else if (strcmp(name, "blue1") == 0)
+    else if (CmpName(name) == 5)
     {
         blueplayer.blue1[0] = x;
         blueplayer.blue1[1] = y;
     }
-    else if (strcmp(name, "blue2") == 0)
+    else if (CmpName(name) == 6)
     {
         blueplayer.blue2[0] = x;
         blueplayer.blue2[1] = y;
     }
-    else if (strcmp(name, "blue3") == 0)
+    else if (CmpName(name) == 7)
     {
         blueplayer.blue3[0] = x;
         blueplayer.blue3[1] = y;
     }
-    else if (!strcmp(name, "blue4"))
+    else if (CmpName(name) == 8)
     {
         blueplayer.blue4[0] = x;
         blueplayer.blue4[1] = y;
     }
-    else if (!strcmp(name, "green1"))
+    else if (CmpName(name) == 9)
     {
         greenplayer.green1[0] = x;
         greenplayer.green1[1] = y;
     }
-    else if (!strcmp(name, "green2"))
+    else if (CmpName(name) == 10)
     {
         greenplayer.green2[0] = x;
         greenplayer.green2[1] = y;
     }
-    else if (!strcmp(name, "green3"))
+    else if (CmpName(name) == 11)
     {
         greenplayer.green3[0] = x;
         greenplayer.green3[1] = y;
     }
-    else if (!strcmp(name, "green4"))
+    else if (CmpName(name) == 12)
     {
         greenplayer.green4[0] = x;
         greenplayer.green4[1] = y;
     }
-    else if (strcmp(name, "red1") == 0)
+    else if (CmpName(name) == 13)
     {
         redplayer.red1[0] = x;
         redplayer.red1[1] = y;
     }
-    else if (!strcmp(name, "red2"))
+    else if (CmpName(name) == 14)
     {
         redplayer.red2[0] = x;
         redplayer.red2[1] = y;
     }
-    else if (!strcmp(name, "red3"))
+    else if (CmpName(name) == 15)
     {
         redplayer.red3[0] = x;
         redplayer.red3[1] = y;
     }
-    else if (!strcmp(name, "red4"))
+    else if (CmpName(name) == 16)
     {
         redplayer.red4[0] = x;
         redplayer.red4[1] = y;
@@ -809,7 +991,7 @@ void pp2() //人名2
         }
     }
 t:
-    begin2();
+    begin2(2);
 }
 void pp3() //人名3
 {
@@ -875,7 +1057,7 @@ void pc2() //电脑名2
         }
     }
 t:
-    begin2();
+    begin2(2);
 }
 void pc3() //电脑名3
 {
@@ -921,23 +1103,120 @@ void pc4() //电脑名4
 t:
     begin4();
 }
-int dice_point() //骰子
+int CmpName(const char name[10])
+{
+    if (!strcmp(name, "yellow1"))
+        return 1; //黄一号
+    else if (!strcmp(name, "yellow2"))
+        return 2;
+    else if (!strcmp(name, "yellow3"))
+        return 3;
+    else if (!strcmp(name, "yellow4"))
+        return 4;
+    else if (!strcmp(name, "blue1"))
+        return 5;
+    else if (!strcmp(name, "blue2"))
+        return 6;
+    else if (!strcmp(name, "blue3"))
+        return 7;
+    else if (!strcmp(name, "blue4"))
+        return 8;
+    else if (!strcmp(name, "green1"))
+        return 9;
+    else if (!strcmp(name, "green2"))
+        return 10;
+    else if (!strcmp(name, "green3"))
+        return 11;
+    else if (!strcmp(name, "green4"))
+        return 12;
+    else if (!strcmp(name, "red1"))
+        return 13;
+    else if (!strcmp(name, "red2"))
+        return 14;
+    else if (!strcmp(name, "red3"))
+        return 15;
+    else if (!strcmp(name, "red4"))
+        return 16;
+}
+int Dice_point(const char name[10]) //骰子
 {
     srand((unsigned)time(NULL));
-    return rand() % 6 + 1;
+    int result = 0;
+    result = rand() % 6 + 1;
+    Load_dice(result, name);
+    return result;
 }
-void startchess(char name[10])
+void Load_dice(int result, const char name[10])
 {
-}
-void moveyellow()
-{
-    int result = dice_point();
-    switch (SDL_Keysym)
+    switch (result)
     {
-        case
+    case 1:
+        SDL_RenderCopy(Renderer, oneBackGroundTexture, NULL, &oneBackGroundRect);
+        SDL_RenderPresent(Renderer);
+        break;
+    case 2:
+        SDL_RenderCopy(Renderer, twoBackGroundTexture, NULL, &twoBackGroundRect);
+        SDL_RenderPresent(Renderer);
+        break;
+    case 3:
+        SDL_RenderCopy(Renderer, threeBackGroundTexture, NULL, &threeBackGroundRect);
+        SDL_RenderPresent(Renderer);
+        break;
+    case 4:
+        SDL_RenderCopy(Renderer, fourBackGroundTexture, NULL, &fourBackGroundRect);
+        SDL_RenderPresent(Renderer);
+        break;
+    case 5:
+        SDL_RenderCopy(Renderer, fiveBackGroundTexture, NULL, &fiveBackGroundRect);
+        SDL_RenderPresent(Renderer);
+    case 6:
+        SDL_RenderCopy(Renderer, sixBackGroundTexture, NULL, &sixBackGroundRect);
+        SDL_RenderPresent(Renderer);
+    }
+    if (!strcmp(name, "yellow"))
+    {
+        SDL_RenderCopy(Renderer, yellowplayBackGroundTexture, NULL, &yellowplayBackGroundRect);
+        SDL_RenderPresent(Renderer);
+    }
+    else if (!strcmp(name, "blue"))
+    {
+        SDL_RenderCopy(Renderer, blueplayBackGroundTexture, NULL, &blueplayBackGroundRect);
+        SDL_RenderPresent(Renderer);
+    }
+    else if (!strcmp(name, "red"))
+    {
+        SDL_RenderCopy(Renderer, redplayBackGroundTexture, NULL, &redplayBackGroundRect);
+        SDL_RenderPresent(Renderer);
+    }
+    else if (!strcmp(name, "green"))
+    {
+        SDL_RenderCopy(Renderer, greenplayBackGroundTexture, NULL, &greenplayBackGroundRect);
+        SDL_RenderPresent(Renderer);
     }
 }
-int endgame()
+void MoveChess(const char name[10])
+{
+    int result = Dice_point(name);
+    SDL_Event ChessMove;
+    while (SDL_WaitEvent(&ChessMove))
+    {
+        switch (ChessMove.type)
+        {
+        case SDL_MOUSEBUTTONDOWN:
+            break;
+        }
+    }
+}
+void originorder() //初始命令行
+{
+    SDL_RenderCopy(Renderer, nowBackGroundTexture, NULL, &nowBackGroundRect);               //复制画笔
+    SDL_RenderPresent(Renderer);                                                            //刷新画笔
+    SDL_RenderCopy(Renderer, yellowplayBackGroundTexture, NULL, &yellowplayBackGroundRect); //复制画笔
+    SDL_RenderPresent(Renderer);                                                            //刷新画笔
+    SDL_RenderCopy(Renderer, oneBackGroundTexture, NULL, &oneBackGroundRect);               //复制画笔
+    SDL_RenderPresent(Renderer);                                                            //刷新画笔
+}
+int EndGame()
 {
     if (EndChessNum.endyellowchess == 4)
         return 1; // 1为黄方胜
@@ -949,6 +1228,6 @@ int endgame()
         return 4; // 4为红方胜
 }
 
-        //函数区
+//函数区
 
-        //棋子大小 50x50
+//棋子大小 50x50
