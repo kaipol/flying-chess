@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
 //头文件
 
 //声明图形库区
@@ -92,7 +93,7 @@ void p_p_fight();               //人人对战
 void begin2();                  //进入棋盘 二人
 void begin3();                  //进入棋盘 三人
 void begin4();                  //进入棋盘 四人
-void begin_chess();             //初始棋子位置
+void load_chess();              //初始棋子位置
 void load_greenchess(int, int); //加载棋子
 void load_yellowchess(int, int);
 void load_redchess(int, int);
@@ -103,9 +104,9 @@ void pp4(); // 4玩家名称
 void pc2(); // 2电脑名称
 void pc3(); // 3电脑名称
 void pc4(); // 4电脑名称
-int point();
+int dice_point();
 void startchess(char *); //起步
-void reload(char *);
+void reload(char *, int, int);
 void moveyellow();
 void movegreen();
 void movered();
@@ -119,7 +120,7 @@ struct yellow
     int yellow3[2];
     int yellow4[2];
 
-} yellowplayer;
+} yellowplayer{{85, 68}, {163, 68}, {85, 145}, {163, 145}};
 struct blue
 {
     int blue1[2];
@@ -127,7 +128,7 @@ struct blue
     int blue3[2];
     int blue4[2];
 
-} blueplayer;
+} blueplayer{{800, 75}, {800, 145}, {875, 75}, {875, 145}};
 struct red
 {
     int red1[2];
@@ -135,7 +136,7 @@ struct red
     int red3[2];
     int red4[2];
 
-} redplayer;
+} redplayer{{795, 710}, {795, 790}, {880, 710}, {880, 790}};
 struct green
 {
     int green1[2];
@@ -143,14 +144,14 @@ struct green
     int green3[2];
     int green4[2];
 
-} greenplayer;
-struct endchess
+} greenplayer{{85, 710}, {85, 790}, {165, 710}, {165, 790}};
+struct EndChess
 {
     int endyellowchess;
     int endbluechess;
     int endredchess;
     int endgreenchess;
-} endchessnum;
+} EndChessNum{0, 0, 0, 0};
 //主函数
 #undef main
 int main(int argc, char *argv[]) //主函数
@@ -317,6 +318,21 @@ void load_bluechess(int x, int y)
     BulBackGroundRect.y = y;                                                  //加载图片起始点是以窗口x=0，y=0为坐标系开始的
     SDL_RenderCopy(Renderer, BulBackGroundTexture, NULL, &BulBackGroundRect); //复制画笔
     SDL_RenderPresent(Renderer);                                              //刷新画笔 打印人数界面
+}
+void load_greenchess(int x, int y)
+{
+
+    GreenBackGroundRect.x = x;                                                    //同下
+    GreenBackGroundRect.y = y;                                                    //加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    SDL_RenderCopy(Renderer, GreenBackGroundTexture, NULL, &GreenBackGroundRect); //复制画笔
+    SDL_RenderPresent(Renderer);                                                  //刷新画笔 打印人数界面
+}
+void load_redchess(int x, int y)
+{
+    RedBackGroundRect.x = x;
+    RedBackGroundRect.y = y;
+    SDL_RenderCopy(Renderer, RedBackGroundTexture, NULL, &RedBackGroundRect);
+    SDL_RenderPresent(Renderer);
 }
 void start() //开始游戏
 {
@@ -528,7 +544,7 @@ void begin2() //进入棋盘 二人
     SDL_RenderClear(Renderer);                                                //清空画笔
     SDL_RenderCopy(Renderer, TapBackGroundTexture, NULL, &TapBackGroundRect); //复制画笔
     SDL_RenderPresent(Renderer);                                              //刷新画笔 打印人数界面
-    begin_chess();
+    load_chess();
     SDL_Event begin2Event; //主事件
     while (SDL_WaitEvent(&begin2Event))
     {
@@ -570,7 +586,7 @@ void begin3() //进入棋盘 三人
     SDL_RenderClear(Renderer);                                                //清空画笔
     SDL_RenderCopy(Renderer, TapBackGroundTexture, NULL, &TapBackGroundRect); //复制画笔
     SDL_RenderPresent(Renderer);                                              //刷新画笔 打印人数界面
-    begin_chess();
+    load_chess();
     SDL_Event begin3Event; //主事件
     while (SDL_WaitEvent(&begin3Event))
     {
@@ -615,7 +631,7 @@ void begin4() //进入棋盘 四人
     SDL_RenderClear(Renderer);                                                //清空画笔
     SDL_RenderCopy(Renderer, TapBackGroundTexture, NULL, &TapBackGroundRect); //复制画笔
     SDL_RenderPresent(Renderer);                                              //刷新画笔 打印人数界面
-    begin_chess();
+    load_chess();
     SDL_Event begin4Event; //主事件
     while (SDL_WaitEvent(&begin4Event))
     {
@@ -658,79 +674,120 @@ void begin4() //进入棋盘 四人
 t:
     return;
 }
-void begin_chess() //棋子初态
+void load_chess() //加载棋子
 {
     //黄色
-    load_yellowchess(85, 68);
-    load_yellowchess(163, 68);
-    load_yellowchess(85, 145);
-    load_yellowchess(163, 145);
+    load_yellowchess(yellowplayer.yellow1[0], yellowplayer.yellow1[1]);
+    load_yellowchess(yellowplayer.yellow2[0], yellowplayer.yellow2[1]);
+    load_yellowchess(yellowplayer.yellow3[0], yellowplayer.yellow3[1]);
+    load_yellowchess(yellowplayer.yellow4[0], yellowplayer.yellow4[1]);
     //黄色
 
     //蓝色
 
-    load_bluechess(800, 75);
-    load_bluechess(800, 145);
-    load_bluechess(875, 75);
-    load_bluechess(875, 145);
+    load_bluechess(blueplayer.blue1[0], blueplayer.blue1[1]);
+    load_bluechess(blueplayer.blue2[0], blueplayer.blue2[1]);
+    load_bluechess(blueplayer.blue3[0], blueplayer.blue3[1]);
+    load_bluechess(blueplayer.blue4[0], blueplayer.blue4[1]);
     //蓝色
 
     //绿色
-    GreenBackGroundRect.x = 85;                                                   //同下
-    GreenBackGroundRect.y = 710;                                                  //加载图片起始点是以窗口x=0，y=0为坐标系开始的
-    SDL_RenderCopy(Renderer, GreenBackGroundTexture, NULL, &GreenBackGroundRect); //复制画笔
-    SDL_RenderPresent(Renderer);                                                  //刷新画笔 打印人数界面
-
-    GreenBackGroundRect.x = 85;                                                   //同下
-    GreenBackGroundRect.y = 790;                                                  //加载图片起始点是以窗口x=0，y=0为坐标系开始的
-    SDL_RenderCopy(Renderer, GreenBackGroundTexture, NULL, &GreenBackGroundRect); //复制画笔
-    SDL_RenderPresent(Renderer);                                                  //刷新画笔 打印人数界面
-
-    GreenBackGroundRect.x = 165;                                                  //同下
-    GreenBackGroundRect.y = 710;                                                  //加载图片起始点是以窗口x=0，y=0为坐标系开始的
-    SDL_RenderCopy(Renderer, GreenBackGroundTexture, NULL, &GreenBackGroundRect); //复制画笔
-    SDL_RenderPresent(Renderer);                                                  //刷新画笔 打印人数界面
-
-    GreenBackGroundRect.x = 165;                                                  //同下
-    GreenBackGroundRect.y = 790;                                                  //加载图片起始点是以窗口x=0，y=0为坐标系开始的
-    SDL_RenderCopy(Renderer, GreenBackGroundTexture, NULL, &GreenBackGroundRect); //复制画笔
-    SDL_RenderPresent(Renderer);                                                  //刷新画笔 打印人数界面
+    load_greenchess(greenplayer.green1[0], greenplayer.green1[1]);
+    load_greenchess(greenplayer.green2[0], greenplayer.green2[1]);
+    load_greenchess(greenplayer.green3[0], greenplayer.green3[1]);
+    load_greenchess(greenplayer.green4[0], greenplayer.green4[1]);
     //绿色
 
     //红色
-    RedBackGroundRect.x = 795;                                                //同下
-    RedBackGroundRect.y = 710;                                                //加载图片起始点是以窗口x=0，y=0为坐标系开始的
-    SDL_RenderCopy(Renderer, RedBackGroundTexture, NULL, &RedBackGroundRect); //复制画笔
-    SDL_RenderPresent(Renderer);                                              //刷新画笔 打印人数界面
-
-    RedBackGroundRect.x = 795;                                                //同下
-    RedBackGroundRect.y = 790;                                                //加载图片起始点是以窗口x=0，y=0为坐标系开始的
-    SDL_RenderCopy(Renderer, RedBackGroundTexture, NULL, &RedBackGroundRect); //复制画笔
-    SDL_RenderPresent(Renderer);                                              //刷新画笔 打印人数界面
-
-    RedBackGroundRect.x = 880;                                                //同下
-    RedBackGroundRect.y = 710;                                                //加载图片起始点是以窗口x=0，y=0为坐标系开始的
-    SDL_RenderCopy(Renderer, RedBackGroundTexture, NULL, &RedBackGroundRect); //复制画笔
-    SDL_RenderPresent(Renderer);                                              //刷新画笔 打印人数界面
-
-    RedBackGroundRect.x = 880;                                                //同下
-    RedBackGroundRect.y = 790;                                                //加载图片起始点是以窗口x=0，y=0为坐标系开始的
-    SDL_RenderCopy(Renderer, RedBackGroundTexture, NULL, &RedBackGroundRect); //复制画笔
-    SDL_RenderPresent(Renderer);                                              //刷新画笔 打印人数界面
+    load_redchess(redplayer.red1[0], redplayer.red1[1]);
+    load_redchess(redplayer.red2[0], redplayer.red2[1]);
+    load_redchess(redplayer.red3[0], redplayer.red3[1]);
+    load_redchess(redplayer.red4[0], redplayer.red4[1]);
     //红色
 }
-void reload(char name[10])
+void reload(const char name[10], int x, int y) //改变棋子位置并重新加载
 {
-    if (name == "yellow1")
+    if (strcmp(name, "yellow1" == 0))
     {
-        YellowBackGroundRect.x = 47;
-        YellowBackGroundRect.y = 266;
-        SDL_RenderCopy(Renderer, YellowBackGroundTexture, NULL, &YellowBackGroundRect);
-        SDL_RenderPresent(Renderer);
+        yellowplayer.yellow1[0] = x;
+        yellowplayer.yellow1[1] = y;
     }
-    else if (name == "")
+    else if (strcmp(name, "yellow2") == 0)
     {
+        yellowplayer.yellow2[0] = x;
+        yellowplayer.yellow2[1] = y;
     }
+    else if (strcmp(name, "yellow3") == 0)
+    {
+        yellowplayer.yellow3[0] = x;
+        yellowplayer.yellow3[1] = y;
+    }
+    else if (strcmp(name, "yellow4") == 0)
+    {
+        yellowplayer.yellow4[0] = x;
+        yellowplayer.yellow4[1] = y;
+    }
+    else if (strcmp(name, "blue1") == 0)
+    {
+        blueplayer.blue1[0] = x;
+        blueplayer.blue1[1] = y;
+    }
+    else if (strcmp(name, "blue2") == 0)
+    {
+        blueplayer.blue2[0] = x;
+        blueplayer.blue2[1] = y;
+    }
+    else if (strcmp(name, "blue3") == 0)
+    {
+        blueplayer.blue3[0] = x;
+        blueplayer.blue3[1] = y;
+    }
+    else if (!strcmp(name, "blue4"))
+    {
+        blueplayer.blue4[0] = x;
+        blueplayer.blue4[1] = y;
+    }
+    else if (!strcmp(name, "green1"))
+    {
+        greenplayer.green1[0] = x;
+        greenplayer.green1[1] = y;
+    }
+    else if (!strcmp(name, "green2"))
+    {
+        greenplayer.green2[0] = x;
+        greenplayer.green2[1] = y;
+    }
+    else if (!strcmp(name, "green3"))
+    {
+        greenplayer.green3[0] = x;
+        greenplayer.green3[1] = y;
+    }
+    else if (!strcmp(name, "green4"))
+    {
+        greenplayer.green4[0] = x;
+        greenplayer.green4[1] = y;
+    }
+    else if (strcmp(name, "red1") == 0)
+    {
+        redplayer.red1[0] = x;
+        redplayer.red1[1] = y;
+    }
+    else if (!strcmp(name, "red2"))
+    {
+        redplayer.red2[0] = x;
+        redplayer.red2[1] = y;
+    }
+    else if (!strcmp(name, "red3"))
+    {
+        redplayer.red3[0] = x;
+        redplayer.red3[1] = y;
+    }
+    else if (!strcmp(name, "red4"))
+    {
+        redplayer.red4[0] = x;
+        redplayer.red4[1] = y;
+    }
+    load_chess();
 }
 void pp2() //人名2
 {
@@ -864,7 +921,7 @@ void pc4() //电脑名4
 t:
     begin4();
 }
-int point()
+int dice_point() //骰子
 {
     srand((unsigned)time(NULL));
     return rand() % 6 + 1;
@@ -874,20 +931,24 @@ void startchess(char name[10])
 }
 void moveyellow()
 {
-    int result = point();
+    int result = dice_point();
+    switch (SDL_Keysym)
+    {
+        case
+    }
 }
 int endgame()
 {
-    if (endchessnum.endyellowchess == 4)
+    if (EndChessNum.endyellowchess == 4)
         return 1; // 1为黄方胜
-    else if (endchessnum.endbluechess == 4)
+    else if (EndChessNum.endbluechess == 4)
         return 2; // 2为蓝方胜
-    else if (endchessnum.endgreenchess == 4)
+    else if (EndChessNum.endgreenchess == 4)
         return 3; // 3为绿方胜
-    else if (endchessnum.endredchess == 4)
+    else if (EndChessNum.endredchess == 4)
         return 4; // 4为红方胜
 }
 
-//函数区
+        //函数区
 
-//棋子大小 50x50
+        //棋子大小 50x50
