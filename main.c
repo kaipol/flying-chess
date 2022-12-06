@@ -149,8 +149,8 @@ void start();                   //开始游戏
 void rule();                    //游戏规则
 void quit();                    //退出游戏
 void type_chose();              //游戏模式选择
-int p_c_fight();                //人机对战
-int p_p_fight();                //人人对战
+void p_c_fight();               //人机对战
+void p_p_fight();               //人人对战
 void begin2(int);               //进入棋盘 二人
 void begin3();                  //进入棋盘 三人
 void begin4();                  //进入棋盘 四人
@@ -617,7 +617,7 @@ void type_chose() //游戏模式
 t:
     return;
 }
-int p_c_fight() //人机大战人数选择
+void p_c_fight() //人机大战人数选择
 {
     SDL_RenderClear(Renderer);                                                //清空画笔
     SDL_RenderCopy(Renderer, NumBackGroundTexture, NULL, &NumBackGroundRect); //复制画笔
@@ -665,7 +665,7 @@ int p_c_fight() //人机大战人数选择
 t:
     return;
 }
-int p_p_fight() //人人对战人数选择
+void p_p_fight() //人人对战人数选择
 {
     SDL_RenderClear(Renderer);                                                //清空画笔
     SDL_RenderCopy(Renderer, NumBackGroundTexture, NULL, &NumBackGroundRect); //复制画笔
