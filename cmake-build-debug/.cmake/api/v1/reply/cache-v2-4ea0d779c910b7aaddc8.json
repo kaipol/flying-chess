@@ -34,18 +34,6 @@
 			"value" : "C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/mingw/bin/ar.exe"
 		},
 		{
-			"name" : "CMAKE_BACKWARDS_COMPATIBILITY",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "For backwards compatibility, what version of CMake commands and syntax should this version of CMake try to support."
-				}
-			],
-			"type" : "STRING",
-			"value" : "2.4"
-		},
-		{
 			"name" : "CMAKE_BUILD_TYPE",
 			"properties" : 
 			[
@@ -67,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "d:/untitled/cmake-build-debug"
+			"value" : "d:/flychess2/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -443,7 +431,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/untitled/cmake-build-debug/CMakeFiles/pkgRedirects"
+			"value" : "D:/flychess2/cmake-build-debug/CMakeFiles/pkgRedirects"
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -515,7 +503,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "D:/untitled"
+			"value" : "D:/flychess2"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1122,30 +1110,6 @@
 			"value" : "FALSE"
 		},
 		{
-			"name" : "EXECUTABLE_OUTPUT_PATH",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Single output directory for building all executables."
-				}
-			],
-			"type" : "PATH",
-			"value" : ""
-		},
-		{
-			"name" : "LIBRARY_OUTPUT_PATH",
-			"properties" : 
-			[
-				{
-					"name" : "HELPSTRING",
-					"value" : "Single output directory for building all libraries."
-				}
-			],
-			"type" : "PATH",
-			"value" : ""
-		},
-		{
 			"name" : "_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED",
 			"properties" : 
 			[
@@ -1167,7 +1131,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/untitled/cmake-build-debug"
+			"value" : "D:/flychess2/cmake-build-debug"
 		},
 		{
 			"name" : "untitled_IS_TOP_LEVEL",
@@ -1191,7 +1155,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "D:/untitled"
+			"value" : "D:/flychess2"
 		}
 	],
 	"kind" : "cache",
