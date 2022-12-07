@@ -211,62 +211,13 @@ struct EndChess
     int endredchess;
     int endgreenchess;
 } EndChessNum = {0, 0, 0, 0};
-const struct YellowJumpPonint
-{
-    int LeftYellowPoint[4][2];   // 飞行点之前
-    int TopYellowPoint[7][2];    // 飞行点之后
-    int RightYellowPoint[1][2];  // 进终点
-    int FlyingYellowPoint[1][2]; // 飞行点
-    int EndYellowPoint[1][2];    // 终点
-    int StartYellowPoint[1][2]   // 起飞点
-} YellowPoint = {{{153, 280}, {309, 188}, {403, 80}, {635, 90}},
-                 {{850, 333}, {850, 520}, {692, 567}, {635, 762}, {423, 762}, {260, 665}, {154, 567}},
-                 {53, 425},
-                 {691, 332},
-                 {427, 422},
-                 {20, 250}};
-const struct BlueJumpPoint
-{
-    int LeftBluePoint[4][2];   // 飞行点之前
-    int TopBluePoint[7][2];    // 飞行点之后
-    int RightBluePoint[1][2];  // 进终点
-    int FlyingBluePoint[1][2]; // 飞行点
-    int EndBluePoint[1][2];    // 终点
-    int StartBluePoint[1][2]   // 起飞点
-} BluePoint = {{{635, 138}, {744, 235}, {850, 378}, {850, 568}},
-               {{583, 764}, {372, 763}, {316, 611}, {101, 568}, {53, 380}, {205, 235}, {259, 139}},
-               {{476, 47}},
-               {{635, 614}},
-               {{477, 381}},
-               {{682, 16}}};
-const struct RedJumpPoint
-{
-    int LeftRedPoint[4][2];   // 飞行点之前
-    int TopRedPoint[7][2];    // 飞行点之后
-    int RightRedPoint[1][2];  // 进终点
-    int FlyingRedPoint[1][2]; // 飞行点
-    int EndRedPoint[1][2];    // 终点
-    int StartRedPoint[1][2]   // 起飞点
-} RedPoint = {{{797, 567}, {635, 668}, {530, 763}, {311, 761}},
-              {{53, 520}, {55, 332}, {260, 284}, {313, 138}, {531, 47}, {638, 186}, {796, 235}},
-              {{851, 426}},
-              {{311, 567}},
-              {{534, 421}},
-              {{929, 612}}};
-const struct GreenJumpPoint
-{
-    int LeftGreenPoint[4][2];   // 飞行点之前
-    int TopGreenPoint[7][2];    // 飞行点之后
-    int RightGreenPoint[1][2];  // 进终点
-    int FlyingGreenPoint[1][2]; // 飞行点
-    int EndGreenPoint[1][2];    // 终点
-    int StartYellowPoint[1][2]  // 起飞点
-} GreenPoint = {{{260, 717}, {207, 569}, {53, 474}, {105, 285}},
-                {{369, 47}, {583, 47}, {685, 235}, {850, 285}, {850, 473}, {746, 567}, {635, 715}},
-                {{476, 763}},
-                {{312, 233}},
-                {{472, 478}},
-                {{276, 837}}};
+const struct SpecPoint
+{                           // 1,2为黄；3,4为蓝；5，6为绿；7,8为红
+    int ChessEndPoint[8];   // 终点坐标
+    int ChessFlyPoint[8];   // 跳跃坐标
+    int ChessEnterPoint[8]; // 进入最终行坐标
+    int ChessStartPoint[8]; // 起飞坐标
+};
 // 主函数
 #undef main
 int main(int argc, char *argv[]) // 主函数
