@@ -211,6 +211,7 @@ struct EndChess
     int endredchess;
     int endgreenchess;
 } EndChessNum = {0, 0, 0, 0};
+<<<<<<< HEAD
 const struct SpecPoint
 {                           // 1,2为黄；3,4为蓝；5，6为绿；7,8为红
     int ChessEndPoint[8];   // 终点坐标
@@ -219,6 +220,49 @@ const struct SpecPoint
     int ChessStartPoint[8]; // 起飞坐标
 };
 // 主函数
+=======
+const struct YellowJumpPonint
+{
+    int LeftYellowPoint[3][3];   //左边三个点坐标
+    int TopYellowPoint[3][3];    //上面三个点坐标
+    int RightYellowPoint[3][3];  //右边三个点坐标
+    int UnderYellowPoint[3][3];  //下面三个点坐标
+    int FlyingYellowPoint[1][1]; //飞行点
+    int EndYellowPoint[1][1];    //终点
+    int StartYellowPoint[1][1]   //起飞点
+} YellowPoint;
+const struct BlueJumpPoint
+{
+    int LeftBluePoint[3][3];   //左边三个点坐标
+    int TopBluePoint[3][3];    //上面三个点坐标
+    int RightBluePoint[3][3];  //右边三个点坐标
+    int UnderBluePoint[3][3];  //下面三个点坐标
+    int FlyingBluePoint[1][1]; //飞行点
+    int EndBluePoint[1][1];    //终点
+    int StartBluePoint[1][1]   //起飞点
+} BluePoint;
+const struct RedJumpPoint
+{
+    int LeftRedPoint[3][3];   //左边三个点坐标
+    int TopRedPoint[3][3];    //上面三个点坐标
+    int RightRedPoint[3][3];  //右边三个点坐标
+    int UnderRedPoint[3][3];  //下面三个点坐标
+    int FlyingRedPoint[1][1]; //飞行点
+    int EndRedPoint[1][1];    //终点
+    int StartRedPoint[1][1]   //起飞点
+} RedPoint;
+const struct GreenJumpPoint
+{
+    int LeftGreenPoint[3][3];   //左边三个点坐标
+    int TopGreenPoint[3][3];    //上面三个点坐标
+    int RightGreenPoint[3][3];  //右边三个点坐标
+    int UnderGreenPoint[3][3];  //下面三个点坐标
+    int FlyingGreenPoint[1][1]; //飞行点
+    int EndGreenPoint[1][1];    //终点
+    int StartGreenPoint[1][1]   //起飞点
+} GreenPoint;
+//主函数
+>>>>>>> 9fa37ee352668124d8b875ceb148df65927e671d
 #undef main
 int main(int argc, char *argv[]) // 主函数
 {
