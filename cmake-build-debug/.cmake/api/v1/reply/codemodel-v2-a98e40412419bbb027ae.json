@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "D:/untitled/cmake-build-debug",
-		"source" : "D:/untitled"
+		"build" : "D:/flychess2/cmake-build-debug",
+		"source" : "D:/flychess2"
 	},
 	"version" : 
 	{
