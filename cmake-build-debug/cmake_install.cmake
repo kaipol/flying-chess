@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 # Install script for directory: D:/flytest
+=======
+# Install script for directory: D:/flychess2
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
 =======
 # Install script for directory: D:/flychess2
 >>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
@@ -50,7 +54,11 @@ endif()
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
 <<<<<<< HEAD
+<<<<<<< HEAD
 file(WRITE "D:/flytest/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+=======
+file(WRITE "D:/flychess2/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
 =======
 file(WRITE "D:/flychess2/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
 >>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a

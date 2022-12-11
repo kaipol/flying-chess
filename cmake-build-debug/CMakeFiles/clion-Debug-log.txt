@@ -1,5 +1,9 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 C:\Users\35238\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.7571.171\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/ninja/win/ninja.exe -G Ninja -S D:\flytest -B D:\flytest\cmake-build-debug
+=======
+C:\Users\35238\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.7571.171\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/ninja/win/ninja.exe -G Ninja -S D:\flychess2 -B D:\flychess2\cmake-build-debug
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
 =======
 C:\Users\35238\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.7571.171\bin\cmake\win\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=C:/Users/35238/AppData/Local/JetBrains/Toolbox/apps/CLion/ch-0/223.7571.171/bin/ninja/win/ninja.exe -G Ninja -S D:\flychess2 -B D:\flychess2\cmake-build-debug
 >>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
@@ -12,7 +16,11 @@ C:\Users\35238\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.7571.171\bin\
 -- Configuring done
 -- Generating done
 <<<<<<< HEAD
+<<<<<<< HEAD
 -- Build files have been written to: D:/flytest/cmake-build-debug
+=======
+-- Build files have been written to: D:/flychess2/cmake-build-debug
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
 =======
 -- Build files have been written to: D:/flychess2/cmake-build-debug
 >>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a

@@ -43,7 +43,11 @@ rule CUSTOM_COMMAND
 
 rule RERUN_CMAKE
 <<<<<<< HEAD
+<<<<<<< HEAD
   command = C:\Users\35238\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.7571.171\bin\cmake\win\bin\cmake.exe --regenerate-during-build -SD:\flytest -BD:\flytest\cmake-build-debug
+=======
+  command = C:\Users\35238\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.7571.171\bin\cmake\win\bin\cmake.exe --regenerate-during-build -SD:\flychess2 -BD:\flychess2\cmake-build-debug
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
 =======
   command = C:\Users\35238\AppData\Local\JetBrains\Toolbox\apps\CLion\ch-0\223.7571.171\bin\cmake\win\bin\cmake.exe --regenerate-during-build -SD:\flychess2 -BD:\flychess2\cmake-build-debug
 >>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
