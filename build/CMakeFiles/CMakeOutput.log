@@ -402,7 +402,10 @@ Compilation of the C compiler identification source "CMakeCCompilerId.c" produce
 
 The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
 
+<<<<<<< HEAD
 The system is: Windows - 10.0.22000 - AMD64
+=======
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
 Compiler: C:/TDM-GCC-64/bin/gcc.exe 
 Build flags: 
@@ -414,6 +417,194 @@ The output was:
 
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
 
+<<<<<<< HEAD
+The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/TDM-GCC-64/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+<<<<<<< HEAD
+The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/TDM-GCC-64/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+<<<<<<< HEAD
+The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/TDM-GCC-64/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+<<<<<<< HEAD
+The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/TDM-GCC-64/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+<<<<<<< HEAD
+The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/TDM-GCC-64/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+<<<<<<< HEAD
+The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/TDM-GCC-64/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+<<<<<<< HEAD
+The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/TDM-GCC-64/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+<<<<<<< HEAD
+The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/TDM-GCC-64/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+<<<<<<< HEAD
+The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/TDM-GCC-64/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+<<<<<<< HEAD
+The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/TDM-GCC-64/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+<<<<<<< HEAD
+The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: C:/TDM-GCC-64/bin/gcc.exe 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
+
+<<<<<<< HEAD
 The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
 
 Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
@@ -428,147 +619,7 @@ The output was:
 Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
 
 The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
-
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: C:/TDM-GCC-64/bin/gcc.exe 
-Build flags: 
-Id flags:  
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
-
-The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
-
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: C:/TDM-GCC-64/bin/gcc.exe 
-Build flags: 
-Id flags:  
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
-
-The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
-
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: C:/TDM-GCC-64/bin/gcc.exe 
-Build flags: 
-Id flags:  
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
-
-The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
-
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: C:/TDM-GCC-64/bin/gcc.exe 
-Build flags: 
-Id flags:  
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
-
-The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
-
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: C:/TDM-GCC-64/bin/gcc.exe 
-Build flags: 
-Id flags:  
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
-
-The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
-
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: C:/TDM-GCC-64/bin/gcc.exe 
-Build flags: 
-Id flags:  
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
-
-The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
-
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: C:/TDM-GCC-64/bin/gcc.exe 
-Build flags: 
-Id flags:  
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
-
-The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
-
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: C:/TDM-GCC-64/bin/gcc.exe 
-Build flags: 
-Id flags:  
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
-
-The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
-
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: C:/TDM-GCC-64/bin/gcc.exe 
-Build flags: 
-Id flags:  
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
-
-The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
-
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: C:/TDM-GCC-64/bin/gcc.exe 
-Build flags: 
-Id flags:  
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
-
-The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
-
-Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
-Compiler: C:/TDM-GCC-64/bin/gcc.exe 
-Build flags: 
-Id flags:  
-
-The output was:
-0
-
-
-Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.exe"
-
-The C compiler identification is GNU, found in "E:/Project/flychess2/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+=======
+The C compiler identification is GNU, found in "E:/project/flying-chess/build/CMakeFiles/3.25.0/CompilerIdC/a.exe"
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a
 

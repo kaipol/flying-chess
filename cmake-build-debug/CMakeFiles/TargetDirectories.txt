@@ -1,3 +1,9 @@
+<<<<<<< HEAD
 D:/flytest/cmake-build-debug/CMakeFiles/untitled.dir
 D:/flytest/cmake-build-debug/CMakeFiles/edit_cache.dir
 D:/flytest/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+=======
+D:/flychess2/cmake-build-debug/CMakeFiles/untitled.dir
+D:/flychess2/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/flychess2/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a

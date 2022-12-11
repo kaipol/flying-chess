@@ -49,8 +49,13 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-45786a3d7630cb9a9d90.json
 		"build" : "D:/flytest/cmake-build-debug",
 		"source" : "D:/flytest"
+========
+		"build" : "D:/flychess2/cmake-build-debug",
+		"source" : "D:/flychess2"
+>>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a:cmake-build-debug/.cmake/api/v1/reply/codemodel-v2-a98e40412419bbb027ae.json
 	},
 	"version" : 
 	{

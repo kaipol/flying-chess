@@ -429,8 +429,13 @@
 	"kind" : "cmakeFiles",
 	"paths" : 
 	{
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-4d6623eaa1bad44f3daf.json
 		"build" : "D:/flytest/cmake-build-debug",
 		"source" : "D:/flytest"
+========
+		"build" : "D:/flychess2/cmake-build-debug",
+		"source" : "D:/flychess2"
+>>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a:cmake-build-debug/.cmake/api/v1/reply/cmakeFiles-v1-06696fc73b2770a4fb8d.json
 	},
 	"version" : 
 	{

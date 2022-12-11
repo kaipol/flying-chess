@@ -55,7 +55,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-bfc90d19598112a971b1.json
 			"value" : "d:/flytest/cmake-build-debug"
+========
+			"value" : "d:/flychess2/cmake-build-debug"
+>>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a:cmake-build-debug/.cmake/api/v1/reply/cache-v2-4ea0d779c910b7aaddc8.json
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -431,7 +435,11 @@
 				}
 			],
 			"type" : "STATIC",
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-bfc90d19598112a971b1.json
 			"value" : "D:/flytest/cmake-build-debug/CMakeFiles/pkgRedirects"
+========
+			"value" : "D:/flychess2/cmake-build-debug/CMakeFiles/pkgRedirects"
+>>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a:cmake-build-debug/.cmake/api/v1/reply/cache-v2-4ea0d779c910b7aaddc8.json
 		},
 		{
 			"name" : "CMAKE_GENERATOR",
@@ -503,7 +511,11 @@
 				}
 			],
 			"type" : "INTERNAL",
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-bfc90d19598112a971b1.json
 			"value" : "D:/flytest"
+========
+			"value" : "D:/flychess2"
+>>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a:cmake-build-debug/.cmake/api/v1/reply/cache-v2-4ea0d779c910b7aaddc8.json
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1131,7 +1143,11 @@
 				}
 			],
 			"type" : "STATIC",
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-bfc90d19598112a971b1.json
 			"value" : "D:/flytest/cmake-build-debug"
+========
+			"value" : "D:/flychess2/cmake-build-debug"
+>>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a:cmake-build-debug/.cmake/api/v1/reply/cache-v2-4ea0d779c910b7aaddc8.json
 		},
 		{
 			"name" : "untitled_IS_TOP_LEVEL",
@@ -1155,7 +1171,11 @@
 				}
 			],
 			"type" : "STATIC",
+<<<<<<<< HEAD:cmake-build-debug/.cmake/api/v1/reply/cache-v2-bfc90d19598112a971b1.json
 			"value" : "D:/flytest"
+========
+			"value" : "D:/flychess2"
+>>>>>>>> f7e7d4d815a16729a8fbd70d4a1f18c292f4f15a:cmake-build-debug/.cmake/api/v1/reply/cache-v2-4ea0d779c910b7aaddc8.json
 		}
 	],
 	"kind" : "cache",
