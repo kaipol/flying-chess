@@ -1779,7 +1779,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.BlueStartChess != 4 && StartedChess.BlueEndChess[0] != 1)
                         {
-                            reload("blue1", 20, 250);
+                            reload("blue1", 682, 16);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -1814,7 +1814,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.BlueStartChess != 4 && StartedChess.BlueEndChess[1] != 1)
                         {
-                            reload("blue2", 20, 250);
+                            reload("blue2", 682, 16);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -1849,7 +1849,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.BlueStartChess != 4 && StartedChess.BlueEndChess[2] != 1)
                         {
-                            reload("blue3", 20, 250);
+                            reload("blue3", 682, 16);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -1884,7 +1884,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.BlueStartChess != 4 && StartedChess.BlueEndChess[3] != 1)
                         {
-                            reload("blue4", 20, 250);
+                            reload("blue4", 682, 16);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -1896,8 +1896,8 @@ void MoveChess(const char name[10], int player, int type, int result)
                                         FirstMove.button.y < 600)
                                     {
                                         result = Dice_point("blue");
-                                        JudgeChess(&ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
-                                        reload("blue4", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
+                                        JudgeChess(&ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result);
+                                        reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
                                         StartedChess.BlueStartChess++;
                                         StartedChess.BlueEndChess[3] = 1;
                                         return;
@@ -1907,8 +1907,8 @@ void MoveChess(const char name[10], int player, int type, int result)
                         }
                         if (StartedChess.BlueEndChess[3] == 1)
                         {
-                            JudgeChess(&ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
-                            reload("blue4", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
+                            JudgeChess(&ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result);
+                            reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
                             return;
                         }
                     }
@@ -1934,7 +1934,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.GreenStartChess != 4 && StartedChess.GreenEndChess[0] != 1)
                         {
-                            reload("green1", 20, 250);
+                            reload("green1", 276, 837);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -1969,7 +1969,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.GreenStartChess != 4 && StartedChess.GreenEndChess[1] != 1)
                         {
-                            reload("green2", 20, 250);
+                            reload("green2", 276, 837);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -2004,7 +2004,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.GreenStartChess != 4 && StartedChess.GreenEndChess[2] != 1)
                         {
-                            reload("green3", 20, 250);
+                            reload("green3", 276, 837);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -2039,7 +2039,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.GreenStartChess != 4 && StartedChess.GreenEndChess[3] != 1)
                         {
-                            reload("green4", 20, 250);
+                            reload("green4", 276, 837);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -2089,7 +2089,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.RedStartChess != 4 && StartedChess.RedEndChess[0] != 1)
                         {
-                            reload("red1", 20, 250);
+                            reload("red1", 929, 612);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -2124,7 +2124,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.RedStartChess != 4 && StartedChess.RedEndChess[1] != 1)
                         {
-                            reload("red2", 20, 250);
+                            reload("red2", 929, 612);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -2159,7 +2159,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.RedStartChess != 4 && StartedChess.RedEndChess[2] != 1)
                         {
-                            reload("red3", 20, 250);
+                            reload("red3", 929, 612);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -2194,7 +2194,7 @@ void MoveChess(const char name[10], int player, int type, int result)
                     {
                         if (result == 6 && StartedChess.RedStartChess != 4 && StartedChess.RedEndChess[3] != 1)
                         {
-                            reload("red4", 20, 250);
+                            reload("red4", 929, 612);
                             while (SDL_WaitEvent(&FirstMove))
                             {
                                 switch (FirstMove.type)
@@ -2391,7 +2391,7 @@ void JudgeChess(int *x, int *y, int result)
         *y = 280;
         result--;
     }
-    if (*x == 683 && *y == 16)
+    if (*x == 682 && *y == 16)
     {
         *x = 633;
         *y = 92;
