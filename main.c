@@ -173,7 +173,6 @@ int CmpName(const char *);
 void TurnChess(int, int);
 void MoveChess(const char *, int, int, int);
 void JudgeChess(int *, int *, int);
-int EndJudge(const char *, int *, int *, int);
 int EndJump(const char *, int *, int *, int);
 int EndGame();
 void originorder();
@@ -218,10 +217,14 @@ struct StartedChess
 struct EndChess
 {
     int endyellowchess;
+    int YellowEndChess[4];
     int endbluechess;
+    int BlueEndChess[4];
     int endredchess;
+    int RedEndChess[4];
     int endgreenchess;
-} EndChessNum = {0, 0, 0, 0};
+    int GreenEndChess[4];
+} EndChessNum = {0, {0}, 0, {0}, 0, {0}, 0, {0}};
 const struct YellowJumpPonint
 {
     int LeftYellowPoint[5][2];   // 飞行点之前
@@ -278,6 +281,10 @@ const struct GreenJumpPoint
                 {{315, 233}},
                 {{474, 468}},
                 {{276, 837}}};
+int YellowStatus[4] = {0};
+int BlueStatus[4] = {0};
+int GreenStatus[4] = {0};
+int RedStatus[4] = {0};
 // 主函数
 #undef main
 int main(int argc, char *argv[]) // 主函数
@@ -1646,22 +1653,23 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        else if (StartedChess.YellowEndChess[0] == 1)
+                        else if (StartedChess.YellowEndChess[0] == 1 && EndChessNum.YellowEndChess[0] == 0)
                         {
+                            if ((ChessPointNow.yellow1[1] == 686 && ChessPointNow.yellow1[0] <= 315) || (ChessPointNow.yellow1[0] == 103 && ChessPointNow.yellow1[1] > 280))
+                                EndChessNum.YellowEndChess[0] = 1;
                             JudgeChess(&ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result);
-                            if (EndJudge("yellow", &ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result))
-                                goto endjumpyellow1;
-                            if (EndJudge("yellow", &ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result))
-                                goto endjumpyellow1;
                             jump("yellow1");
                             cross();
                             reload("yellow1", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
                             return;
                         }
-                    endjumpyellow1:
-                        EndJump("yellow", &ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result);
-                        reload("yellow1", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
-                        return;
+                        else if (!YellowStatus[0])
+                        {
+                            printf("enter2\n");
+                            YellowStatus[0] = EndJump("yellow", &ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result);
+                            reload("yellow1", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.yellow2[0] &&
                              FirstMove.button.x < ChessPointNow.yellow2[0] + 50 &&
@@ -1693,20 +1701,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        else if (StartedChess.YellowEndChess[1] == 1)
+                        else if (StartedChess.YellowEndChess[1] == 1 && EndChessNum.YellowEndChess[1] == 0)
                         {
+                            if ((ChessPointNow.yellow2[1] == 686 && ChessPointNow.yellow2[0] <= 315) || (ChessPointNow.yellow1[0] == 103 && ChessPointNow.yellow1[1] > 280))
+                                EndChessNum.YellowEndChess[1] = 1;
                             JudgeChess(&ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result);
-                            if (EndJudge("yellow", &ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result))
-                                goto endjumpyellow2;
                             jump("yellow2");
                             cross();
                             reload("yellow2", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
                             return;
                         }
-                    endjumpyellow2:
-                        EndJump("yellow", &ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result);
-                        reload("yellow2", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
-                        return;
+                        else if (!YellowStatus[1])
+                        {
+                            YellowStatus[1] = EndJump("yellow", &ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result);
+                            reload("yellow2", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.yellow3[0] &&
                              FirstMove.button.x < ChessPointNow.yellow3[0] + 50 &&
@@ -1738,20 +1748,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.YellowEndChess[2] == 1)
+                        if (StartedChess.YellowEndChess[2] == 1 && EndChessNum.YellowEndChess[2] == 0)
                         {
+                            if ((ChessPointNow.yellow3[1] == 686 && ChessPointNow.yellow3[0] <= 315) || (ChessPointNow.yellow3[0] == 103 && ChessPointNow.yellow3[1] > 280))
+                                EndChessNum.YellowEndChess[2] = 1;
                             JudgeChess(&ChessPointNow.yellow3[0], &ChessPointNow.yellow3[1], result);
-                            if (EndJudge("yellow", &ChessPointNow.yellow3[0], &ChessPointNow.yellow3[1], result))
-                                goto endjumpyellow3;
                             jump("yellow3");
                             cross();
                             reload("yellow3", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
                             return;
                         }
-                    endjumpyellow3:
-                        EndJump("yellow", &ChessPointNow.yellow3[0], &ChessPointNow.yellow3[1], result);
-                        reload("yellow3", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
-                        return;
+                        else if (!YellowStatus[2])
+                        {
+                            YellowStatus[2] = EndJump("yellow", &ChessPointNow.yellow3[0], &ChessPointNow.yellow3[1], result);
+                            reload("yellow3", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.yellow4[0] &&
                              FirstMove.button.x < ChessPointNow.yellow4[0] + 50 &&
@@ -1783,20 +1795,23 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.YellowEndChess[3] == 1)
+                        if (StartedChess.YellowEndChess[3] == 1 && EndChessNum.YellowEndChess[3] == 0)
                         {
+                            if ((ChessPointNow.yellow4[1] == 686 && ChessPointNow.yellow4[0] <= 315) || (ChessPointNow.yellow4[0] == 103 && ChessPointNow.yellow4[1] > 280))
+                                EndChessNum.YellowEndChess[3] = 1;
                             JudgeChess(&ChessPointNow.yellow4[0], &ChessPointNow.yellow4[1], result);
-                            if (EndJudge("yellow", &ChessPointNow.yellow4[0], &ChessPointNow.yellow4[1], result))
-                                goto endjumpyellow4;
+
                             jump("yellow4");
                             cross();
                             reload("yellow4", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
                             return;
                         }
-                    endjumpyellow4:
-                        EndJump("yellow", &ChessPointNow.yellow4[0], &ChessPointNow.yellow4[1], result);
-                        reload("yellow4", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
-                        return;
+                        else if (!YellowStatus[3])
+                        {
+                            YellowStatus[3] = EndJump("yellow", &ChessPointNow.yellow4[0], &ChessPointNow.yellow4[1], result);
+                            reload("yellow4", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
+                            return;
+                        }
                     }
                 }
             }
@@ -1843,20 +1858,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.BlueEndChess[0] == 1)
+                        if (StartedChess.BlueEndChess[0] == 1 && EndChessNum.BlueEndChess[0] == 0)
                         {
+                            if ((ChessPointNow.blue1[1] == 92 && ChessPointNow.blue1[0] < 633) || (ChessPointNow.blue1[0] == 315 && ChessPointNow.blue1[1] <= 280))
+                                EndChessNum.BlueEndChess[0] = 1;
                             JudgeChess(&ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
-                            if (EndJudge("blue", &ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result))
-                                goto endjumpblue1;
                             jump("blue1");
                             cross();
                             reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
                             return;
                         }
-                    endjumpblue1:
-                        EndJump("blue", &ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
-                        reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
-                        return;
+                        else if (!BlueStatus[0])
+                        {
+                            BlueStatus[0] = EndJump("blue", &ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
+                            reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.blue2[0] &&
                              FirstMove.button.x < ChessPointNow.blue2[0] + 50 &&
@@ -1888,20 +1905,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.BlueEndChess[1] == 1)
+                        if (StartedChess.BlueEndChess[1] == 1 && EndChessNum.BlueEndChess[1] == 0)
                         {
+                            if ((ChessPointNow.blue2[1] == 92 && ChessPointNow.blue2[0] < 633) || (ChessPointNow.blue2[0] == 315 && ChessPointNow.blue2[1] <= 280))
+                                EndChessNum.BlueEndChess[1] = 1;
                             JudgeChess(&ChessPointNow.blue2[0], &ChessPointNow.blue2[1], result);
-                            if (EndJudge("blue", &ChessPointNow.blue2[0], &ChessPointNow.blue2[1], result))
-                                goto endjumpblue2;
                             jump("blue2");
                             cross();
                             reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
                             return;
                         }
-                    endjumpblue2:
-                        EndJump("blue", &ChessPointNow.blue2[0], &ChessPointNow.blue2[1], result);
-                        reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
-                        return;
+                        else if (!BlueStatus[1])
+                        {
+                            BlueStatus[1] = EndJump("blue", &ChessPointNow.blue2[0], &ChessPointNow.blue2[1], result);
+                            reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.blue3[0] &&
                              FirstMove.button.x < ChessPointNow.blue3[0] + 50 &&
@@ -1933,20 +1952,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.BlueEndChess[2] == 1)
+                        if (StartedChess.BlueEndChess[2] == 1 && EndChessNum.BlueEndChess[2] == 0)
                         {
+                            if ((ChessPointNow.blue3[1] == 92 && ChessPointNow.blue3[0] < 633) || (ChessPointNow.blue3[0] == 315 && ChessPointNow.blue3[1] <= 280))
+                                EndChessNum.BlueEndChess[2] = 1;
                             JudgeChess(&ChessPointNow.blue3[0], &ChessPointNow.blue3[1], result);
-                            if (EndJudge("blue", &ChessPointNow.blue3[0], &ChessPointNow.blue3[1], result))
-                                goto endjumpblue3;
                             jump("blue3");
                             cross();
                             reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
                             return;
                         }
-                    endjumpblue3:
-                        EndJump("blue", &ChessPointNow.blue3[0], &ChessPointNow.blue3[1], result);
-                        reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
-                        return;
+                        else if (!BlueStatus[2])
+                        {
+                            BlueStatus[2] = EndJump("blue", &ChessPointNow.blue3[0], &ChessPointNow.blue3[1], result);
+                            reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.blue4[0] &&
                              FirstMove.button.x < ChessPointNow.blue4[0] + 50 &&
@@ -1978,21 +1999,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.BlueEndChess[3] == 1)
+                        if (StartedChess.BlueEndChess[3] == 1 && EndChessNum.BlueEndChess[3] == 0)
                         {
-                            jump("blue4");
+                            if ((ChessPointNow.blue4[1] == 92 && ChessPointNow.blue4[0] < 633) || (ChessPointNow.blue4[0] == 315 && ChessPointNow.blue4[1] <= 280))
+                                EndChessNum.BlueEndChess[3] = 1;
                             JudgeChess(&ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result);
-                            if (EndJudge("blue", &ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result))
-                                goto endjumpblue4;
                             jump("blue4");
                             cross();
                             reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
                             return;
                         }
-                    endjumpblue4:
-                        EndJump("blue", &ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
-                        reload("blue4", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
-                        return;
+                        else if (!BlueStatus[3])
+                        {
+                            BlueStatus[3] = EndJump("blue", &ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
+                            reload("blue4", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
+                            return;
+                        }
                     }
                 }
             }
@@ -2039,20 +2061,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.GreenEndChess[0] == 1)
+                        if (StartedChess.GreenEndChess[0] == 1 && EndChessNum.GreenEndChess[0] == 0)
                         {
+                            if ((ChessPointNow.green1[1] == 750 && ChessPointNow.green1[0] > 315) || (ChessPointNow.green1[0] == 633 && ChessPointNow.green1[1] >= 562))
+                                EndChessNum.GreenEndChess[0] = 1;
                             JudgeChess(&ChessPointNow.green1[0], &ChessPointNow.green1[1], result);
-                            if (EndJudge("green", &ChessPointNow.green1[0], &ChessPointNow.green1[1], result))
-                                goto endjumpgreen1;
                             jump("green1");
                             cross();
                             reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1]);
                             return;
                         }
-                    endjumpgreen1:
-                        EndJump("green", &ChessPointNow.green1[0], &ChessPointNow.green1[1], result);
-                        reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1]);
-                        return;
+                        else if (!GreenStatus[0])
+                        {
+                            GreenStatus[0] = EndJump("green", &ChessPointNow.green1[0], &ChessPointNow.green1[1], result);
+                            reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.green2[0] &&
                              FirstMove.button.x < ChessPointNow.green2[0] + 50 &&
@@ -2084,21 +2108,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.GreenEndChess[1] == 1)
+                        if (StartedChess.GreenEndChess[1] == 1 && EndChessNum.GreenEndChess[1] == 0)
                         {
-
+                            if ((ChessPointNow.green2[1] == 750 && ChessPointNow.green2[0] > 315) || (ChessPointNow.green2[0] == 633 && ChessPointNow.green2[1] >= 562))
+                                EndChessNum.GreenEndChess[1] = 1;
                             JudgeChess(&ChessPointNow.green2[0], &ChessPointNow.green2[1], result);
-                            if (EndJudge("green", &ChessPointNow.green2[0], &ChessPointNow.green2[1], result))
-                                goto endjumpgreen2;
                             jump("green2");
                             cross();
                             reload("green2", ChessPointNow.green2[0], ChessPointNow.green2[1]);
                             return;
                         }
-                    endjumpgreen2:
-                        EndJump("green", &ChessPointNow.green2[0], &ChessPointNow.green2[1], result);
-                        reload("green2", ChessPointNow.green2[0], ChessPointNow.green2[1]);
-                        return;
+                        else if (!GreenStatus[1])
+                        {
+                            GreenStatus[1] = EndJump("green", &ChessPointNow.green2[0], &ChessPointNow.green2[1], result);
+                            reload("green2", ChessPointNow.green2[0], ChessPointNow.green2[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.green3[0] &&
                              FirstMove.button.x < ChessPointNow.green3[0] + 50 &&
@@ -2130,20 +2155,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.GreenEndChess[2] == 1)
+                        if (StartedChess.GreenEndChess[2] == 1 && EndChessNum.GreenEndChess[2] == 0)
                         {
+                            if ((ChessPointNow.green3[1] == 750 && ChessPointNow.green3[0] > 315) || (ChessPointNow.green3[0] == 633 && ChessPointNow.green3[1] >= 562))
+                                EndChessNum.GreenEndChess[2] = 1;
                             JudgeChess(&ChessPointNow.green3[0], &ChessPointNow.green3[1], result);
-                            if (EndJudge("green", &ChessPointNow.green3[0], &ChessPointNow.green3[1], result))
-                                goto endjumpgreen3;
                             jump("green3");
                             cross();
                             reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1]);
                             return;
                         }
-                    endjumpgreen3:
-                        EndJump("green", &ChessPointNow.green3[0], &ChessPointNow.green3[1], result);
-                        reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1]);
-                        return;
+                        else if (!GreenStatus[2])
+                        {
+                            GreenStatus[2] = EndJump("green", &ChessPointNow.green3[0], &ChessPointNow.green3[1], result);
+                            reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.green4[0] &&
                              FirstMove.button.x < ChessPointNow.green4[0] + 50 &&
@@ -2175,20 +2202,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.GreenEndChess[3] == 1)
+                        if (StartedChess.GreenEndChess[3] == 1 && EndChessNum.GreenEndChess[3] == 0)
                         {
+                            if ((ChessPointNow.green4[1] == 750 && ChessPointNow.green4[0] > 315) || (ChessPointNow.green4[0] == 633 && ChessPointNow.green4[1] >= 562))
+                                EndChessNum.GreenEndChess[3] = 1;
                             JudgeChess(&ChessPointNow.green4[0], &ChessPointNow.green4[1], result);
-                            if (EndJudge("green", &ChessPointNow.green4[0], &ChessPointNow.green4[1], result))
-                                goto endjumpgreen4;
                             jump("green4");
                             cross();
                             reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1]);
                             return;
                         }
-                    endjumpgreen4:
-                        EndJump("green", &ChessPointNow.green4[0], &ChessPointNow.green4[1], result);
-                        reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1]);
-                        return;
+                        else if (!GreenStatus[3])
+                        {
+                            GreenStatus[3] = EndJump("green", &ChessPointNow.green4[0], &ChessPointNow.green4[1], result);
+                            reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1]);
+                            return;
+                        }
                     }
                 }
             }
@@ -2235,20 +2264,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.RedEndChess[0] == 1)
+                        if (StartedChess.RedEndChess[0] == 1 && EndChessNum.RedEndChess[0] == 0)
                         {
+                            if ((ChessPointNow.red1[1] == 280 && ChessPointNow.red1[0] >= 633) || (ChessPointNow.red1[0] == 845 && ChessPointNow.red1[1] < 562))
+                                EndChessNum.RedEndChess[0] = 1;
                             JudgeChess(&ChessPointNow.red1[0], &ChessPointNow.red1[1], result);
-                            if (EndJudge("red", &ChessPointNow.red1[0], &ChessPointNow.red1[1], result))
-                                goto endjumpred1;
                             jump("red1");
                             cross();
                             reload("red1", ChessPointNow.red1[0], ChessPointNow.red1[1]);
                             return;
                         }
-                    endjumpred1:
-                        EndJump("red", &ChessPointNow.red1[0], &ChessPointNow.red1[1], result);
-                        reload("red1", ChessPointNow.red1[0], ChessPointNow.red1[1]);
-                        return;
+                        else if (!RedStatus[0])
+                        {
+                            RedStatus[0] = EndJump("red", &ChessPointNow.red1[0], &ChessPointNow.red1[1], result);
+                            reload("red1", ChessPointNow.red1[0], ChessPointNow.red1[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.red2[0] &&
                              FirstMove.button.x < ChessPointNow.red2[0] + 50 &&
@@ -2280,20 +2311,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.RedEndChess[1] == 1)
+                        if (StartedChess.RedEndChess[1] == 1 && EndChessNum.RedEndChess[1] == 0)
                         {
+                            if ((ChessPointNow.red2[1] == 280 && ChessPointNow.red2[0] >= 633) || (ChessPointNow.red2[0] == 845 && ChessPointNow.red2[1] < 562))
+                                EndChessNum.RedEndChess[1] = 1;
                             JudgeChess(&ChessPointNow.red2[0], &ChessPointNow.red2[1], result);
-                            if (EndJudge("red", &ChessPointNow.red2[0], &ChessPointNow.red2[1], result))
-                                goto endjumpred2;
                             jump("red2");
                             cross();
                             reload("red2", ChessPointNow.red2[0], ChessPointNow.red2[1]);
                             return;
                         }
-                    endjumpred2:
-                        EndJump("red", &ChessPointNow.red2[0], &ChessPointNow.red2[1], result);
-                        reload("red2", ChessPointNow.red2[0], ChessPointNow.red2[1]);
-                        return;
+                        else if (!RedStatus[1])
+                        {
+                            RedStatus[1] = EndJump("red", &ChessPointNow.red2[0], &ChessPointNow.red2[1], result);
+                            reload("red2", ChessPointNow.red2[0], ChessPointNow.red2[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.red3[0] &&
                              FirstMove.button.x < ChessPointNow.red3[0] + 50 &&
@@ -2325,20 +2358,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.RedEndChess[2] == 1)
+                        if (StartedChess.RedEndChess[2] == 1 && EndChessNum.RedEndChess[2] == 0)
                         {
+                            if ((ChessPointNow.red3[1] == 280 && ChessPointNow.red3[0] >= 633) || (ChessPointNow.red3[0] == 845 && ChessPointNow.red3[1] < 562))
+                                EndChessNum.RedEndChess[2] = 1;
                             JudgeChess(&ChessPointNow.red3[0], &ChessPointNow.red3[1], result);
-                            if (EndJudge("red", &ChessPointNow.red3[0], &ChessPointNow.red3[1], result))
-                                goto endjumpred3;
                             jump("red3");
                             cross();
                             reload("red3", ChessPointNow.red3[0], ChessPointNow.red3[1]);
                             return;
                         }
-                    endjumpred3:
-                        EndJump("red", &ChessPointNow.red3[0], &ChessPointNow.red3[1], result);
-                        reload("red3", ChessPointNow.red3[0], ChessPointNow.red3[1]);
-                        return;
+                        else if (!RedStatus[2])
+                        {
+                            RedStatus[2] = EndJump("red", &ChessPointNow.red3[0], &ChessPointNow.red3[1], result);
+                            reload("red3", ChessPointNow.red3[0], ChessPointNow.red3[1]);
+                            return;
+                        }
                     }
                     else if (FirstMove.button.x > ChessPointNow.red4[0] &&
                              FirstMove.button.x < ChessPointNow.red4[0] + 50 &&
@@ -2370,20 +2405,22 @@ void MoveChess(const char name[10], int player, int type, int result)
                                 }
                             }
                         }
-                        if (StartedChess.RedEndChess[3] == 1)
+                        if (StartedChess.RedEndChess[3] == 1 && EndChessNum.RedEndChess[3] == 0)
                         {
+                            if ((ChessPointNow.red4[1] == 280 && ChessPointNow.red4[0] >= 633) || (ChessPointNow.red4[0] == 845 && ChessPointNow.red1[1] < 562))
+                                EndChessNum.RedEndChess[3] = 1;
                             JudgeChess(&ChessPointNow.red4[0], &ChessPointNow.red4[1], result);
-                            if (EndJudge("red", &ChessPointNow.red4[0], &ChessPointNow.red4[1], result))
-                                goto endjumpred4;
                             jump("red4");
                             cross();
                             reload("red4", ChessPointNow.red4[0], ChessPointNow.red4[1]);
                             return;
                         }
-                    endjumpred4:
-                        EndJump("red", &ChessPointNow.red4[0], &ChessPointNow.red4[1], result);
-                        reload("red4", ChessPointNow.red4[0], ChessPointNow.red4[1]);
-                        return;
+                        else if (!RedStatus[3])
+                        {
+                            RedStatus[3] = EndJump("red", &ChessPointNow.red4[0], &ChessPointNow.red4[1], result);
+                            reload("red4", ChessPointNow.red4[0], ChessPointNow.red4[1]);
+                            return;
+                        }
                     }
                 }
             }
@@ -2794,120 +2831,157 @@ void JudgeChess(int *x, int *y, int result)
         return;
     }
 }
-int EndJudge(const char name[10], int *x, int *y, int result) // TODO:棋子判断有误，冲多了
-{
-    if (!strcmp(name, "yellow"))
-    {
-        if (*x == 103 && *y - result * 47 < 424 && *y > 280)
-        {
-            result -= (*y - 424) / 47;
-            *y = 424;
-            *x += result * 53;
-            return 1;
-        }
-        return 0;
-    }
-    else if (!strcmp(name, "blue"))
-    {
-        if (*y == 92 && *x + result * 53 > 474 && *x < 633)
-        {
-            result -= (474 - *x) / 53;
-            *x = 474;
-            *y += result * 47;
-            return 2;
-        }
-        return 0;
-    }
-    else if (!strcmp(name, "green"))
-    {
-        if (*y == 750 && *x - result * 53 < 474 && *x > 315)
-        {
-            result -= (*x - 474) / 53;
-            *x = 474;
-            *y -= result * 47;
-            return 3;
-        }
-        return 0;
-    }
-    else if (!strcmp(name, "red"))
-    {
-        if (*x == 845 && *y + result * 47 > 421 && *y < 562)
-        {
-            result -= (421 - *y) / 47;
-            *y = 421;
-            *x -= result * 53;
-            return 4;
-        }
-        return 0;
-    }
-}
 int EndJump(const char name[10], int *x, int *y, int result) // TODO:棋子消失
 {
     if (!strcmp(name, "yellow"))
     {
-        *x += result * 53;
-        if (*x > 421)
+        if (*y == 686 && *x > 103)
         {
-            result -= ((421 - *x) / 53 + 2);
             *x -= result * 53;
+            if (*x <= 103)
+            {
+                result -= (result - (103 - *x) / 53);
+                *x = 103;
+            }
         }
-        else if (*x == 421)
+        if (*x == 103 && *y > 421)
         {
-            EndChessNum.endyellowchess++;
-            *x = -100;
-            *y = -100;
-            return 1;
+            *y -= result * 47;
+            if (*y < 421)
+            {
+                result -= (result - (421 - *y) / 47);
+                *y = 421;
+            }
+        }
+        if (*y == 421 && *x == 103)
+        {
+            *x += result * 53;
+            if (*x > 421)
+            {
+                result -= ((421 - *x) / 53);
+                *x -= result * 53;
+            }
+            else if (*x == 421)
+            {
+                EndChessNum.endyellowchess++;
+                *x = -100;
+                *y = -100;
+                return 1;
+            }
         }
         return 0;
     }
     else if (!strcmp(name, "blue"))
     {
-        *y += result * 47;
-        if (*y > 374)
+        if (*x == 315 && *y > 92)
         {
-            result -= ((374 - *y) / 47 + 2);
             *y -= result * 47;
+            if (*y <= 92)
+            {
+                result -= (result - (92 - *y) / 47);
+                *y = 92;
+            }
         }
-        else if (*y == 374)
+        if (*y == 92 && *x < 474)
         {
-            EndChessNum.endbluechess++;
-            *x = -100;
-            *y = -100;
-            return 2;
+            *x += result * 53;
+            if (*x >= 474)
+            {
+                result -= (result - (*x - 474) / 53);
+                *x = 474;
+            }
+        }
+        if (*x == 474 && *y <= 374)
+        {
+            *y += result * 47;
+            if (*y > 374)
+            {
+                result -= ((374 - *y) / 47);
+                *y -= result * 47;
+            }
+            else if (*y == 374)
+            {
+                EndChessNum.endbluechess++;
+                *x = -100;
+                *y = -100;
+                return 2;
+            }
         }
         return 0;
     }
     else if (!strcmp(name, "red"))
     {
-        *x -= result * 53;
-        if (*x < 527)
+        if (*y == 280 && *x < 845)
         {
-            result -= ((*x - 527) / 53 + 2);
             *x += result * 53;
+            if (*x >= 845)
+            {
+                result -= (result - (*x - 845) / 53);
+                *x = 845;
+            }
         }
-        else if (*x == 527)
+        if (*x == 845 && *y < 421)
         {
-            *x = -100;
-            *y = -100;
-            EndChessNum.endredchess++;
-            return 3;
+            *y += result * 47;
+            if (*y >= 421)
+            {
+                result -= (result - (*y - 421) / 47);
+                *y = 421;
+            }
+        }
+        if (*y == 421 && *x >= 527)
+        {
+            *x -= result * 53;
+            if (*x < 527)
+            {
+                result -= ((*x - 527) / 53);
+                *x += result * 53;
+            }
+            else if (*x == 527)
+            {
+                *x = -100;
+                *y = -100;
+                EndChessNum.endredchess++;
+                return 3;
+            }
         }
         return 0;
     }
     else if (!strcmp(name, "green"))
     {
-        *y -= result * 47;
-        if (*y > 468)
+        if (*x == 633 && *y < 750)
         {
-            result -= ((*y - 468) / 47 + 2);
             *y += result * 47;
+            if (*y >= 750)
+            {
+                result -= (result - (*y - 750) / 47);
+                *y = 750;
+            }
         }
-        else if (*y == 468)
+        if (*y == 750 && *x < 474)
         {
-            *x = -100;
-            *y = -100;
-            EndChessNum.endgreenchess++;
-            return 4;
+            *x -= result * 53;
+            if (*x <= 474)
+            {
+                result -= (result - (474 - *x) / 53);
+                *x = 474;
+            }
+        }
+        if (*x == 474 && *y >= 468)
+        {
+            *y -= result * 47;
+            if (*y >= 468)
+            {
+                result -= ((*y - 468) / 47);
+                *y += result * 47;
+            }
+            else if (*y == 468)
+            {
+                *x = -100;
+                *y = -100;
+                EndChessNum.endgreenchess++;
+                return 4;
+            }
         }
         return 0;
     }
