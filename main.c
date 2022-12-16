@@ -1291,292 +1291,7 @@ void Load_dice(int result, const char name[10])
         SDL_RenderPresent(Renderer);
     }
 }
-/*void MoveChess(const char name[10], int player,int type)
-{
-    int result = Dice_point(name);
-    SDL_Event FirstMove, ChessMove;
-    if (result == 6) {
-        if (player == 1 && StartedChess.YellowStartChess == 4)
-            goto r1;
-        else if (player == 2 && StartedChess.BlueStartChess == 4)
-            goto r1;
-        else if (player == 3 && StartedChess.GreenStartChess == 4)
-            goto r1;
-        else if (player == 4 && StartedChess.RedStartChess == 4)
-            goto r1;
-        else if (player == 1 && StartedChess.YellowStartChess != 4)//é»„æ——
-        {
-            while (SDL_WaitEvent(&FirstMove)) {
-                switch (FirstMove.type) {
-                    case SDL_MOUSEBUTTONUP:
-                        if (FirstMove.button.x > ChessPointNow.yellow1[0] &&
-                            FirstMove.button.x < ChessPointNow.yellow1[0] + 50 &&
-                            FirstMove.button.y > ChessPointNow.yellow1[1] &&
-                            FirstMove.button.y < ChessPointNow.yellow1[1] + 50) {
-                            reload("yellow1", 20, 250);
-                            goto j;
-                        } else if (FirstMove.button.x > ChessPointNow.yellow2[0] &&
-                                   FirstMove.button.x < ChessPointNow.yellow2[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.yellow2[1] &&
-                                   FirstMove.button.y < ChessPointNow.yellow2[1] + 50) {
-                            reload("yellow2", 20, 250);
-                            goto j;
-                        } else if (FirstMove.button.x > ChessPointNow.yellow3[0] &&
-                                   FirstMove.button.x < ChessPointNow.yellow3[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.yellow3[1] &&
-                                   FirstMove.button.y < ChessPointNow.yellow3[1] + 50) {
-                            reload("yellow3", 20, 250);
-                            goto j;
-                        } else if (FirstMove.button.x > ChessPointNow.yellow4[0] &&
-                                   FirstMove.button.x < ChessPointNow.yellow4[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.yellow4[1] &&
-                                   FirstMove.button.y < ChessPointNow.yellow4[1] + 50) {
-                            reload("yellow4", 20, 250);
-                            goto j;
-                        }
-                }
-            }
-            j:
-            StartedChess.YellowStartChess++;
-            player = 2;
-            return MoveChess("blue", player, type);
-        } else if (player == 2 && StartedChess.BlueStartChess != 4)//è“è‰²æ£‹å­
-        {
-            while (SDL_WaitEvent(&FirstMove)) {
-                switch (FirstMove.type) {
-                    case SDL_MOUSEBUTTONUP:
-                        if (FirstMove.button.x > ChessPointNow.blue1[0] &&
-                            FirstMove.button.x < ChessPointNow.blue1[0] + 50 &&
-                            FirstMove.button.y > ChessPointNow.blue1[1] &&
-                            FirstMove.button.y < ChessPointNow.blue1[1] + 50) {
-                            reload("blue1", 682, 16);
-                            goto k;
-                        } else if (FirstMove.button.x > ChessPointNow.blue2[0] &&
-                                   FirstMove.button.x < ChessPointNow.blue2[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.blue2[1] &&
-                                   FirstMove.button.y < ChessPointNow.blue2[1] + 50) {
-                            reload("blue2", 682, 16);
-                            goto k;
-                        } else if (FirstMove.button.x > ChessPointNow.blue3[0] &&
-                                   FirstMove.button.x < ChessPointNow.blue3[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.blue3[1] &&
-                                   FirstMove.button.y < ChessPointNow.blue3[1] + 50) {
-                            reload("blue3", 682, 16);
-                            goto k;
-                        } else if (FirstMove.button.x > ChessPointNow.blue4[0] &&
-                                   FirstMove.button.x < ChessPointNow.blue4[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.blue4[1] &&
-                                   FirstMove.button.y < ChessPointNow.blue4[1] + 50) {
-                            reload("blue4", 682, 16);
-                            goto k;
-                        }
-                }
-            }
-            k:
-            StartedChess.BlueStartChess++;
-            if (type == 2)//2äººæ¸¸æˆ
-            {
-                player = 1;
-                return MoveChess("yellow", player, 2);
-            } else if (type == 3 || type == 4) {
-                player = 3;
-                return MoveChess("green", player, type);
-            }
-        } else if (player == 3 && StartedChess.GreenStartChess != 4)//ç»¿è‰²æ£‹å­
-        {
-            while (SDL_WaitEvent(&FirstMove)) {
-                switch (FirstMove.type) {
-                    case SDL_MOUSEBUTTONUP:
-                        if (FirstMove.button.x > ChessPointNow.green1[0] &&
-                            FirstMove.button.x < ChessPointNow.green1[0] + 50 &&
-                            FirstMove.button.y > ChessPointNow.green1[1] &&
-                            FirstMove.button.y < ChessPointNow.green1[1] + 50) {
-                            reload("green1", 276, 837);
-                            goto k1;
-                        } else if (FirstMove.button.x > ChessPointNow.green2[0] &&
-                                   FirstMove.button.x < ChessPointNow.green2[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.green2[1] &&
-                                   FirstMove.button.y < ChessPointNow.green2[1] + 50) {
-                            reload("green2", 276, 837);
-                            goto k1;
-                        } else if (FirstMove.button.x > ChessPointNow.green3[0] &&
-                                   FirstMove.button.x < ChessPointNow.green3[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.green3[1] &&
-                                   FirstMove.button.y < ChessPointNow.green3[1] + 50) {
-                            reload("green3", 276, 837);
-                            goto k1;
-                        } else if (FirstMove.button.x > ChessPointNow.green4[0] &&
-                                   FirstMove.button.x < ChessPointNow.green4[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.green4[1] &&
-                                   FirstMove.button.y < ChessPointNow.green4[1] + 50) {
-                            reload("green4", 276, 837);
-                            goto k1;
-                        }
-                }
-            }
-            k1:
-            if (type == 3)//3äººæ¸¸æˆ
-            {
-                player = 1;
-                return MoveChess("yellow", player, 3);
-            } else if (type == 4) {
-                player = 4;
-                return MoveChess("red", player, 4);
-            }
-            StartedChess.GreenStartChess++;
-        } else if (player == 4 && StartedChess.RedStartChess != 4)//çº¢è‰²æ£‹å­
-        {
-            while (SDL_WaitEvent(&FirstMove)) {
-                switch (FirstMove.type) {
-                    case SDL_MOUSEBUTTONUP:
-                        if (FirstMove.button.x > ChessPointNow.red1[0] &&
-                            FirstMove.button.x < ChessPointNow.red1[0] + 50 &&
-                            FirstMove.button.y > ChessPointNow.red1[1] &&
-                            FirstMove.button.y < ChessPointNow.red1[1] + 50) {
-                            reload("red1", 929, 612);
-                            goto k2;
-                        } else if (FirstMove.button.x > ChessPointNow.red2[0] &&
-                                   FirstMove.button.x < ChessPointNow.red2[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.red2[1] &&
-                                   FirstMove.button.y < ChessPointNow.red2[1] + 50) {
-                            reload("red2", 929, 612);
-                            goto k2;
-                        } else if (FirstMove.button.x > ChessPointNow.red3[0] &&
-                                   FirstMove.button.x < ChessPointNow.red3[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.red3[1] &&
-                                   FirstMove.button.y < ChessPointNow.red3[1] + 50) {
-                            reload("red3", 929, 612);
-                            goto k2;
-                        } else if (FirstMove.button.x > ChessPointNow.red4[0] &&
-                                   FirstMove.button.x < ChessPointNow.red4[0] + 50 &&
-                                   FirstMove.button.y > ChessPointNow.red4[1] &&
-                                   FirstMove.button.y < ChessPointNow.red4[1] + 50) {
-                            reload("red4", 929, 612);
-                            goto k2;
-                        }
-                }
-            }
-            k2:
-            StartedChess.RedStartChess++;
-            player = 1;
-            return MoveChess("yellow", player, 4);
-        }
-    }
-    r1:while (SDL_WaitEvent(&ChessMove)) {
-    switch (ChessMove.type) {
-        case SDL_MOUSEBUTTONUP:
-            if (player == 1) {
-                if (ChessMove.button.x > ChessPointNow.yellow1[0] &&
-                    ChessMove.button.x < ChessPointNow.yellow1[0] + 50 &&
-                    ChessMove.button.y > ChessPointNow.yellow1[1] &&
-                    ChessMove.button.y < ChessPointNow.yellow1[1] + 50) {
-                    reload("yellow1", ChessPointNow.yellow1[0] + 53 * result, ChessPointNow.yellow1[1]);
-                } else if (ChessMove.button.x > ChessPointNow.yellow2[0] &&
-                           ChessMove.button.x < ChessPointNow.yellow2[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.yellow2[1] &&
-                           ChessMove.button.y < ChessPointNow.yellow2[1] + 50) {
-                    reload("yellow2", ChessPointNow.yellow2[0] + 53 * result, ChessPointNow.yellow2[1]);
-                } else if (ChessMove.button.x > ChessPointNow.yellow3[0] &&
-                           ChessMove.button.x < ChessPointNow.yellow3[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.yellow3[1] &&
-                           ChessMove.button.y < ChessPointNow.yellow3[1] + 50) {
-                    reload("yellow3", ChessPointNow.yellow3[0] + 53 * result, ChessPointNow.yellow3[1]);
-                } else if (ChessMove.button.x > ChessPointNow.yellow4[0] &&
-                           ChessMove.button.x < ChessPointNow.yellow4[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.yellow4[1] &&
-                           ChessMove.button.y < ChessPointNow.yellow4[1] + 50) {
-                    reload("yellow4", ChessPointNow.yellow4[0] + 53 * result, ChessPointNow.yellow4[1]);
-                }
-                player = 2;
-                return MoveChess("blue", player, type);
-            } else if (player == 2) {
-                if (ChessMove.button.x > ChessPointNow.blue1[0] && ChessMove.button.x < ChessPointNow.blue1[0] + 50 &&
-                    ChessMove.button.y > ChessPointNow.blue1[1] && ChessMove.button.y < ChessPointNow.blue1[1] + 50) {
-                    reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1] + 47 * result);
-                } else if (ChessMove.button.x > ChessPointNow.blue2[0] &&
-                           ChessMove.button.x < ChessPointNow.blue2[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.blue2[1] &&
-                           ChessMove.button.y < ChessPointNow.blue2[1] + 50) {
-                    reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1] + 47 * result);
-                } else if (ChessMove.button.x > ChessPointNow.blue3[0] &&
-                           ChessMove.button.x < ChessPointNow.blue3[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.blue3[1] &&
-                           ChessMove.button.y < ChessPointNow.blue3[1] + 50) {
-                    reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1] + 47 * result);
-                } else if (ChessMove.button.x > ChessPointNow.blue4[0] &&
-                           ChessMove.button.x < ChessPointNow.blue4[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.blue4[1] &&
-                           ChessMove.button.y < ChessPointNow.blue4[1] + 50) {
-                    reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1] + 47 * result);
-                }
-                if (type == 2)//2äººæ¸¸æˆ
-                {
-                    player = 1;
-                    return MoveChess("yellow", player, 2);
-                } else if (type == 3 || type == 4) {
-                    player = 3;
-                    return MoveChess("green", player, type);
-                }
-            } else if (player == 3) {
-                if (ChessMove.button.x > ChessPointNow.green1[0] && ChessMove.button.x < ChessPointNow.green1[0] + 50 &&
-                    ChessMove.button.y > ChessPointNow.green1[1] && ChessMove.button.y < ChessPointNow.green1[1] + 50) {
-                    reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1] - 47 * result);
-                } else if (ChessMove.button.x > ChessPointNow.green2[0] &&
-                           ChessMove.button.x < ChessPointNow.green2[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.green2[1] &&
-                           ChessMove.button.y < ChessPointNow.green2[1] + 50) {
-                    reload("green2", ChessPointNow.green2[0], ChessPointNow.green2[1] - 47 * result);
-                } else if (ChessMove.button.x > ChessPointNow.green3[0] &&
-                           ChessMove.button.x < ChessPointNow.green3[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.green3[1] &&
-                           ChessMove.button.y < ChessPointNow.green3[1] + 50) {
-                    reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1] - 47 * result);
-                } else if (ChessMove.button.x > ChessPointNow.green4[0] &&
-                           ChessMove.button.x < ChessPointNow.green4[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.green4[1] &&
-                           ChessMove.button.y < ChessPointNow.green4[1] + 50) {
-                    reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1] - 47 * result);
-                }
-                if (type == 3)//3äººæ¸¸æˆ
-                {
-                    player = 1;
-                    return MoveChess("yellow", player, 3);
-                } else if (type == 4) {
-                    player = 4;
-                    return MoveChess("red", player, 4);
-                }
-            } else if (player == 4) {
-                if (ChessMove.button.x > ChessPointNow.red1[0] && ChessMove.button.x < ChessPointNow.red1[0] + 50 &&
-                    ChessMove.button.y > ChessPointNow.red1[1] && ChessMove.button.y < ChessPointNow.red1[1] + 50) {
-                    reload("red1", ChessPointNow.red1[0] - 53 * result, ChessPointNow.red1[1]);
-                } else if (ChessMove.button.x > ChessPointNow.red2[0] &&
-                           ChessMove.button.x < ChessPointNow.red2[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.red2[1] &&
-                           ChessMove.button.y < ChessPointNow.red2[1] + 50) {
-                    reload("red2", ChessPointNow.red2[0] - 53 * result, ChessPointNow.red2[1]);
-                } else if (ChessMove.button.x > ChessPointNow.red3[0] &&
-                           ChessMove.button.x < ChessPointNow.red3[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.red3[1] &&
-                           ChessMove.button.y < ChessPointNow.red3[1] + 50) {
-                    reload("red3", ChessPointNow.red3[0] - 53 * result, ChessPointNow.red3[1]);
-                } else if (ChessMove.button.x > ChessPointNow.red4[0] &&
-                           ChessMove.button.x < ChessPointNow.red4[0] + 50 &&
-                           ChessMove.button.y > ChessPointNow.red4[1] &&
-                           ChessMove.button.y < ChessPointNow.red4[1] + 50) {
-                    reload("red4", ChessPointNow.red4[0] - 53 * result, ChessPointNow.red4[1]);
-                }
-                player = 1;
-                return MoveChess("yellow", player, 4);
-            }
-    }
-}
-    r:
-    printf("over");
-    return;
-}
- */
-/*void MoveChess(const char name[10], int player, int type)
-{
+/*{
 
     if (result == 6)
     {
@@ -1610,7 +1325,7 @@ void Load_dice(int result, const char name[10])
 r1:
     return;
 }*/
-void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£‹å­æ¶ˆå¤±åŽç»§ç»­æŠ•
+void MoveChess(const char name[10], int player, int type, int result)
 {
     SDL_Event FirstMove;
     if (player == 1)
@@ -1619,9 +1334,9 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
             return;
         else
         {
+            int count = 0;
             for (int i = 0; i < 4; i++)
             {
-                int count = 0;
                 if (StartedChess.YellowEndChess[i] == 0)
                     count++;
                 if (count == 4 && result != 6)
@@ -1678,7 +1393,6 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         else if (EndChessNum.YellowEndChess[0] == 1)
                         {
                         yellow1:
-                            printf("chanrgyellow\n");
                             EndJump("yellow", &ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result);
                             jump("yellow1");
                             if (ChessPointNow.yellow1[0] < 0)
@@ -1719,7 +1433,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         }
                         else if (StartedChess.YellowEndChess[1] == 1 && EndChessNum.YellowEndChess[1] == 0)
                         {
-                            if ((ChessPointNow.yellow2[1] == 686 && ChessPointNow.yellow2[0] <= 315) || (ChessPointNow.yellow1[0] == 103 && ChessPointNow.yellow1[1] > 280))
+                            if ((ChessPointNow.yellow2[1] == 686 && ChessPointNow.yellow2[0] <= 315) || (ChessPointNow.yellow2[0] == 103 && ChessPointNow.yellow2[1] > 280))
                             {
                                 EndChessNum.YellowEndChess[1] = 1;
                                 goto yellow2;
@@ -1733,7 +1447,9 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         else if (EndChessNum.YellowEndChess[1] == 1)
                         {
                         yellow2:
+                            printf("yellow2change\n");
                             EndJump("yellow", &ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result);
+                            jump("yellow2");
                             if (ChessPointNow.yellow2[0] == -100)
                                 StartedChess.YellowEndChess[1] = 0;
                             reload("yellow2", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
@@ -1787,6 +1503,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         yellow3:
                             EndJump("yellow", &ChessPointNow.yellow3[0], &ChessPointNow.yellow3[1], result);
+                            jump("yellow3");
                             if (ChessPointNow.yellow3[0] == -100)
                                 StartedChess.YellowEndChess[2] = 0;
                             reload("yellow3", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
@@ -1840,6 +1557,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         yellow4:
                             EndJump("yellow", &ChessPointNow.yellow4[0], &ChessPointNow.yellow4[1], result);
+                            jump("yellow4");
                             if (ChessPointNow.yellow4[0] == -100)
                                 StartedChess.YellowEndChess[3] = 0;
                             reload("yellow4", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
@@ -1856,9 +1574,9 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
             return;
         else
         {
+            int count = 0;
             for (int i = 0; i < 4; i++)
             {
-                int count = 0;
                 if (StartedChess.BlueEndChess[i] == 0)
                     count++;
                 if (count == 4 && result != 6)
@@ -1916,6 +1634,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         blue1:
                             EndJump("blue", &ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
+                            jump("blue1");
                             if (ChessPointNow.blue1[0] == -100)
                                 StartedChess.BlueEndChess[0] = 0;
                             reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
@@ -1969,6 +1688,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         blue2:
                             EndJump("blue", &ChessPointNow.blue2[0], &ChessPointNow.blue2[1], result);
+                            jump("blue2");
                             if (ChessPointNow.blue2[0] == -100)
                                 StartedChess.BlueEndChess[1] = 0;
                             reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
@@ -2022,6 +1742,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         blue3:
                             EndJump("blue", &ChessPointNow.blue3[0], &ChessPointNow.blue3[1], result);
+                            jump("blue3");
                             if (ChessPointNow.blue3[0] == -100)
                                 StartedChess.BlueEndChess[2] = 0;
                             reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
@@ -2075,6 +1796,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         blue4:
                             EndJump("blue", &ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result);
+                            jump("blue4");
                             if (ChessPointNow.blue4[0] == -100)
                                 StartedChess.BlueEndChess[3] = 0;
                             reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
@@ -2091,9 +1813,9 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
             return;
         else
         {
+            int count = 0;
             for (int i = 0; i < 4; i++)
             {
-                int count = 0;
                 if (StartedChess.GreenEndChess[i] == 0)
                     count++;
                 if (count == 4 && result != 6)
@@ -2151,6 +1873,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         green1:
                             EndJump("green", &ChessPointNow.green1[0], &ChessPointNow.green1[1], result);
+                            jump("green1");
                             if (ChessPointNow.green1[0] == -100)
                                 StartedChess.GreenEndChess[0] = 0;
                             reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1]);
@@ -2257,6 +1980,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         green3:
                             EndJump("green", &ChessPointNow.green3[0], &ChessPointNow.green3[1], result);
+                            jump("green3");
                             if (ChessPointNow.green3[0] == -100)
                                 StartedChess.GreenEndChess[2] = 0;
                             reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1]);
@@ -2310,6 +2034,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         green4:
                             EndJump("green", &ChessPointNow.green4[0], &ChessPointNow.green4[1], result);
+                            jump("green4");
                             if (ChessPointNow.green4[0] == -100)
                                 StartedChess.GreenEndChess[3] = 0;
                             reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1]);
@@ -2326,9 +2051,9 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
             return;
         else
         {
+            int count = 0;
             for (int i = 0; i < 4; i++)
             {
-                int count = 0;
                 if (StartedChess.RedEndChess[i] == 0)
                     count++;
                 if (count == 4 && result != 6)
@@ -2386,6 +2111,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         red1:
                             EndJump("red", &ChessPointNow.red1[0], &ChessPointNow.red1[1], result);
+                            jump("red1");
                             if (ChessPointNow.red1[0] == -100)
                                 StartedChess.RedEndChess[0] = 0;
                             reload("red1", ChessPointNow.red1[0], ChessPointNow.red1[1]);
@@ -2439,6 +2165,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         red2:
                             EndJump("red", &ChessPointNow.red2[0], &ChessPointNow.red2[1], result);
+                            jump("red2");
                             if (ChessPointNow.red2[0] == -100)
                                 StartedChess.RedEndChess[1] = 0;
                             reload("red2", ChessPointNow.red2[0], ChessPointNow.red2[1]);
@@ -2492,6 +2219,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         red3:
                             EndJump("red", &ChessPointNow.red3[0], &ChessPointNow.red3[1], result);
+                            jump("red3");
                             if (ChessPointNow.red3[0] == -100)
                                 StartedChess.RedEndChess[2] = 0;
                             reload("red3", ChessPointNow.red3[0], ChessPointNow.red3[1]);
@@ -2545,6 +2273,7 @@ void MoveChess(const char name[10], int player, int type, int result) // TODO:æ£
                         {
                         red4:
                             EndJump("red", &ChessPointNow.red4[0], &ChessPointNow.red4[1], result);
+                            jump("red4");
                             if (ChessPointNow.red4[0] == -100)
                                 StartedChess.RedEndChess[3] = 0;
                             reload("red4", ChessPointNow.red4[0], ChessPointNow.red4[1]);
@@ -2972,17 +2701,13 @@ void EndJump(const char name[10], int *x, int *y, int result)
             {
                 result = (103 - *x) / 53;
                 *x = 103;
-                printf("1\n");
             }
-            printf("2\n");
         }
         if (*x == 103 && *y > 280)
         {
-            printf("3\n");
             *y -= result * 47;
             if (*y <= 421)
             {
-                printf("4\n");
                 result = (421 - *y) / 47;
                 *y = 421;
             }
@@ -2990,7 +2715,6 @@ void EndJump(const char name[10], int *x, int *y, int result)
         if (*y == 421 && *x >= 103)
         {
             *x += result * 53;
-            printf("aljdksl\n");
             if (*x > 421)
             {
                 result = ((*x - 421) / 53);
@@ -3015,17 +2739,13 @@ void EndJump(const char name[10], int *x, int *y, int result)
             {
                 result = (92 - *y) / 47;
                 *y = 92;
-                printf("1.1\n");
             }
-            printf("2.1\n");
         }
         if (*y == 92 && *x < 474)
         {
-            printf("3.1\n");
             *x += result * 53;
             if (*x >= 474)
             {
-                printf("4.1\n");
                 result = (*x - 474) / 53;
                 *x = 474;
             }
@@ -3043,10 +2763,10 @@ void EndJump(const char name[10], int *x, int *y, int result)
                 EndChessNum.endbluechess++;
                 *x = -100;
                 *y = -100;
-                return 2;
+                return;
             }
         }
-        return 0;
+        return;
     }
     else if (!strcmp(name, "red"))
     {
@@ -3081,10 +2801,10 @@ void EndJump(const char name[10], int *x, int *y, int result)
                 *x = -100;
                 *y = -100;
                 EndChessNum.endredchess++;
-                return 3;
+                return;
             }
         }
-        return 0;
+        return;
     }
     else if (!strcmp(name, "green"))
     {
@@ -3097,7 +2817,7 @@ void EndJump(const char name[10], int *x, int *y, int result)
                 *y = 750;
             }
         }
-        if (*y == 750 && *x < 474)
+        if (*y == 750 && *x > 474)
         {
             *x -= result * 53;
             if (*x <= 474)
@@ -3109,7 +2829,7 @@ void EndJump(const char name[10], int *x, int *y, int result)
         if (*x == 474 && *y >= 468)
         {
             *y -= result * 47;
-            if (*y >= 468)
+            if (*y < 468)
             {
                 result = ((*y - 468) / 47);
                 *y = 468 + result * 47;
@@ -3119,10 +2839,10 @@ void EndJump(const char name[10], int *x, int *y, int result)
                 *x = -100;
                 *y = -100;
                 EndChessNum.endgreenchess++;
-                return 4;
+                return;
             }
         }
-        return 0;
+        return;
     }
 }
 void originorder() // åˆå§‹å‘½ä»¤è¡Œ
