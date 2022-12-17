@@ -207,15 +207,11 @@ struct ChessPointNow
 } ChessPointNow = {{85, 68}, {163, 68}, {85, 145}, {163, 145}, {800, 75}, {800, 145}, {875, 75}, {875, 145}, {795, 710}, {795, 790}, {880, 710}, {880, 790}, {85, 710}, {85, 790}, {165, 710}, {165, 790}};
 struct StartedChess
 {
-    int YellowStartChess;
     int YellowEndChess[4]; // 每个棋子是否出发状态判断
-    int BlueStartChess;
     int BlueEndChess[4];
-    int GreenStartChess;
     int RedEndChess[4];
-    int RedStartChess;
     int GreenEndChess[4];
-} StartedChess = {0, {0}, 0, {0}, 0, {0}, 0, {0}};
+} StartedChess = {{0}, {0}, {0}, {0}};
 
 struct EndChess
 {
@@ -1293,255 +1289,246 @@ void MoveChess(const char name[10], int player, int type, int result)
     SDL_Event FirstMove;
     if (player == 1)
     {
-        if (result != 6 && StartedChess.YellowStartChess == 0)
-            return;
-        else
+        int count = 0;
+        for (int i = 0; i < 4; i++)
         {
-            int count = 0;
-            for (int i = 0; i < 4; i++)
+            if (StartedChess.YellowEndChess[i] == 0)
+                count++;
+            if (count == 4 && result != 6)
+                return;
+        }
+        while (SDL_WaitEvent(&FirstMove))
+        {
+            switch (FirstMove.type)
             {
-                if (StartedChess.YellowEndChess[i] == 0)
-                    count++;
-                if (count == 4 && result != 6)
-                    return;
-            }
-            while (SDL_WaitEvent(&FirstMove))
-            {
-                switch (FirstMove.type)
+            case SDL_MOUSEBUTTONUP:
+                if (FirstMove.button.x > ChessPointNow.yellow1[0] &&
+                    FirstMove.button.x < ChessPointNow.yellow1[0] + 50 &&
+                    FirstMove.button.y > ChessPointNow.yellow1[1] &&
+                    FirstMove.button.y < ChessPointNow.yellow1[1] + 50)
                 {
-                case SDL_MOUSEBUTTONUP:
-                    if (FirstMove.button.x > ChessPointNow.yellow1[0] &&
-                        FirstMove.button.x < ChessPointNow.yellow1[0] + 50 &&
-                        FirstMove.button.y > ChessPointNow.yellow1[1] &&
-                        FirstMove.button.y < ChessPointNow.yellow1[1] + 50)
+                    if (result == 6 && StartedChess.YellowEndChess[0] != 1)
                     {
-                        if (result == 6 && StartedChess.YellowStartChess != 4 && StartedChess.YellowEndChess[0] != 1)
+                        reload("yellow1", 20, 250);
+                        while (SDL_WaitEvent(&FirstMove))
                         {
-                            reload("yellow1", 20, 250);
-                            while (SDL_WaitEvent(&FirstMove))
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("yellow");
-                                        JudgeChess(&ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result);
-                                        jump("yellow1");
-                                        cross();
-                                        attack("yellow", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
-                                        reload("yellow1", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
-                                        StartedChess.YellowStartChess++;
-                                        StartedChess.YellowEndChess[0] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("yellow");
+                                    JudgeChess(&ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result);
+                                    jump("yellow1");
+                                    cross();
+                                    attack("yellow", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
+                                    reload("yellow1", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
+                                    StartedChess.YellowEndChess[0] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        else if (StartedChess.YellowEndChess[0] == 1 && EndChessNum.YellowEndChess[0] == 0)
-                        {
-                            if ((ChessPointNow.yellow1[1] == 686 && ChessPointNow.yellow1[0] <= 315) || (ChessPointNow.yellow1[0] == 103 && ChessPointNow.yellow1[1] > 280))
-                            {
-                                EndChessNum.YellowEndChess[0] = 1;
-                                goto yellow1;
-                            }
-                            JudgeChess(&ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result);
-                            jump("yellow1");
-                            cross();
-                            attack("yellow", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
-                            reload("yellow1", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
-                            return;
-                        }
-                        else if (EndChessNum.YellowEndChess[0] == 1)
-                        {
-                        yellow1:
-                            EndJump("yellow", &ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result);
-                            jump("yellow1");
-                            attack("yellow", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
-                            if (ChessPointNow.yellow1[0] < 0)
-                                StartedChess.YellowEndChess[0] = 0;
-                            reload("yellow1", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.yellow2[0] &&
-                             FirstMove.button.x < ChessPointNow.yellow2[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.yellow2[1] &&
-                             FirstMove.button.y < ChessPointNow.yellow2[1] + 50)
+                    else if (StartedChess.YellowEndChess[0] == 1 && EndChessNum.YellowEndChess[0] == 0)
                     {
-                        if (result == 6 && StartedChess.YellowStartChess != 4 && StartedChess.YellowEndChess[1] != 1)
+                        if ((ChessPointNow.yellow1[1] == 686 && ChessPointNow.yellow1[0] <= 315) || (ChessPointNow.yellow1[0] == 103 && ChessPointNow.yellow1[1] > 280))
                         {
-                            reload("yellow2", 20, 250);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.YellowEndChess[0] = 1;
+                            goto yellow1;
+                        }
+                        JudgeChess(&ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result);
+                        jump("yellow1");
+                        cross();
+                        attack("yellow", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
+                        reload("yellow1", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
+                        return;
+                    }
+                    else if (EndChessNum.YellowEndChess[0] == 1)
+                    {
+                    yellow1:
+                        EndJump("yellow", &ChessPointNow.yellow1[0], &ChessPointNow.yellow1[1], result);
+                        jump("yellow1");
+                        attack("yellow", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
+                        if (ChessPointNow.yellow1[0] < 0)
+                            StartedChess.YellowEndChess[0] = 0;
+                        reload("yellow1", ChessPointNow.yellow1[0], ChessPointNow.yellow1[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.yellow2[0] &&
+                         FirstMove.button.x < ChessPointNow.yellow2[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.yellow2[1] &&
+                         FirstMove.button.y < ChessPointNow.yellow2[1] + 50)
+                {
+                    if (result == 6 && StartedChess.YellowEndChess[1] != 1)
+                    {
+                        reload("yellow2", 20, 250);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("yellow");
-                                        JudgeChess(&ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result);
-                                        jump("yellow2");
-                                        cross();
-                                        attack("yellow", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
-                                        reload("yellow2", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
-                                        StartedChess.YellowStartChess++;
-                                        StartedChess.YellowEndChess[1] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("yellow");
+                                    JudgeChess(&ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result);
+                                    jump("yellow2");
+                                    cross();
+                                    attack("yellow", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
+                                    reload("yellow2", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
+                                    StartedChess.YellowEndChess[1] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        else if (StartedChess.YellowEndChess[1] == 1 && EndChessNum.YellowEndChess[1] == 0)
-                        {
-                            if ((ChessPointNow.yellow2[1] == 686 && ChessPointNow.yellow2[0] <= 315) || (ChessPointNow.yellow2[0] == 103 && ChessPointNow.yellow2[1] > 280))
-                            {
-                                EndChessNum.YellowEndChess[1] = 1;
-                                goto yellow2;
-                            }
-                            JudgeChess(&ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result);
-                            jump("yellow2");
-                            cross();
-                            attack("yellow", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
-                            reload("yellow2", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
-                            return;
-                        }
-                        else if (EndChessNum.YellowEndChess[1] == 1)
-                        {
-                        yellow2:
-                            printf("yellow2change\n");
-                            EndJump("yellow", &ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result);
-                            jump("yellow2");
-                            attack("yellow", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
-                            if (ChessPointNow.yellow2[0] < 0)
-                                StartedChess.YellowEndChess[1] = 0;
-                            reload("yellow2", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.yellow3[0] &&
-                             FirstMove.button.x < ChessPointNow.yellow3[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.yellow3[1] &&
-                             FirstMove.button.y < ChessPointNow.yellow3[1] + 50)
+                    else if (StartedChess.YellowEndChess[1] == 1 && EndChessNum.YellowEndChess[1] == 0)
                     {
-                        if (result == 6 && StartedChess.YellowStartChess != 4 && StartedChess.YellowEndChess[2] != 1)
+                        if ((ChessPointNow.yellow2[1] == 686 && ChessPointNow.yellow2[0] <= 315) || (ChessPointNow.yellow2[0] == 103 && ChessPointNow.yellow2[1] > 280))
                         {
-                            reload("yellow3", 20, 250);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.YellowEndChess[1] = 1;
+                            goto yellow2;
+                        }
+                        JudgeChess(&ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result);
+                        jump("yellow2");
+                        cross();
+                        attack("yellow", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
+                        reload("yellow2", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
+                        return;
+                    }
+                    else if (EndChessNum.YellowEndChess[1] == 1)
+                    {
+                    yellow2:
+                        printf("yellow2change\n");
+                        EndJump("yellow", &ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result);
+                        jump("yellow2");
+                        attack("yellow", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
+                        if (ChessPointNow.yellow2[0] < 0)
+                            StartedChess.YellowEndChess[1] = 0;
+                        reload("yellow2", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.yellow3[0] &&
+                         FirstMove.button.x < ChessPointNow.yellow3[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.yellow3[1] &&
+                         FirstMove.button.y < ChessPointNow.yellow3[1] + 50)
+                {
+                    if (result == 6 && StartedChess.YellowEndChess[2] != 1)
+                    {
+                        reload("yellow3", 20, 250);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("yellow");
-                                        JudgeChess(&ChessPointNow.yellow3[0], &ChessPointNow.yellow3[1], result);
-                                        jump("yellow3");
-                                        cross();
-                                        attack("yellow", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
-                                        reload("yellow3", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
-                                        StartedChess.YellowStartChess++;
-                                        StartedChess.YellowEndChess[2] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("yellow");
+                                    JudgeChess(&ChessPointNow.yellow3[0], &ChessPointNow.yellow3[1], result);
+                                    jump("yellow3");
+                                    cross();
+                                    attack("yellow", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
+                                    reload("yellow3", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
+                                    StartedChess.YellowEndChess[2] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        if (StartedChess.YellowEndChess[2] == 1 && EndChessNum.YellowEndChess[2] == 0)
-                        {
-                            if ((ChessPointNow.yellow3[1] == 686 && ChessPointNow.yellow3[0] <= 315) || (ChessPointNow.yellow3[0] == 103 && ChessPointNow.yellow3[1] > 280))
-                            {
-                                EndChessNum.YellowEndChess[2] = 1;
-                                goto yellow3;
-                            }
-                            JudgeChess(&ChessPointNow.yellow3[0], &ChessPointNow.yellow3[1], result);
-                            jump("yellow3");
-                            cross();
-                            attack("yellow", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
-                            reload("yellow3", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
-                            return;
-                        }
-                        else if (EndChessNum.YellowEndChess[2] == 1)
-                        {
-                        yellow3:
-                            EndJump("yellow", &ChessPointNow.yellow3[0], &ChessPointNow.yellow3[1], result);
-                            jump("yellow3");
-                            attack("yellow", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
-                            if (ChessPointNow.yellow3[0] < 0)
-                                StartedChess.YellowEndChess[2] = 0;
-                            reload("yellow3", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.yellow4[0] &&
-                             FirstMove.button.x < ChessPointNow.yellow4[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.yellow4[1] &&
-                             FirstMove.button.y < ChessPointNow.yellow4[1] + 50)
+                    if (StartedChess.YellowEndChess[2] == 1 && EndChessNum.YellowEndChess[2] == 0)
                     {
-                        if (result == 6 && StartedChess.YellowStartChess != 4 && StartedChess.YellowEndChess[3] != 1)
+                        if ((ChessPointNow.yellow3[1] == 686 && ChessPointNow.yellow3[0] <= 315) || (ChessPointNow.yellow3[0] == 103 && ChessPointNow.yellow3[1] > 280))
                         {
-                            reload("yellow4", 20, 250);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.YellowEndChess[2] = 1;
+                            goto yellow3;
+                        }
+                        JudgeChess(&ChessPointNow.yellow3[0], &ChessPointNow.yellow3[1], result);
+                        jump("yellow3");
+                        cross();
+                        attack("yellow", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
+                        reload("yellow3", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
+                        return;
+                    }
+                    else if (EndChessNum.YellowEndChess[2] == 1)
+                    {
+                    yellow3:
+                        EndJump("yellow", &ChessPointNow.yellow3[0], &ChessPointNow.yellow3[1], result);
+                        jump("yellow3");
+                        attack("yellow", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
+                        if (ChessPointNow.yellow3[0] < 0)
+                            StartedChess.YellowEndChess[2] = 0;
+                        reload("yellow3", ChessPointNow.yellow3[0], ChessPointNow.yellow3[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.yellow4[0] &&
+                         FirstMove.button.x < ChessPointNow.yellow4[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.yellow4[1] &&
+                         FirstMove.button.y < ChessPointNow.yellow4[1] + 50)
+                {
+                    if (result == 6 && StartedChess.YellowEndChess[3] != 1)
+                    {
+                        reload("yellow4", 20, 250);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("yellow");
-                                        JudgeChess(&ChessPointNow.yellow4[0], &ChessPointNow.yellow4[1], result);
-                                        jump("yellow4");
-                                        cross();
-                                        attack("yellow", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
-                                        reload("yellow4", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
-                                        StartedChess.YellowStartChess++;
-                                        StartedChess.YellowEndChess[3] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("yellow");
+                                    JudgeChess(&ChessPointNow.yellow4[0], &ChessPointNow.yellow4[1], result);
+                                    jump("yellow4");
+                                    cross();
+                                    attack("yellow", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
+                                    reload("yellow4", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
+                                    StartedChess.YellowEndChess[3] = 1;
+                                    return;
                                 }
                             }
                         }
-                        if (StartedChess.YellowEndChess[3] == 1 && EndChessNum.YellowEndChess[3] == 0)
+                    }
+                    if (StartedChess.YellowEndChess[3] == 1 && EndChessNum.YellowEndChess[3] == 0)
+                    {
+                        if ((ChessPointNow.yellow4[1] == 686 && ChessPointNow.yellow4[0] <= 315) || (ChessPointNow.yellow4[0] == 103 && ChessPointNow.yellow4[1] > 280))
                         {
-                            if ((ChessPointNow.yellow4[1] == 686 && ChessPointNow.yellow4[0] <= 315) || (ChessPointNow.yellow4[0] == 103 && ChessPointNow.yellow4[1] > 280))
-                            {
-                                EndChessNum.YellowEndChess[3] = 1;
-                                goto yellow4;
-                            }
-                            JudgeChess(&ChessPointNow.yellow4[0], &ChessPointNow.yellow4[1], result);
-                            jump("yellow4");
-                            cross();
-                            attack("yellow", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
-                            reload("yellow4", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
-                            return;
+                            EndChessNum.YellowEndChess[3] = 1;
+                            goto yellow4;
                         }
-                        else if (EndChessNum.YellowEndChess[3] == 1)
-                        {
-                        yellow4:
-                            EndJump("yellow", &ChessPointNow.yellow4[0], &ChessPointNow.yellow4[1], result);
-                            jump("yellow4");
-                            attack("yellow", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
-                            if (ChessPointNow.yellow4[0] < 0)
-                                StartedChess.YellowEndChess[3] = 0;
-                            reload("yellow4", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
-                            end();
-                            return;
-                        }
+                        JudgeChess(&ChessPointNow.yellow4[0], &ChessPointNow.yellow4[1], result);
+                        jump("yellow4");
+                        cross();
+                        attack("yellow", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
+                        reload("yellow4", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
+                        return;
+                    }
+                    else if (EndChessNum.YellowEndChess[3] == 1)
+                    {
+                    yellow4:
+                        EndJump("yellow", &ChessPointNow.yellow4[0], &ChessPointNow.yellow4[1], result);
+                        jump("yellow4");
+                        attack("yellow", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
+                        if (ChessPointNow.yellow4[0] < 0)
+                            StartedChess.YellowEndChess[3] = 0;
+                        reload("yellow4", ChessPointNow.yellow4[0], ChessPointNow.yellow4[1]);
+                        end();
+                        return;
                     }
                 }
             }
@@ -1549,254 +1536,246 @@ void MoveChess(const char name[10], int player, int type, int result)
     }
     else if (player == 2)
     {
-        if (result != 6 && StartedChess.BlueStartChess == 0)
-            return;
-        else
+
+        int count = 0;
+        for (int i = 0; i < 4; i++)
         {
-            int count = 0;
-            for (int i = 0; i < 4; i++)
+            if (StartedChess.BlueEndChess[i] == 0)
+                count++;
+            if (count == 4 && result != 6)
+                return;
+        }
+        while (SDL_WaitEvent(&FirstMove))
+        {
+            switch (FirstMove.type)
             {
-                if (StartedChess.BlueEndChess[i] == 0)
-                    count++;
-                if (count == 4 && result != 6)
-                    return;
-            }
-            while (SDL_WaitEvent(&FirstMove))
-            {
-                switch (FirstMove.type)
+            case SDL_MOUSEBUTTONUP:
+                if (FirstMove.button.x > ChessPointNow.blue1[0] &&
+                    FirstMove.button.x < ChessPointNow.blue1[0] + 50 &&
+                    FirstMove.button.y > ChessPointNow.blue1[1] &&
+                    FirstMove.button.y < ChessPointNow.blue1[1] + 50)
                 {
-                case SDL_MOUSEBUTTONUP:
-                    if (FirstMove.button.x > ChessPointNow.blue1[0] &&
-                        FirstMove.button.x < ChessPointNow.blue1[0] + 50 &&
-                        FirstMove.button.y > ChessPointNow.blue1[1] &&
-                        FirstMove.button.y < ChessPointNow.blue1[1] + 50)
+                    if (result == 6 && StartedChess.BlueEndChess[0] != 1)
                     {
-                        if (result == 6 && StartedChess.BlueStartChess != 4 && StartedChess.BlueEndChess[0] != 1)
+                        reload("blue1", 682, 16);
+                        while (SDL_WaitEvent(&FirstMove))
                         {
-                            reload("blue1", 682, 16);
-                            while (SDL_WaitEvent(&FirstMove))
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("blue");
-                                        JudgeChess(&ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
-                                        jump("blue1");
-                                        cross();
-                                        attack("blue", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
-                                        reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
-                                        StartedChess.BlueStartChess++;
-                                        StartedChess.BlueEndChess[0] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("blue");
+                                    JudgeChess(&ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
+                                    jump("blue1");
+                                    cross();
+                                    attack("blue", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
+                                    reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
+                                    StartedChess.BlueEndChess[0] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        if (StartedChess.BlueEndChess[0] == 1 && EndChessNum.BlueEndChess[0] == 0)
-                        {
-                            if ((ChessPointNow.blue1[1] == 92 && ChessPointNow.blue1[0] < 633) || (ChessPointNow.blue1[0] == 315 && ChessPointNow.blue1[1] <= 280))
-                            {
-                                EndChessNum.BlueEndChess[0] = 1;
-                                goto blue1;
-                            }
-                            JudgeChess(&ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
-                            jump("blue1");
-                            cross();
-                            attack("blue", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
-                            reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
-                            return;
-                        }
-                        else if (EndChessNum.BlueEndChess[0] == 1)
-                        {
-                        blue1:
-                            EndJump("blue", &ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
-                            jump("blue1");
-                            attack("blue", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
-                            if (ChessPointNow.blue1[0] < 0)
-                                StartedChess.BlueEndChess[0] = 0;
-                            reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.blue2[0] &&
-                             FirstMove.button.x < ChessPointNow.blue2[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.blue2[1] &&
-                             FirstMove.button.y < ChessPointNow.blue2[1] + 50)
+                    if (StartedChess.BlueEndChess[0] == 1 && EndChessNum.BlueEndChess[0] == 0)
                     {
-                        if (result == 6 && StartedChess.BlueStartChess != 4 && StartedChess.BlueEndChess[1] != 1)
+                        if ((ChessPointNow.blue1[1] == 92 && ChessPointNow.blue1[0] < 633) || (ChessPointNow.blue1[0] == 315 && ChessPointNow.blue1[1] <= 280))
                         {
-                            reload("blue2", 682, 16);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.BlueEndChess[0] = 1;
+                            goto blue1;
+                        }
+                        JudgeChess(&ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
+                        jump("blue1");
+                        cross();
+                        attack("blue", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
+                        reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
+                        return;
+                    }
+                    else if (EndChessNum.BlueEndChess[0] == 1)
+                    {
+                    blue1:
+                        EndJump("blue", &ChessPointNow.blue1[0], &ChessPointNow.blue1[1], result);
+                        jump("blue1");
+                        attack("blue", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
+                        if (ChessPointNow.blue1[0] < 0)
+                            StartedChess.BlueEndChess[0] = 0;
+                        reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.blue2[0] &&
+                         FirstMove.button.x < ChessPointNow.blue2[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.blue2[1] &&
+                         FirstMove.button.y < ChessPointNow.blue2[1] + 50)
+                {
+                    if (result == 6 && StartedChess.BlueEndChess[1] != 1)
+                    {
+                        reload("blue2", 682, 16);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("blue");
-                                        JudgeChess(&ChessPointNow.blue2[0], &ChessPointNow.blue2[1], result);
-                                        jump("blue2");
-                                        cross();
-                                        attack("blue", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
-                                        reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
-                                        StartedChess.BlueStartChess++;
-                                        StartedChess.BlueEndChess[1] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("blue");
+                                    JudgeChess(&ChessPointNow.blue2[0], &ChessPointNow.blue2[1], result);
+                                    jump("blue2");
+                                    cross();
+                                    attack("blue", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
+                                    reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
+                                    StartedChess.BlueEndChess[1] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        if (StartedChess.BlueEndChess[1] == 1 && EndChessNum.BlueEndChess[1] == 0)
-                        {
-                            if ((ChessPointNow.blue2[1] == 92 && ChessPointNow.blue2[0] < 633) || (ChessPointNow.blue2[0] == 315 && ChessPointNow.blue2[1] <= 280))
-                            {
-                                EndChessNum.BlueEndChess[1] = 1;
-                                goto blue2;
-                            }
-                            JudgeChess(&ChessPointNow.blue2[0], &ChessPointNow.blue2[1], result);
-                            jump("blue2");
-                            cross();
-                            attack("blue", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
-                            reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
-                            return;
-                        }
-                        else if (EndChessNum.BlueEndChess[1] == 1)
-                        {
-                        blue2:
-                            EndJump("blue", &ChessPointNow.blue2[0], &ChessPointNow.blue2[1], result);
-                            jump("blue2");
-                            attack("blue", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
-                            if (ChessPointNow.blue2[0] < 0)
-                                StartedChess.BlueEndChess[1] = 0;
-                            reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.blue3[0] &&
-                             FirstMove.button.x < ChessPointNow.blue3[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.blue3[1] &&
-                             FirstMove.button.y < ChessPointNow.blue3[1] + 50)
+                    if (StartedChess.BlueEndChess[1] == 1 && EndChessNum.BlueEndChess[1] == 0)
                     {
-                        if (result == 6 && StartedChess.BlueStartChess != 4 && StartedChess.BlueEndChess[2] != 1)
+                        if ((ChessPointNow.blue2[1] == 92 && ChessPointNow.blue2[0] < 633) || (ChessPointNow.blue2[0] == 315 && ChessPointNow.blue2[1] <= 280))
                         {
-                            reload("blue3", 682, 16);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.BlueEndChess[1] = 1;
+                            goto blue2;
+                        }
+                        JudgeChess(&ChessPointNow.blue2[0], &ChessPointNow.blue2[1], result);
+                        jump("blue2");
+                        cross();
+                        attack("blue", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
+                        reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
+                        return;
+                    }
+                    else if (EndChessNum.BlueEndChess[1] == 1)
+                    {
+                    blue2:
+                        EndJump("blue", &ChessPointNow.blue2[0], &ChessPointNow.blue2[1], result);
+                        jump("blue2");
+                        attack("blue", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
+                        if (ChessPointNow.blue2[0] < 0)
+                            StartedChess.BlueEndChess[1] = 0;
+                        reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.blue3[0] &&
+                         FirstMove.button.x < ChessPointNow.blue3[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.blue3[1] &&
+                         FirstMove.button.y < ChessPointNow.blue3[1] + 50)
+                {
+                    if (result == 6 && StartedChess.BlueEndChess[2] != 1)
+                    {
+                        reload("blue3", 682, 16);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("blue");
-                                        JudgeChess(&ChessPointNow.blue3[0], &ChessPointNow.blue3[1], result);
-                                        jump("blue3");
-                                        cross();
-                                        attack("blue", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
-                                        reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
-                                        StartedChess.BlueStartChess++;
-                                        StartedChess.BlueEndChess[2] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("blue");
+                                    JudgeChess(&ChessPointNow.blue3[0], &ChessPointNow.blue3[1], result);
+                                    jump("blue3");
+                                    cross();
+                                    attack("blue", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
+                                    reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
+                                    StartedChess.BlueEndChess[2] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        if (StartedChess.BlueEndChess[2] == 1 && EndChessNum.BlueEndChess[2] == 0)
-                        {
-                            if ((ChessPointNow.blue3[1] == 92 && ChessPointNow.blue3[0] < 633) || (ChessPointNow.blue3[0] == 315 && ChessPointNow.blue3[1] <= 280))
-                            {
-                                EndChessNum.BlueEndChess[2] = 1;
-                                goto blue3;
-                            }
-                            JudgeChess(&ChessPointNow.blue3[0], &ChessPointNow.blue3[1], result);
-                            jump("blue3");
-                            cross();
-                            attack("blue", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
-                            reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
-                            return;
-                        }
-                        else if (EndChessNum.BlueEndChess[2] == 1)
-                        {
-                        blue3:
-                            EndJump("blue", &ChessPointNow.blue3[0], &ChessPointNow.blue3[1], result);
-                            jump("blue3");
-                            attack("blue", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
-                            if (ChessPointNow.blue3[0] < 0)
-                                StartedChess.BlueEndChess[2] = 0;
-                            reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.blue4[0] &&
-                             FirstMove.button.x < ChessPointNow.blue4[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.blue4[1] &&
-                             FirstMove.button.y < ChessPointNow.blue4[1] + 50)
+                    if (StartedChess.BlueEndChess[2] == 1 && EndChessNum.BlueEndChess[2] == 0)
                     {
-                        if (result == 6 && StartedChess.BlueStartChess != 4 && StartedChess.BlueEndChess[3] != 1)
+                        if ((ChessPointNow.blue3[1] == 92 && ChessPointNow.blue3[0] < 633) || (ChessPointNow.blue3[0] == 315 && ChessPointNow.blue3[1] <= 280))
                         {
-                            reload("blue4", 682, 16);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.BlueEndChess[2] = 1;
+                            goto blue3;
+                        }
+                        JudgeChess(&ChessPointNow.blue3[0], &ChessPointNow.blue3[1], result);
+                        jump("blue3");
+                        cross();
+                        attack("blue", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
+                        reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
+                        return;
+                    }
+                    else if (EndChessNum.BlueEndChess[2] == 1)
+                    {
+                    blue3:
+                        EndJump("blue", &ChessPointNow.blue3[0], &ChessPointNow.blue3[1], result);
+                        jump("blue3");
+                        attack("blue", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
+                        if (ChessPointNow.blue3[0] < 0)
+                            StartedChess.BlueEndChess[2] = 0;
+                        reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.blue4[0] &&
+                         FirstMove.button.x < ChessPointNow.blue4[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.blue4[1] &&
+                         FirstMove.button.y < ChessPointNow.blue4[1] + 50)
+                {
+                    if (result == 6 && StartedChess.BlueEndChess[3] != 1)
+                    {
+                        reload("blue4", 682, 16);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("blue");
-                                        JudgeChess(&ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result);
-                                        jump("blue4");
-                                        cross();
-                                        attack("blue", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
-                                        reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
-                                        StartedChess.BlueStartChess++;
-                                        StartedChess.BlueEndChess[3] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("blue");
+                                    JudgeChess(&ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result);
+                                    jump("blue4");
+                                    cross();
+                                    attack("blue", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
+                                    reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
+                                    StartedChess.BlueEndChess[3] = 1;
+                                    return;
                                 }
                             }
                         }
-                        if (StartedChess.BlueEndChess[3] == 1 && EndChessNum.BlueEndChess[3] == 0)
+                    }
+                    if (StartedChess.BlueEndChess[3] == 1 && EndChessNum.BlueEndChess[3] == 0)
+                    {
+                        if ((ChessPointNow.blue4[1] == 92 && ChessPointNow.blue4[0] < 633) || (ChessPointNow.blue4[0] == 315 && ChessPointNow.blue4[1] <= 280))
                         {
-                            if ((ChessPointNow.blue4[1] == 92 && ChessPointNow.blue4[0] < 633) || (ChessPointNow.blue4[0] == 315 && ChessPointNow.blue4[1] <= 280))
-                            {
-                                EndChessNum.BlueEndChess[3] = 1;
-                                goto blue4;
-                            }
-                            JudgeChess(&ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result);
-                            jump("blue4");
-                            cross();
-                            attack("blue", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
-                            reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
-                            return;
+                            EndChessNum.BlueEndChess[3] = 1;
+                            goto blue4;
                         }
-                        else if (EndChessNum.BlueEndChess[0] == 1)
-                        {
-                        blue4:
-                            EndJump("blue", &ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result);
-                            jump("blue4");
-                            attack("blue", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
-                            if (ChessPointNow.blue4[0] < 0)
-                                StartedChess.BlueEndChess[3] = 0;
-                            reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
-                            end();
-                            return;
-                        }
+                        JudgeChess(&ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result);
+                        jump("blue4");
+                        cross();
+                        attack("blue", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
+                        reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
+                        return;
+                    }
+                    else if (EndChessNum.BlueEndChess[0] == 1)
+                    {
+                    blue4:
+                        EndJump("blue", &ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result);
+                        jump("blue4");
+                        attack("blue", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
+                        if (ChessPointNow.blue4[0] < 0)
+                            StartedChess.BlueEndChess[3] = 0;
+                        reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
+                        end();
+                        return;
                     }
                 }
             }
@@ -1804,254 +1783,246 @@ void MoveChess(const char name[10], int player, int type, int result)
     }
     else if (player == 3)
     {
-        if (result != 6 && StartedChess.GreenStartChess == 0)
-            return;
-        else
+
+        int count = 0;
+        for (int i = 0; i < 4; i++)
         {
-            int count = 0;
-            for (int i = 0; i < 4; i++)
+            if (StartedChess.GreenEndChess[i] == 0)
+                count++;
+            if (count == 4 && result != 6)
+                return;
+        }
+        while (SDL_WaitEvent(&FirstMove))
+        {
+            switch (FirstMove.type)
             {
-                if (StartedChess.GreenEndChess[i] == 0)
-                    count++;
-                if (count == 4 && result != 6)
-                    return;
-            }
-            while (SDL_WaitEvent(&FirstMove))
-            {
-                switch (FirstMove.type)
+            case SDL_MOUSEBUTTONUP:
+                if (FirstMove.button.x > ChessPointNow.green1[0] &&
+                    FirstMove.button.x < ChessPointNow.green1[0] + 50 &&
+                    FirstMove.button.y > ChessPointNow.green1[1] &&
+                    FirstMove.button.y < ChessPointNow.green1[1] + 50)
                 {
-                case SDL_MOUSEBUTTONUP:
-                    if (FirstMove.button.x > ChessPointNow.green1[0] &&
-                        FirstMove.button.x < ChessPointNow.green1[0] + 50 &&
-                        FirstMove.button.y > ChessPointNow.green1[1] &&
-                        FirstMove.button.y < ChessPointNow.green1[1] + 50)
+                    if (result == 6 && StartedChess.GreenEndChess[0] != 1)
                     {
-                        if (result == 6 && StartedChess.GreenStartChess != 4 && StartedChess.GreenEndChess[0] != 1)
+                        reload("green1", 276, 837);
+                        while (SDL_WaitEvent(&FirstMove))
                         {
-                            reload("green1", 276, 837);
-                            while (SDL_WaitEvent(&FirstMove))
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("green");
-                                        JudgeChess(&ChessPointNow.green1[0], &ChessPointNow.green1[1], result);
-                                        jump("green1");
-                                        cross();
-                                        attack("green", ChessPointNow.green1[0], ChessPointNow.green1[1]);
-                                        reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1]);
-                                        StartedChess.GreenStartChess++;
-                                        StartedChess.GreenEndChess[0] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("green");
+                                    JudgeChess(&ChessPointNow.green1[0], &ChessPointNow.green1[1], result);
+                                    jump("green1");
+                                    cross();
+                                    attack("green", ChessPointNow.green1[0], ChessPointNow.green1[1]);
+                                    reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1]);
+                                    StartedChess.GreenEndChess[0] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        if (StartedChess.GreenEndChess[0] == 1 && EndChessNum.GreenEndChess[0] == 0)
-                        {
-                            if ((ChessPointNow.green1[1] == 750 && ChessPointNow.green1[0] > 315) || (ChessPointNow.green1[0] == 633 && ChessPointNow.green1[1] >= 562))
-                            {
-                                EndChessNum.GreenEndChess[0] = 1;
-                                goto green1;
-                            }
-                            JudgeChess(&ChessPointNow.green1[0], &ChessPointNow.green1[1], result);
-                            jump("green1");
-                            cross();
-                            attack("green", ChessPointNow.green1[0], ChessPointNow.green1[1]);
-                            reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1]);
-                            return;
-                        }
-                        else if (EndChessNum.GreenEndChess[0] == 1)
-                        {
-                        green1:
-                            EndJump("green", &ChessPointNow.green1[0], &ChessPointNow.green1[1], result);
-                            jump("green1");
-                            attack("green", ChessPointNow.green1[0], ChessPointNow.green1[1]);
-                            if (ChessPointNow.green1[0] < 0)
-                                StartedChess.GreenEndChess[0] = 0;
-                            reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.green2[0] &&
-                             FirstMove.button.x < ChessPointNow.green2[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.green2[1] &&
-                             FirstMove.button.y < ChessPointNow.green2[1] + 50)
+                    if (StartedChess.GreenEndChess[0] == 1 && EndChessNum.GreenEndChess[0] == 0)
                     {
-                        if (result == 6 && StartedChess.GreenStartChess != 4 && StartedChess.GreenEndChess[1] != 1)
+                        if ((ChessPointNow.green1[1] == 750 && ChessPointNow.green1[0] > 315) || (ChessPointNow.green1[0] == 633 && ChessPointNow.green1[1] >= 562))
                         {
-                            reload("green2", 276, 837);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.GreenEndChess[0] = 1;
+                            goto green1;
+                        }
+                        JudgeChess(&ChessPointNow.green1[0], &ChessPointNow.green1[1], result);
+                        jump("green1");
+                        cross();
+                        attack("green", ChessPointNow.green1[0], ChessPointNow.green1[1]);
+                        reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1]);
+                        return;
+                    }
+                    else if (EndChessNum.GreenEndChess[0] == 1)
+                    {
+                    green1:
+                        EndJump("green", &ChessPointNow.green1[0], &ChessPointNow.green1[1], result);
+                        jump("green1");
+                        attack("green", ChessPointNow.green1[0], ChessPointNow.green1[1]);
+                        if (ChessPointNow.green1[0] < 0)
+                            StartedChess.GreenEndChess[0] = 0;
+                        reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.green2[0] &&
+                         FirstMove.button.x < ChessPointNow.green2[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.green2[1] &&
+                         FirstMove.button.y < ChessPointNow.green2[1] + 50)
+                {
+                    if (result == 6 && StartedChess.GreenEndChess[1] != 1)
+                    {
+                        reload("green2", 276, 837);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("green");
-                                        JudgeChess(&ChessPointNow.green2[0], &ChessPointNow.green2[1], result);
-                                        jump("green2");
-                                        cross();
-                                        attack("green", ChessPointNow.green2[0], ChessPointNow.green2[1]);
-                                        reload("green2", ChessPointNow.green2[0], ChessPointNow.green2[1]);
-                                        StartedChess.GreenStartChess++;
-                                        StartedChess.GreenEndChess[1] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("green");
+                                    JudgeChess(&ChessPointNow.green2[0], &ChessPointNow.green2[1], result);
+                                    jump("green2");
+                                    cross();
+                                    attack("green", ChessPointNow.green2[0], ChessPointNow.green2[1]);
+                                    reload("green2", ChessPointNow.green2[0], ChessPointNow.green2[1]);
+                                    StartedChess.GreenEndChess[1] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        if (StartedChess.GreenEndChess[1] == 1 && EndChessNum.GreenEndChess[1] == 0)
-                        {
-                            if ((ChessPointNow.green2[1] == 750 && ChessPointNow.green2[0] > 315) || (ChessPointNow.green2[0] == 633 && ChessPointNow.green2[1] >= 562))
-                            {
-                                EndChessNum.GreenEndChess[1] = 1;
-                                goto green2;
-                            }
-                            JudgeChess(&ChessPointNow.green2[0], &ChessPointNow.green2[1], result);
-                            jump("green2");
-                            cross();
-                            attack("green", ChessPointNow.green2[0], ChessPointNow.green2[1]);
-                            reload("green2", ChessPointNow.green2[0], ChessPointNow.green2[1]);
-                            return;
-                        }
-                        else if (EndChessNum.GreenEndChess[1] == 1)
-                        {
-                        green2:
-                            EndJump("green", &ChessPointNow.green2[0], &ChessPointNow.green2[1], result);
-                            jump("green2");
-                            attack("green", ChessPointNow.green2[0], ChessPointNow.green2[1]);
-                            if (ChessPointNow.green2[0] < 0)
-                                StartedChess.GreenEndChess[1] = 0;
-                            reload("green2", ChessPointNow.green2[0], ChessPointNow.green2[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.green3[0] &&
-                             FirstMove.button.x < ChessPointNow.green3[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.green3[1] &&
-                             FirstMove.button.y < ChessPointNow.green3[1] + 50)
+                    if (StartedChess.GreenEndChess[1] == 1 && EndChessNum.GreenEndChess[1] == 0)
                     {
-                        if (result == 6 && StartedChess.GreenStartChess != 4 && StartedChess.GreenEndChess[2] != 1)
+                        if ((ChessPointNow.green2[1] == 750 && ChessPointNow.green2[0] > 315) || (ChessPointNow.green2[0] == 633 && ChessPointNow.green2[1] >= 562))
                         {
-                            reload("green3", 276, 837);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.GreenEndChess[1] = 1;
+                            goto green2;
+                        }
+                        JudgeChess(&ChessPointNow.green2[0], &ChessPointNow.green2[1], result);
+                        jump("green2");
+                        cross();
+                        attack("green", ChessPointNow.green2[0], ChessPointNow.green2[1]);
+                        reload("green2", ChessPointNow.green2[0], ChessPointNow.green2[1]);
+                        return;
+                    }
+                    else if (EndChessNum.GreenEndChess[1] == 1)
+                    {
+                    green2:
+                        EndJump("green", &ChessPointNow.green2[0], &ChessPointNow.green2[1], result);
+                        jump("green2");
+                        attack("green", ChessPointNow.green2[0], ChessPointNow.green2[1]);
+                        if (ChessPointNow.green2[0] < 0)
+                            StartedChess.GreenEndChess[1] = 0;
+                        reload("green2", ChessPointNow.green2[0], ChessPointNow.green2[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.green3[0] &&
+                         FirstMove.button.x < ChessPointNow.green3[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.green3[1] &&
+                         FirstMove.button.y < ChessPointNow.green3[1] + 50)
+                {
+                    if (result == 6 && StartedChess.GreenEndChess[2] != 1)
+                    {
+                        reload("green3", 276, 837);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("green");
-                                        JudgeChess(&ChessPointNow.green3[0], &ChessPointNow.green3[1], result);
-                                        jump("green3");
-                                        cross();
-                                        attack("green", ChessPointNow.green3[0], ChessPointNow.green3[1]);
-                                        reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1]);
-                                        StartedChess.GreenStartChess++;
-                                        StartedChess.GreenEndChess[2] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("green");
+                                    JudgeChess(&ChessPointNow.green3[0], &ChessPointNow.green3[1], result);
+                                    jump("green3");
+                                    cross();
+                                    attack("green", ChessPointNow.green3[0], ChessPointNow.green3[1]);
+                                    reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1]);
+                                    StartedChess.GreenEndChess[2] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        if (StartedChess.GreenEndChess[2] == 1 && EndChessNum.GreenEndChess[2] == 0)
-                        {
-                            if ((ChessPointNow.green3[1] == 750 && ChessPointNow.green3[0] > 315) || (ChessPointNow.green3[0] == 633 && ChessPointNow.green3[1] >= 562))
-                            {
-                                EndChessNum.GreenEndChess[2] = 1;
-                                goto green3;
-                            }
-                            JudgeChess(&ChessPointNow.green3[0], &ChessPointNow.green3[1], result);
-                            jump("green3");
-                            cross();
-                            attack("green", ChessPointNow.green3[0], ChessPointNow.green3[1]);
-                            reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1]);
-                            return;
-                        }
-                        else if (EndChessNum.GreenEndChess[2] == 1)
-                        {
-                        green3:
-                            EndJump("green", &ChessPointNow.green3[0], &ChessPointNow.green3[1], result);
-                            jump("green3");
-                            attack("green", ChessPointNow.green3[0], ChessPointNow.green3[1]);
-                            if (ChessPointNow.green3[0] < 0)
-                                StartedChess.GreenEndChess[2] = 0;
-                            reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.green4[0] &&
-                             FirstMove.button.x < ChessPointNow.green4[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.green4[1] &&
-                             FirstMove.button.y < ChessPointNow.green4[1] + 50)
+                    if (StartedChess.GreenEndChess[2] == 1 && EndChessNum.GreenEndChess[2] == 0)
                     {
-                        if (result == 6 && StartedChess.GreenStartChess != 4 && StartedChess.GreenEndChess[3] != 1)
+                        if ((ChessPointNow.green3[1] == 750 && ChessPointNow.green3[0] > 315) || (ChessPointNow.green3[0] == 633 && ChessPointNow.green3[1] >= 562))
                         {
-                            reload("green4", 276, 837);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.GreenEndChess[2] = 1;
+                            goto green3;
+                        }
+                        JudgeChess(&ChessPointNow.green3[0], &ChessPointNow.green3[1], result);
+                        jump("green3");
+                        cross();
+                        attack("green", ChessPointNow.green3[0], ChessPointNow.green3[1]);
+                        reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1]);
+                        return;
+                    }
+                    else if (EndChessNum.GreenEndChess[2] == 1)
+                    {
+                    green3:
+                        EndJump("green", &ChessPointNow.green3[0], &ChessPointNow.green3[1], result);
+                        jump("green3");
+                        attack("green", ChessPointNow.green3[0], ChessPointNow.green3[1]);
+                        if (ChessPointNow.green3[0] < 0)
+                            StartedChess.GreenEndChess[2] = 0;
+                        reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.green4[0] &&
+                         FirstMove.button.x < ChessPointNow.green4[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.green4[1] &&
+                         FirstMove.button.y < ChessPointNow.green4[1] + 50)
+                {
+                    if (result == 6 && StartedChess.GreenEndChess[3] != 1)
+                    {
+                        reload("green4", 276, 837);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("green");
-                                        JudgeChess(&ChessPointNow.green4[0], &ChessPointNow.green4[1], result);
-                                        jump("green4");
-                                        cross();
-                                        attack("green", ChessPointNow.green4[0], ChessPointNow.green4[1]);
-                                        reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1]);
-                                        StartedChess.GreenStartChess++;
-                                        StartedChess.GreenEndChess[3] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("green");
+                                    JudgeChess(&ChessPointNow.green4[0], &ChessPointNow.green4[1], result);
+                                    jump("green4");
+                                    cross();
+                                    attack("green", ChessPointNow.green4[0], ChessPointNow.green4[1]);
+                                    reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1]);
+                                    StartedChess.GreenEndChess[3] = 1;
+                                    return;
                                 }
                             }
                         }
-                        if (StartedChess.GreenEndChess[3] == 1 && EndChessNum.GreenEndChess[3] == 0)
+                    }
+                    if (StartedChess.GreenEndChess[3] == 1 && EndChessNum.GreenEndChess[3] == 0)
+                    {
+                        if ((ChessPointNow.green4[1] == 750 && ChessPointNow.green4[0] > 315) || (ChessPointNow.green4[0] == 633 && ChessPointNow.green4[1] >= 562))
                         {
-                            if ((ChessPointNow.green4[1] == 750 && ChessPointNow.green4[0] > 315) || (ChessPointNow.green4[0] == 633 && ChessPointNow.green4[1] >= 562))
-                            {
-                                EndChessNum.GreenEndChess[3] = 1;
-                                goto green4;
-                            }
-                            JudgeChess(&ChessPointNow.green4[0], &ChessPointNow.green4[1], result);
-                            jump("green4");
-                            cross();
-                            attack("green", ChessPointNow.green4[0], ChessPointNow.green4[1]);
-                            reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1]);
-                            return;
+                            EndChessNum.GreenEndChess[3] = 1;
+                            goto green4;
                         }
-                        else if (EndChessNum.GreenEndChess[3] == 1)
-                        {
-                        green4:
-                            EndJump("green", &ChessPointNow.green4[0], &ChessPointNow.green4[1], result);
-                            jump("green4");
-                            attack("green", ChessPointNow.green4[0], ChessPointNow.green4[1]);
-                            if (ChessPointNow.green4[0] < 0)
-                                StartedChess.GreenEndChess[3] = 0;
-                            reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1]);
-                            end();
-                            return;
-                        }
+                        JudgeChess(&ChessPointNow.green4[0], &ChessPointNow.green4[1], result);
+                        jump("green4");
+                        cross();
+                        attack("green", ChessPointNow.green4[0], ChessPointNow.green4[1]);
+                        reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1]);
+                        return;
+                    }
+                    else if (EndChessNum.GreenEndChess[3] == 1)
+                    {
+                    green4:
+                        EndJump("green", &ChessPointNow.green4[0], &ChessPointNow.green4[1], result);
+                        jump("green4");
+                        attack("green", ChessPointNow.green4[0], ChessPointNow.green4[1]);
+                        if (ChessPointNow.green4[0] < 0)
+                            StartedChess.GreenEndChess[3] = 0;
+                        reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1]);
+                        end();
+                        return;
                     }
                 }
             }
@@ -2059,260 +2030,251 @@ void MoveChess(const char name[10], int player, int type, int result)
     }
     else if (player == 4)
     {
-        if (result != 6 && StartedChess.RedStartChess == 0)
-            return;
-        else
+        int count = 0;
+        for (int i = 0; i < 4; i++)
         {
-            int count = 0;
-            for (int i = 0; i < 4; i++)
+            if (StartedChess.RedEndChess[i] == 0)
+                count++;
+            if (count == 4 && result != 6)
+                return;
+        }
+        while (SDL_WaitEvent(&FirstMove))
+        {
+            switch (FirstMove.type)
             {
-                if (StartedChess.RedEndChess[i] == 0)
-                    count++;
-                if (count == 4 && result != 6)
-                    return;
-            }
-            while (SDL_WaitEvent(&FirstMove))
-            {
-                switch (FirstMove.type)
+            case SDL_MOUSEBUTTONUP:
+                if (FirstMove.button.x > ChessPointNow.red1[0] &&
+                    FirstMove.button.x < ChessPointNow.red1[0] + 50 &&
+                    FirstMove.button.y > ChessPointNow.red1[1] &&
+                    FirstMove.button.y < ChessPointNow.red1[1] + 50)
                 {
-                case SDL_MOUSEBUTTONUP:
-                    if (FirstMove.button.x > ChessPointNow.red1[0] &&
-                        FirstMove.button.x < ChessPointNow.red1[0] + 50 &&
-                        FirstMove.button.y > ChessPointNow.red1[1] &&
-                        FirstMove.button.y < ChessPointNow.red1[1] + 50)
+                    if (result == 6 && StartedChess.RedEndChess[0] != 1)
                     {
-                        if (result == 6 && StartedChess.RedStartChess != 4 && StartedChess.RedEndChess[0] != 1)
+                        reload("red1", 929, 612);
+                        while (SDL_WaitEvent(&FirstMove))
                         {
-                            reload("red1", 929, 612);
-                            while (SDL_WaitEvent(&FirstMove))
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("red");
-                                        JudgeChess(&ChessPointNow.red1[0], &ChessPointNow.red1[1], result);
-                                        jump("red1");
-                                        cross();
-                                        attack("red", ChessPointNow.red1[0], ChessPointNow.red1[1]);
-                                        reload("red1", ChessPointNow.red1[0], ChessPointNow.red1[1]);
-                                        StartedChess.RedStartChess++;
-                                        StartedChess.RedEndChess[0] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("red");
+                                    JudgeChess(&ChessPointNow.red1[0], &ChessPointNow.red1[1], result);
+                                    jump("red1");
+                                    cross();
+                                    attack("red", ChessPointNow.red1[0], ChessPointNow.red1[1]);
+                                    reload("red1", ChessPointNow.red1[0], ChessPointNow.red1[1]);
+                                    StartedChess.RedEndChess[0] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        if (StartedChess.RedEndChess[0] == 1 && EndChessNum.RedEndChess[0] == 0)
-                        {
-                            if ((ChessPointNow.red1[1] == 280 && ChessPointNow.red1[0] >= 633) || (ChessPointNow.red1[0] == 845 && ChessPointNow.red1[1] < 562))
-                            {
-                                EndChessNum.RedEndChess[0] = 1;
-                                goto red1;
-                            }
-                            JudgeChess(&ChessPointNow.red1[0], &ChessPointNow.red1[1], result);
-                            jump("red1");
-                            cross();
-                            attack("red", ChessPointNow.red1[0], ChessPointNow.red1[1]);
-                            reload("red1", ChessPointNow.red1[0], ChessPointNow.red1[1]);
-                            return;
-                        }
-                        else if (EndChessNum.RedEndChess[0] == 1)
-                        {
-                        red1:
-                            EndJump("red", &ChessPointNow.red1[0], &ChessPointNow.red1[1], result);
-                            jump("red1");
-                            attack("red", ChessPointNow.red1[0], ChessPointNow.red1[1]);
-                            if (ChessPointNow.red1[0] < 0)
-                                StartedChess.RedEndChess[0] = 0;
-                            reload("red1", ChessPointNow.red1[0], ChessPointNow.red1[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.red2[0] &&
-                             FirstMove.button.x < ChessPointNow.red2[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.red2[1] &&
-                             FirstMove.button.y < ChessPointNow.red2[1] + 50)
+                    if (StartedChess.RedEndChess[0] == 1 && EndChessNum.RedEndChess[0] == 0)
                     {
-                        if (result == 6 && StartedChess.RedStartChess != 4 && StartedChess.RedEndChess[1] != 1)
+                        if ((ChessPointNow.red1[1] == 280 && ChessPointNow.red1[0] >= 633) || (ChessPointNow.red1[0] == 845 && ChessPointNow.red1[1] < 562))
                         {
-                            reload("red2", 929, 612);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.RedEndChess[0] = 1;
+                            goto red1;
+                        }
+                        JudgeChess(&ChessPointNow.red1[0], &ChessPointNow.red1[1], result);
+                        jump("red1");
+                        cross();
+                        attack("red", ChessPointNow.red1[0], ChessPointNow.red1[1]);
+                        reload("red1", ChessPointNow.red1[0], ChessPointNow.red1[1]);
+                        return;
+                    }
+                    else if (EndChessNum.RedEndChess[0] == 1)
+                    {
+                    red1:
+                        EndJump("red", &ChessPointNow.red1[0], &ChessPointNow.red1[1], result);
+                        jump("red1");
+                        attack("red", ChessPointNow.red1[0], ChessPointNow.red1[1]);
+                        if (ChessPointNow.red1[0] < 0)
+                            StartedChess.RedEndChess[0] = 0;
+                        reload("red1", ChessPointNow.red1[0], ChessPointNow.red1[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.red2[0] &&
+                         FirstMove.button.x < ChessPointNow.red2[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.red2[1] &&
+                         FirstMove.button.y < ChessPointNow.red2[1] + 50)
+                {
+                    if (result == 6 && StartedChess.RedEndChess[1] != 1)
+                    {
+                        reload("red2", 929, 612);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("red");
-                                        JudgeChess(&ChessPointNow.red2[0], &ChessPointNow.red2[1], result);
-                                        jump("red2");
-                                        cross();
-                                        attack("red", ChessPointNow.red2[0], ChessPointNow.red2[1]);
-                                        reload("red2", ChessPointNow.red2[0], ChessPointNow.red2[1]);
-                                        StartedChess.RedStartChess++;
-                                        StartedChess.RedEndChess[1] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("red");
+                                    JudgeChess(&ChessPointNow.red2[0], &ChessPointNow.red2[1], result);
+                                    jump("red2");
+                                    cross();
+                                    attack("red", ChessPointNow.red2[0], ChessPointNow.red2[1]);
+                                    reload("red2", ChessPointNow.red2[0], ChessPointNow.red2[1]);
+                                    StartedChess.RedEndChess[1] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        if (StartedChess.RedEndChess[1] == 1 && EndChessNum.RedEndChess[1] == 0)
-                        {
-                            if ((ChessPointNow.red2[1] == 280 && ChessPointNow.red2[0] >= 633) || (ChessPointNow.red2[0] == 845 && ChessPointNow.red2[1] < 562))
-                            {
-                                EndChessNum.RedEndChess[1] = 1;
-                                goto red2;
-                            }
-                            JudgeChess(&ChessPointNow.red2[0], &ChessPointNow.red2[1], result);
-                            jump("red2");
-                            cross();
-                            attack("red", ChessPointNow.red2[0], ChessPointNow.red2[1]);
-                            reload("red2", ChessPointNow.red2[0], ChessPointNow.red2[1]);
-                            return;
-                        }
-                        else if (EndChessNum.RedEndChess[1] == 1)
-                        {
-                        red2:
-                            EndJump("red", &ChessPointNow.red2[0], &ChessPointNow.red2[1], result);
-                            jump("red2");
-                            attack("red", ChessPointNow.red2[0], ChessPointNow.red2[1]);
-                            if (ChessPointNow.red2[0] < 0)
-                                StartedChess.RedEndChess[1] = 0;
-                            reload("red2", ChessPointNow.red2[0], ChessPointNow.red2[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.red3[0] &&
-                             FirstMove.button.x < ChessPointNow.red3[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.red3[1] &&
-                             FirstMove.button.y < ChessPointNow.red3[1] + 50)
+                    if (StartedChess.RedEndChess[1] == 1 && EndChessNum.RedEndChess[1] == 0)
                     {
-                        if (result == 6 && StartedChess.RedStartChess != 4 && StartedChess.RedEndChess[2] != 1)
+                        if ((ChessPointNow.red2[1] == 280 && ChessPointNow.red2[0] >= 633) || (ChessPointNow.red2[0] == 845 && ChessPointNow.red2[1] < 562))
                         {
-                            reload("red3", 929, 612);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.RedEndChess[1] = 1;
+                            goto red2;
+                        }
+                        JudgeChess(&ChessPointNow.red2[0], &ChessPointNow.red2[1], result);
+                        jump("red2");
+                        cross();
+                        attack("red", ChessPointNow.red2[0], ChessPointNow.red2[1]);
+                        reload("red2", ChessPointNow.red2[0], ChessPointNow.red2[1]);
+                        return;
+                    }
+                    else if (EndChessNum.RedEndChess[1] == 1)
+                    {
+                    red2:
+                        EndJump("red", &ChessPointNow.red2[0], &ChessPointNow.red2[1], result);
+                        jump("red2");
+                        attack("red", ChessPointNow.red2[0], ChessPointNow.red2[1]);
+                        if (ChessPointNow.red2[0] < 0)
+                            StartedChess.RedEndChess[1] = 0;
+                        reload("red2", ChessPointNow.red2[0], ChessPointNow.red2[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.red3[0] &&
+                         FirstMove.button.x < ChessPointNow.red3[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.red3[1] &&
+                         FirstMove.button.y < ChessPointNow.red3[1] + 50)
+                {
+                    if (result == 6 && StartedChess.RedEndChess[2] != 1)
+                    {
+                        reload("red3", 929, 612);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("red");
-                                        JudgeChess(&ChessPointNow.red3[0], &ChessPointNow.red3[1], result);
-                                        jump("red3");
-                                        cross();
-                                        attack("red", ChessPointNow.red3[0], ChessPointNow.red3[1]);
-                                        reload("red3", ChessPointNow.red3[0], ChessPointNow.red3[1]);
-                                        StartedChess.RedStartChess++;
-                                        StartedChess.RedEndChess[2] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("red");
+                                    JudgeChess(&ChessPointNow.red3[0], &ChessPointNow.red3[1], result);
+                                    jump("red3");
+                                    cross();
+                                    attack("red", ChessPointNow.red3[0], ChessPointNow.red3[1]);
+                                    reload("red3", ChessPointNow.red3[0], ChessPointNow.red3[1]);
+                                    StartedChess.RedEndChess[2] = 1;
+                                    return;
                                 }
                             }
-                        }
-                        if (StartedChess.RedEndChess[2] == 1 && EndChessNum.RedEndChess[2] == 0)
-                        {
-                            if ((ChessPointNow.red3[1] == 280 && ChessPointNow.red3[0] >= 633) || (ChessPointNow.red3[0] == 845 && ChessPointNow.red3[1] < 562))
-                            {
-                                EndChessNum.RedEndChess[2] = 1;
-                                goto red3;
-                            }
-                            JudgeChess(&ChessPointNow.red3[0], &ChessPointNow.red3[1], result);
-                            jump("red3");
-                            cross();
-                            attack("red", ChessPointNow.red3[0], ChessPointNow.red3[1]);
-                            reload("red3", ChessPointNow.red3[0], ChessPointNow.red3[1]);
-                            return;
-                        }
-                        else if (EndChessNum.RedEndChess[2] == 1)
-                        {
-                        red3:
-                            EndJump("red", &ChessPointNow.red3[0], &ChessPointNow.red3[1], result);
-                            jump("red3");
-                            attack("red", ChessPointNow.red3[0], ChessPointNow.red3[1]);
-                            if (ChessPointNow.red3[0] < 0)
-                                StartedChess.RedEndChess[2] = 0;
-                            reload("red3", ChessPointNow.red3[0], ChessPointNow.red3[1]);
-                            end();
-                            return;
                         }
                     }
-                    else if (FirstMove.button.x > ChessPointNow.red4[0] &&
-                             FirstMove.button.x < ChessPointNow.red4[0] + 50 &&
-                             FirstMove.button.y > ChessPointNow.red4[1] &&
-                             FirstMove.button.y < ChessPointNow.red4[1] + 50)
+                    if (StartedChess.RedEndChess[2] == 1 && EndChessNum.RedEndChess[2] == 0)
                     {
-                        if (result == 6 && StartedChess.RedStartChess != 4 && StartedChess.RedEndChess[3] != 1)
+                        if ((ChessPointNow.red3[1] == 280 && ChessPointNow.red3[0] >= 633) || (ChessPointNow.red3[0] == 845 && ChessPointNow.red3[1] < 562))
                         {
-                            reload("red4", 929, 612);
-                            while (SDL_WaitEvent(&FirstMove))
+                            EndChessNum.RedEndChess[2] = 1;
+                            goto red3;
+                        }
+                        JudgeChess(&ChessPointNow.red3[0], &ChessPointNow.red3[1], result);
+                        jump("red3");
+                        cross();
+                        attack("red", ChessPointNow.red3[0], ChessPointNow.red3[1]);
+                        reload("red3", ChessPointNow.red3[0], ChessPointNow.red3[1]);
+                        return;
+                    }
+                    else if (EndChessNum.RedEndChess[2] == 1)
+                    {
+                    red3:
+                        EndJump("red", &ChessPointNow.red3[0], &ChessPointNow.red3[1], result);
+                        jump("red3");
+                        attack("red", ChessPointNow.red3[0], ChessPointNow.red3[1]);
+                        if (ChessPointNow.red3[0] < 0)
+                            StartedChess.RedEndChess[2] = 0;
+                        reload("red3", ChessPointNow.red3[0], ChessPointNow.red3[1]);
+                        end();
+                        return;
+                    }
+                }
+                else if (FirstMove.button.x > ChessPointNow.red4[0] &&
+                         FirstMove.button.x < ChessPointNow.red4[0] + 50 &&
+                         FirstMove.button.y > ChessPointNow.red4[1] &&
+                         FirstMove.button.y < ChessPointNow.red4[1] + 50)
+                {
+                    if (result == 6 && StartedChess.RedEndChess[3] != 1)
+                    {
+                        reload("red4", 929, 612);
+                        while (SDL_WaitEvent(&FirstMove))
+                        {
+                            switch (FirstMove.type)
                             {
-                                switch (FirstMove.type)
+                            case SDL_MOUSEBUTTONUP:
+                                if (FirstMove.button.x > 1000 &&
+                                    FirstMove.button.x < 1200 &&
+                                    FirstMove.button.y > 400 &&
+                                    FirstMove.button.y < 600)
                                 {
-                                case SDL_MOUSEBUTTONUP:
-                                    if (FirstMove.button.x > 1000 &&
-                                        FirstMove.button.x < 1200 &&
-                                        FirstMove.button.y > 400 &&
-                                        FirstMove.button.y < 600)
-                                    {
-                                        result = Dice_point("red");
-                                        JudgeChess(&ChessPointNow.red4[0], &ChessPointNow.red4[1], result);
-                                        jump("red4");
-                                        cross();
-                                        attack("red", ChessPointNow.red4[0], ChessPointNow.red4[1]);
-                                        reload("red4", ChessPointNow.red4[0], ChessPointNow.red4[1]);
-                                        StartedChess.RedStartChess++;
-                                        StartedChess.RedEndChess[0] = 1;
-                                        return;
-                                    }
+                                    result = Dice_point("red");
+                                    JudgeChess(&ChessPointNow.red4[0], &ChessPointNow.red4[1], result);
+                                    jump("red4");
+                                    cross();
+                                    attack("red", ChessPointNow.red4[0], ChessPointNow.red4[1]);
+                                    reload("red4", ChessPointNow.red4[0], ChessPointNow.red4[1]);
+                                    StartedChess.RedEndChess[3] = 1;
+                                    return;
                                 }
                             }
                         }
-                        if (StartedChess.RedEndChess[3] == 1 && EndChessNum.RedEndChess[3] == 0)
+                    }
+                    if (StartedChess.RedEndChess[3] == 1 && EndChessNum.RedEndChess[3] == 0)
+                    {
+                        if ((ChessPointNow.red4[1] == 280 && ChessPointNow.red4[0] >= 633) || (ChessPointNow.red4[0] == 845 && ChessPointNow.red1[1] < 562))
                         {
-                            if ((ChessPointNow.red4[1] == 280 && ChessPointNow.red4[0] >= 633) || (ChessPointNow.red4[0] == 845 && ChessPointNow.red1[1] < 562))
-                            {
-                                EndChessNum.RedEndChess[3] = 1;
-                                goto red4;
-                            }
-                            JudgeChess(&ChessPointNow.red4[0], &ChessPointNow.red4[1], result);
-                            jump("red4");
-                            cross();
-                            attack("red", ChessPointNow.red4[0], ChessPointNow.red4[1]);
-                            reload("red4", ChessPointNow.red4[0], ChessPointNow.red4[1]);
-                            return;
+                            EndChessNum.RedEndChess[3] = 1;
+                            goto red4;
                         }
-                        else if (EndChessNum.RedEndChess[3] == 1)
-                        {
-                        red4:
-                            EndJump("red", &ChessPointNow.red4[0], &ChessPointNow.red4[1], result);
-                            jump("red4");
-                            attack("red", ChessPointNow.red4[0], ChessPointNow.red4[1]);
-                            if (ChessPointNow.red4[0] < 0)
-                                StartedChess.RedEndChess[3] = 0;
-                            reload("red4", ChessPointNow.red4[0], ChessPointNow.red4[1]);
-                            end();
-                            return;
-                        }
+                        JudgeChess(&ChessPointNow.red4[0], &ChessPointNow.red4[1], result);
+                        jump("red4");
+                        cross();
+                        attack("red", ChessPointNow.red4[0], ChessPointNow.red4[1]);
+                        reload("red4", ChessPointNow.red4[0], ChessPointNow.red4[1]);
+                        return;
+                    }
+                    else if (EndChessNum.RedEndChess[3] == 1)
+                    {
+                    red4:
+                        EndJump("red", &ChessPointNow.red4[0], &ChessPointNow.red4[1], result);
+                        jump("red4");
+                        attack("red", ChessPointNow.red4[0], ChessPointNow.red4[1]);
+                        if (ChessPointNow.red4[0] < 0)
+                            StartedChess.RedEndChess[3] = 0;
+                        reload("red4", ChessPointNow.red4[0], ChessPointNow.red4[1]);
+                        end();
+                        return;
                     }
                 }
             }
         }
     }
-}
+} // 有红棋子动不了
 void firsttap(int result, int player, int type)
 {
     SDL_Event ChessMove;
