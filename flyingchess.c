@@ -422,8 +422,6 @@ void start() // 开始游戏
     SDL_RenderCopy(Renderer, TypeBackGroundTexture, NULL, &TypeBackGroundRect); // 复制画笔
     SDL_RenderPresent(Renderer);                                                // 刷新画笔 打印模式界面
     type_chose();
-    // return;
-    // other code
 }
 void rule() // 游戏规则
 {
@@ -537,19 +535,19 @@ void p_c_fight() // 人机大战人数选择
                 p_c_fightEvent.button.y < 385) // 根据点击位置触发指令
             {
                 printf("2");
-                pc2(); // 2
+                pc(2); // 2
             }
             if (p_c_fightEvent.button.x > 428 && p_c_fightEvent.button.x < 519 && p_c_fightEvent.button.y > 474 &&
                 p_c_fightEvent.button.y < 556) // 根据点击位置触发指令
             {
                 printf("3");
-                pc3(); // 3
+                pc(3); // 3
             }
             if (p_c_fightEvent.button.x > 423 && p_c_fightEvent.button.x < 536 && p_c_fightEvent.button.y > 668 &&
                 p_c_fightEvent.button.y < 764) // 根据点击位置触发指令
             {
                 printf("4");
-                pc4(); // 4
+                pc(4); // 4
             }
             if (p_c_fightEvent.button.x > 894 && p_c_fightEvent.button.x < 996 && p_c_fightEvent.button.y > 8 &&
                 p_c_fightEvent.button.y < 97) // 根据点击位置触发指令
@@ -583,19 +581,19 @@ void p_p_fight() // 人人对战人数选择
                 p_pEvent.button.y < 385) // 根据点击位置触发指令
             {
                 printf("2");
-                pp2(); // 2
+                pp(2); // 2
             }
             if (p_pEvent.button.x > 428 && p_pEvent.button.x < 519 && p_pEvent.button.y > 474 &&
                 p_pEvent.button.y < 556) // 根据点击位置触发指令
             {
                 printf("3");
-                pp3(); // 3
+                pp(3); // 3
             }
             if (p_pEvent.button.x > 423 && p_pEvent.button.x < 536 && p_pEvent.button.y > 668 &&
                 p_pEvent.button.y < 764) // 根据点击位置触发指令
             {
                 printf("4");
-                pp4(); // 4
+                pp(4); // 4
             }
             if (p_pEvent.button.x > 894 && p_pEvent.button.x < 996 && p_pEvent.button.y > 8 &&
                 p_pEvent.button.y < 97) // 根据点击位置触发指令
@@ -606,165 +604,6 @@ void p_p_fight() // 人人对战人数选择
                 return;
                 // 返回上一层
             }
-            break;
-        default:
-            break;
-        }
-    }
-}
-void begin(int number) // 进入棋盘 二人
-{
-    SDL_RenderClear(Renderer);                                                // 清空画笔
-    SDL_RenderCopy(Renderer, TapBackGroundTexture, NULL, &TapBackGroundRect); // 复制画笔
-    SDL_RenderPresent(Renderer);
-    originorder(); // 刷新画笔 打印人数界面
-    load_chess();
-    int count = 0;
-    SDL_Event begin2Event; // 主事件
-    while (SDL_WaitEvent(&begin2Event))
-    {
-        switch (begin2Event.type) // 事件类型
-        {
-        case SDL_MOUSEBUTTONUP: // 鼠标互动 松开触发
-            // function
-            if (begin2Event.button.x > 960 && begin2Event.button.x < 1000 && begin2Event.button.y > 0 &&
-                begin2Event.button.y < 50) // 根据点击位置触发指令
-                quit();
-            else if (begin2Event.button.x > 1000 && begin2Event.button.x < 1200 && begin2Event.button.y > 400 &&
-                     begin2Event.button.y < 600)
-            {
-                if (count == 0)
-                {
-                    int result = Dice_point("yellow");
-                    MoveChess("yellow", 1, result);
-                    count = (count + 1) % number;
-                }
-                else if (count == 1)
-                {
-                    int result = Dice_point("blue");
-                    MoveChess("blue", 2, result);
-                    count = (count + 1) % number;
-                }
-                else if (count == 2)
-                {
-                    int result = Dice_point("green");
-                    MoveChess("green", 3, result);
-                    count = (count + 1) % number;
-                }
-                else if (count == 3)
-                {
-                    int result = Dice_point("red");
-                    MoveChess("red", 4, result);
-                    count = (count + 1) % number;
-                }
-            }
-            printf("(%d,%d)\n", begin2Event.button.x, begin2Event.button.y); // 在命令行打印鼠标坐标
-            break;
-        case SDL_QUIT:
-            quit();
-            break;
-        }
-    }
-}
-void begin3() // 进入棋盘 三人
-{
-    SDL_RenderClear(Renderer);                                                // 清空画笔
-    SDL_RenderCopy(Renderer, TapBackGroundTexture, NULL, &TapBackGroundRect); // 复制画笔
-    SDL_RenderPresent(Renderer);
-    originorder(); // 刷新画笔 打印人数界面
-    load_chess();
-    int dice_result = 0;
-    int count = 0;
-    SDL_Event begin3Event; // 主事件
-    while (SDL_WaitEvent(&begin3Event))
-    {
-        switch (begin3Event.type) // 事件类型
-        {
-        case SDL_MOUSEBUTTONUP: // 鼠标互动 松开触发
-            // function
-            if (begin3Event.button.x > 960 && begin3Event.button.x < 1000 && begin3Event.button.y > 0 &&
-                begin3Event.button.y < 50) // 根据点击位置触发指令
-            {
-                quit();
-                // SDL_RenderClear(Renderer);                                                // 清空画笔
-                // SDL_RenderCopy(Renderer, NumBackGroundTexture, NULL, &NumBackGroundRect); // 复制画笔
-                // SDL_RenderPresent(Renderer);                                              // 刷新画笔
-                // goto t;
-                //  返回上一层
-            }
-            else if (begin3Event.button.x > 1000 && begin3Event.button.x < 1200 && begin3Event.button.y > 400 &&
-                     begin3Event.button.y < 600)
-            {
-                if (count == 1)
-                {
-                    int result = Dice_point("green");
-                    MoveChess("green", 3, result);
-                    count = 2;
-                }
-                else if (count == 0)
-                {
-                    int result = Dice_point("blue");
-                    MoveChess("blue", 2, result);
-                    count = 1;
-                }
-            }
-            printf("(%d,%d)\n", begin3Event.button.x, begin3Event.button.y); // 在命令行打印鼠标坐标
-            break;
-        default:
-            break;
-        }
-    }
-}
-void begin4() // 进入棋盘 四人
-{
-    SDL_RenderClear(Renderer);                                                // 清空画笔
-    SDL_RenderCopy(Renderer, TapBackGroundTexture, NULL, &TapBackGroundRect); // 复制画笔
-    SDL_RenderPresent(Renderer);
-    originorder(); // 刷新画笔 打印人数界面
-    load_chess();
-    int dice_result = 0;
-    int count = 0;
-    const char *name[4] = {"yellow", "blue", "green", "red"};
-    SDL_Event begin4Event; // 主事件
-    while (SDL_WaitEvent(&begin4Event))
-    {
-        switch (begin4Event.type) // 事件类型
-        {
-        case SDL_MOUSEBUTTONUP: // 鼠标互动 松开触发
-            // function
-            if (begin4Event.button.x > 960 && begin4Event.button.x < 1000 && begin4Event.button.y > 0 &&
-                begin4Event.button.y < 50) // 根据点击位置触发指令
-            {
-                quit();
-                // SDL_RenderClear(Renderer);                                                // 清空画笔
-                // SDL_RenderCopy(Renderer, NumBackGroundTexture, NULL, &NumBackGroundRect); // 复制画笔
-                // SDL_RenderPresent(Renderer);                                              // 刷新画笔
-                // goto t;
-                //  返回上一层
-            }
-            else if (begin4Event.button.x > 1000 && begin4Event.button.x < 1200 && begin4Event.button.y > 400 &&
-                     begin4Event.button.y < 600)
-            {
-                if (count == 1)
-                {
-                    int result = Dice_point("green");
-                    MoveChess("green", 3, result);
-                    count = 2;
-                }
-                else if (count == 0)
-                {
-                    int result = Dice_point("blue");
-                    MoveChess("blue", 2, result);
-                    count = 1;
-                }
-                else if (count == 2)
-                {
-                    int result = Dice_point("red");
-                    MoveChess("red", 4, result);
-                    count = 3;
-                }
-            }
-            printf("(%d,%d)\n", begin4Event.button.x, begin4Event.button.y); // 在命令行打印鼠标坐标
             break;
         default:
             break;
@@ -888,11 +727,28 @@ void reload(const char name[10], int x, int y) // 改变棋子位置并重新加
     }
     load_chess();
 }
-void pp2() // 人名2
+void pp(int num) // 人名2
 {
-    SDL_RenderCopy(Renderer, pp2BackGroundTexture, NULL, &pp2BackGroundRect); // 复制画笔
-    SDL_RenderPresent(Renderer);                                              // 刷新画笔
-    SDL_Event pp2Event;                                                       // 主事件
+#define pp_fight
+    switch (num)
+    {
+    case 2:
+        SDL_RenderCopy(Renderer, pp2BackGroundTexture, NULL, &pp2BackGroundRect); // 复制画笔
+        SDL_RenderPresent(Renderer);
+        break;
+    case 3:
+        SDL_RenderCopy(Renderer, pp3BackGroundTexture, NULL, &pp3BackGroundRect); // 复制画笔
+        SDL_RenderPresent(Renderer);
+        break;
+    case 4:
+        SDL_RenderCopy(Renderer, pp4BackGroundTexture, NULL, &pp4BackGroundRect); // 复制画笔
+        SDL_RenderPresent(Renderer);
+        break;
+    default:
+        break;
+    }
+    // 刷新画笔
+    SDL_Event pp2Event; // 主事件
     while (SDL_WaitEvent(&pp2Event))
     {
         switch (pp2Event.type) // 事件类型
@@ -902,109 +758,123 @@ void pp2() // 人名2
         case SDL_KEYDOWN:
             switch (pp2Event.key.keysym.sym)
             case SDLK_SPACE:
-                begin(2);
+                switch (num)
+                {
+                case 2:
+                    begin(2);
+                    break;
+                case 3:
+                    begin(3);
+                    break;
+                case 4:
+                    begin(4);
+                default:
+                    break;
+                }
         default:
             break;
         }
     }
 }
-void pp3() // 人名3
+void pc(int num) // 电脑名
 {
-    SDL_RenderCopy(Renderer, pp3BackGroundTexture, NULL, &pp3BackGroundRect); // 复制画笔
-    SDL_RenderPresent(Renderer);                                              // 刷新画笔
-    SDL_Event pp3Event;                                                       // 主事件
-    while (SDL_WaitEvent(&pp3Event))
+#define pc_fight
+    switch (num)
     {
-        switch (pp3Event.type) // 事件类型
-        {
-        case SDL_QUIT: // 退出游戏
-            quit();
-        case SDL_KEYDOWN:
-            switch (pp3Event.key.keysym.sym)
-            case SDLK_SPACE:
-                begin(3);
-        default:
-            break;
-        }
+    case 2:
+        SDL_RenderCopy(Renderer, pc2BackGroundTexture, NULL, &pc2BackGroundRect); // 复制画笔
+        SDL_RenderPresent(Renderer);
+        break;
+    case 3:
+        SDL_RenderCopy(Renderer, pc3BackGroundTexture, NULL, &pc3BackGroundRect); // 复制画笔
+        SDL_RenderPresent(Renderer);
+        break;
+    case 4:
+        SDL_RenderCopy(Renderer, pc4BackGroundTexture, NULL, &pc4BackGroundRect); // 复制画笔
+        SDL_RenderPresent(Renderer);
+        break;
     }
-}
-void pp4() // 人名4
-{
-    SDL_RenderCopy(Renderer, pp4BackGroundTexture, NULL, &pp4BackGroundRect); // 复制画笔
-    SDL_RenderPresent(Renderer);                                              // 刷新画笔
-    SDL_Event pp4Event;                                                       // 主事件
-    while (SDL_WaitEvent(&pp4Event))
+    // 刷新画笔
+    SDL_Event pcEvent; // 主事件
+    while (SDL_WaitEvent(&pcEvent))
     {
-        switch (pp4Event.type) // 事件类型
+        switch (pcEvent.type) // 事件类型
         {
         case SDL_QUIT: // 退出游戏
             quit();
         case SDL_KEYDOWN:
-            switch (pp4Event.key.keysym.sym)
+            switch (pcEvent.key.keysym.sym)
             case SDLK_SPACE:
-                begin(4);
-        default:
-            break;
-        }
-    }
-}
-void pc2() // 电脑名2
-{
-    SDL_RenderCopy(Renderer, pc2BackGroundTexture, NULL, &pc2BackGroundRect); // 复制画笔
-    SDL_RenderPresent(Renderer);                                              // 刷新画笔
-    SDL_Event pc2Event;                                                       // 主事件
-    while (SDL_WaitEvent(&pc2Event))
-    {
-        switch (pc2Event.type) // 事件类型
-        {
-        case SDL_QUIT: // 退出游戏
-            quit();
-        case SDL_KEYDOWN:
-            switch (pc2Event.key.keysym.sym)
-            case SDLK_SPACE:
-                begin(2);
+                switch (num)
+                {
+                case 2:
+                    begin(2);
+                    break;
+                case 3:
+                    begin(3);
+                    break;
+                case 4:
+                    begin(4);
+                    break;
+                default:
+                    break;
+                }
             break;
         default:
             break;
         }
     }
 }
-void pc3() // 电脑名3
+void begin(int number) // 进入棋盘 二人
 {
-    SDL_RenderCopy(Renderer, pc3BackGroundTexture, NULL, &pc3BackGroundRect); // 复制画笔
-    SDL_RenderPresent(Renderer);                                              // 刷新画笔
-    SDL_Event pc3Event;                                                       // 主事件
-    while (SDL_WaitEvent(&pc3Event))
+    SDL_RenderClear(Renderer);                                                // 清空画笔
+    SDL_RenderCopy(Renderer, TapBackGroundTexture, NULL, &TapBackGroundRect); // 复制画笔
+    SDL_RenderPresent(Renderer);
+    originorder(); // 刷新画笔 打印人数界面
+    load_chess();
+    int count = 0;
+    SDL_Event begin2Event; // 主事件
+    while (SDL_WaitEvent(&begin2Event))
     {
-        switch (pc3Event.type) // 事件类型
+        switch (begin2Event.type) // 事件类型
         {
-        case SDL_QUIT: // 退出游戏
-            quit();
-        case SDL_KEYDOWN:
-            switch (pc3Event.key.keysym.sym)
-            case SDLK_SPACE:
-                begin(3);
-        default:
+        case SDL_MOUSEBUTTONUP: // 鼠标互动 松开触发
+            // function
+            if (begin2Event.button.x > 960 && begin2Event.button.x < 1000 && begin2Event.button.y > 0 &&
+                begin2Event.button.y < 50) // 根据点击位置触发指令
+                quit();
+            else if (begin2Event.button.x > 1000 && begin2Event.button.x < 1200 && begin2Event.button.y > 400 &&
+                     begin2Event.button.y < 600)
+            {
+                if (count == 0)
+                {
+                    int result = Dice_point("yellow");
+                    MoveChess("yellow", 1, result);
+                    count = (count + 1) % number;
+                }
+                else if (count == 1)
+                {
+                    int result = Dice_point("blue");
+                    MoveChess("blue", 2, result);
+                    count = (count + 1) % number;
+                }
+                else if (count == 2)
+                {
+                    int result = Dice_point("green");
+                    MoveChess("green", 3, result);
+                    count = (count + 1) % number;
+                }
+                else if (count == 3)
+                {
+                    int result = Dice_point("red");
+                    MoveChess("red", 4, result);
+                    count = (count + 1) % number;
+                }
+            }
+            printf("(%d,%d)\n", begin2Event.button.x, begin2Event.button.y); // 在命令行打印鼠标坐标
             break;
-        }
-    }
-}
-void pc4() // 电脑名4
-{
-    SDL_RenderCopy(Renderer, pc4BackGroundTexture, NULL, &pc4BackGroundRect); // 复制画笔
-    SDL_RenderPresent(Renderer);                                              // 刷新画笔
-    SDL_Event pc4Event;                                                       // 主事件
-    while (SDL_WaitEvent(&pc4Event))
-    {
-        switch (pc4Event.type) // 事件类型
-        {
-        case SDL_QUIT: // 退出游戏
+        case SDL_QUIT:
             quit();
-        case SDL_KEYDOWN:
-            switch (pc4Event.key.keysym.sym)
-            case SDLK_SPACE:
-                begin(4);
-        default:
             break;
         }
     }
@@ -1121,8 +991,9 @@ void MoveChess(const char name[10], int player, int result)
                     }
                     else if (StartedChess.YellowEndChess[0] == 1 && EndChessNum.YellowEndChess[0] == 0)
                     {
-                        if ((ChessPointNow.yellow1[1] == 686 && ChessPointNow.yellow1[0] <= 315) || (ChessPointNow.yellow1[0] == 103 && ChessPointNow.yellow1[1] > 280))
+                        if ((ChessPointNow.yellow1[1] == 562 && ChessPointNow.yellow1[0] <= 315) || (ChessPointNow.yellow1[0] == 103 && ChessPointNow.yellow1[1] > 280))
                         {
+                            printf("yellow1\n");
                             EndChessNum.YellowEndChess[0] = 1;
                             goto yellow1;
                         }
@@ -1178,8 +1049,9 @@ void MoveChess(const char name[10], int player, int result)
                     }
                     else if (StartedChess.YellowEndChess[1] == 1 && EndChessNum.YellowEndChess[1] == 0)
                     {
-                        if ((ChessPointNow.yellow2[1] == 686 && ChessPointNow.yellow2[0] <= 315) || (ChessPointNow.yellow2[0] == 103 && ChessPointNow.yellow2[1] > 280))
+                        if ((ChessPointNow.yellow2[1] == 562 && ChessPointNow.yellow2[0] <= 315) || (ChessPointNow.yellow2[0] == 103 && ChessPointNow.yellow2[1] > 280))
                         {
+                            printf("yellow2\n");
                             EndChessNum.YellowEndChess[1] = 1;
                             goto yellow2;
                         }
@@ -1193,7 +1065,6 @@ void MoveChess(const char name[10], int player, int result)
                     else if (EndChessNum.YellowEndChess[1] == 1)
                     {
                     yellow2:
-                        printf("yellow2change\n");
                         EndJump("yellow", &ChessPointNow.yellow2[0], &ChessPointNow.yellow2[1], result);
                         jump("yellow2");
                         attack("yellow", ChessPointNow.yellow2[0], ChessPointNow.yellow2[1]);
@@ -1236,8 +1107,9 @@ void MoveChess(const char name[10], int player, int result)
                     }
                     if (StartedChess.YellowEndChess[2] == 1 && EndChessNum.YellowEndChess[2] == 0)
                     {
-                        if ((ChessPointNow.yellow3[1] == 686 && ChessPointNow.yellow3[0] <= 315) || (ChessPointNow.yellow3[0] == 103 && ChessPointNow.yellow3[1] > 280))
+                        if ((ChessPointNow.yellow3[1] == 562 && ChessPointNow.yellow3[0] <= 315) || (ChessPointNow.yellow3[0] == 103 && ChessPointNow.yellow3[1] > 280))
                         {
+                            printf("yellow3\n");
                             EndChessNum.YellowEndChess[2] = 1;
                             goto yellow3;
                         }
@@ -1293,8 +1165,9 @@ void MoveChess(const char name[10], int player, int result)
                     }
                     if (StartedChess.YellowEndChess[3] == 1 && EndChessNum.YellowEndChess[3] == 0)
                     {
-                        if ((ChessPointNow.yellow4[1] == 686 && ChessPointNow.yellow4[0] <= 315) || (ChessPointNow.yellow4[0] == 103 && ChessPointNow.yellow4[1] > 280))
+                        if ((ChessPointNow.yellow4[1] == 562 && ChessPointNow.yellow4[0] <= 315) || (ChessPointNow.yellow4[0] == 103 && ChessPointNow.yellow4[1] > 280))
                         {
+                            printf("yellow4\n");
                             EndChessNum.YellowEndChess[3] = 1;
                             goto yellow4;
                         }
@@ -1327,14 +1200,59 @@ void MoveChess(const char name[10], int player, int result)
     }
     else if (player == 2)
     {
-        int count = 0;
+        int count1 = 0, count2 = 0;
         for (int i = 0; i < 4; i++)
         {
             if (StartedChess.BlueEndChess[i] == 0)
-                count++;
-            if (count == 4 && result != 6)
+                count1++;
+            else if (StartedChess.BlueEndChess[i] == 2)
+                count2++;
+            if (count1 + count2 == 4 && result != 6)
                 return;
         }
+#ifdef pc_fight
+        if (count1 == 4 && result == 6)
+            count1 = 3;
+        else if (result == 6)
+            count1 = 0;
+        int dice = rand() % (4 - count1) + 1;
+        printf("bluepoint:%d\n", dice);
+        while (1)
+        {
+            switch (dice)
+            {
+            case 1:
+                if (StartedChess.BlueEndChess[0] == 1 || (StartedChess.BlueEndChess[0] == 0 && result == 6))
+                {
+                    printf("1blue\n");
+                    goto bluepc1;
+                    break;
+                }
+            case 2:
+                if (StartedChess.BlueEndChess[1] == 1 || (StartedChess.BlueEndChess[1] == 0 && result == 6))
+                {
+                    printf("2blue\n");
+                    goto bluepc2;
+                    break;
+                }
+            case 3:
+                if (StartedChess.BlueEndChess[2] == 1 || (StartedChess.BlueEndChess[2] == 0 && result == 6))
+                {
+                    printf("3blue\n");
+                    goto bluepc3;
+                    break;
+                }
+            case 4:
+                if (StartedChess.BlueEndChess[3] == 1 || (StartedChess.BlueEndChess[3] == 0 && result == 6))
+                {
+                    printf("4blue\n");
+                    goto bluepc4;
+                    break;
+                }
+            }
+            dice = 1;
+        }
+#endif
         while (SDL_WaitEvent(&FirstMove))
         {
             switch (FirstMove.type)
@@ -1345,7 +1263,8 @@ void MoveChess(const char name[10], int player, int result)
                     FirstMove.button.y > ChessPointNow.blue1[1] &&
                     FirstMove.button.y < ChessPointNow.blue1[1] + 50)
                 {
-                    if (result == 6 && StartedChess.BlueEndChess[0] != 1)
+                bluepc1:
+                    if (result == 6 && StartedChess.BlueEndChess[0] == 0)
                     {
                         reload("blue1", 682, 16);
                         while (SDL_WaitEvent(&FirstMove))
@@ -1391,7 +1310,7 @@ void MoveChess(const char name[10], int player, int result)
                         jump("blue1");
                         attack("blue", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
                         if (ChessPointNow.blue1[0] < 0)
-                            StartedChess.BlueEndChess[0] = 0;
+                            StartedChess.BlueEndChess[0] = 2;
                         reload("blue1", ChessPointNow.blue1[0], ChessPointNow.blue1[1]);
                         end();
                         return;
@@ -1402,7 +1321,8 @@ void MoveChess(const char name[10], int player, int result)
                          FirstMove.button.y > ChessPointNow.blue2[1] &&
                          FirstMove.button.y < ChessPointNow.blue2[1] + 50)
                 {
-                    if (result == 6 && StartedChess.BlueEndChess[1] != 1)
+                bluepc2:
+                    if (result == 6 && StartedChess.BlueEndChess[1] == 0)
                     {
                         reload("blue2", 682, 16);
                         while (SDL_WaitEvent(&FirstMove))
@@ -1448,7 +1368,7 @@ void MoveChess(const char name[10], int player, int result)
                         jump("blue2");
                         attack("blue", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
                         if (ChessPointNow.blue2[0] < 0)
-                            StartedChess.BlueEndChess[1] = 0;
+                            StartedChess.BlueEndChess[1] = 2;
                         reload("blue2", ChessPointNow.blue2[0], ChessPointNow.blue2[1]);
                         end();
                         return;
@@ -1459,7 +1379,8 @@ void MoveChess(const char name[10], int player, int result)
                          FirstMove.button.y > ChessPointNow.blue3[1] &&
                          FirstMove.button.y < ChessPointNow.blue3[1] + 50)
                 {
-                    if (result == 6 && StartedChess.BlueEndChess[2] != 1)
+                bluepc3:
+                    if (result == 6 && StartedChess.BlueEndChess[2] == 0)
                     {
                         reload("blue3", 682, 16);
                         while (SDL_WaitEvent(&FirstMove))
@@ -1505,7 +1426,7 @@ void MoveChess(const char name[10], int player, int result)
                         jump("blue3");
                         attack("blue", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
                         if (ChessPointNow.blue3[0] < 0)
-                            StartedChess.BlueEndChess[2] = 0;
+                            StartedChess.BlueEndChess[2] = 2;
                         reload("blue3", ChessPointNow.blue3[0], ChessPointNow.blue3[1]);
                         end();
                         return;
@@ -1516,7 +1437,8 @@ void MoveChess(const char name[10], int player, int result)
                          FirstMove.button.y > ChessPointNow.blue4[1] &&
                          FirstMove.button.y < ChessPointNow.blue4[1] + 50)
                 {
-                    if (result == 6 && StartedChess.BlueEndChess[3] != 1)
+                bluepc4:
+                    if (result == 6 && StartedChess.BlueEndChess[3] == 0)
                     {
                         reload("blue4", 682, 16);
                         while (SDL_WaitEvent(&FirstMove))
@@ -1555,14 +1477,14 @@ void MoveChess(const char name[10], int player, int result)
                         reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
                         return;
                     }
-                    else if (EndChessNum.BlueEndChess[0] == 1)
+                    else if (EndChessNum.BlueEndChess[3] == 1)
                     {
                     blue4:
                         EndJump("blue", &ChessPointNow.blue4[0], &ChessPointNow.blue4[1], result);
                         jump("blue4");
                         attack("blue", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
                         if (ChessPointNow.blue4[0] < 0)
-                            StartedChess.BlueEndChess[3] = 0;
+                            StartedChess.BlueEndChess[3] = 2;
                         reload("blue4", ChessPointNow.blue4[0], ChessPointNow.blue4[1]);
                         end();
                         return;
@@ -1577,15 +1499,55 @@ void MoveChess(const char name[10], int player, int result)
     }
     else if (player == 3)
     {
-
-        int count = 0;
+        int count1 = 0, count2 = 0;
         for (int i = 0; i < 4; i++)
         {
             if (StartedChess.GreenEndChess[i] == 0)
-                count++;
-            if (count == 4 && result != 6)
+                count1++;
+            else if (StartedChess.GreenEndChess[i] == 2)
+                count2++;
+            if (count1 + count2 == 4 && result != 6)
                 return;
         }
+#ifdef pc_fight
+        if (count1 == 4 && result == 6)
+            count1 = 3;
+        else if (result == 6)
+            count1 = 0;
+        int dice = rand() % (4 - count1) + 1;
+        printf("greenpoint:%d\n", dice);
+        while (1)
+        {
+            switch (dice)
+            {
+            case 1:
+                if (StartedChess.GreenEndChess[0] == 1 || (StartedChess.GreenEndChess[0] == 0 && result == 6))
+                {
+                    goto greenpc1;
+                    break;
+                }
+            case 2:
+                if (StartedChess.GreenEndChess[1] == 1 || (StartedChess.GreenEndChess[1] == 0 && result == 6))
+                {
+                    goto greenpc2;
+                    break;
+                }
+            case 3:
+                if (StartedChess.GreenEndChess[2] == 1 || (StartedChess.GreenEndChess[2] == 0 && result == 6))
+                {
+                    goto greenpc3;
+                    break;
+                }
+            case 4:
+                if (StartedChess.GreenEndChess[3] == 1 || (StartedChess.GreenEndChess[3] == 0 && result == 6))
+                {
+                    goto greenpc4;
+                    break;
+                }
+            }
+            dice = 1;
+        }
+#endif
         while (SDL_WaitEvent(&FirstMove))
         {
             switch (FirstMove.type)
@@ -1596,6 +1558,7 @@ void MoveChess(const char name[10], int player, int result)
                     FirstMove.button.y > ChessPointNow.green1[1] &&
                     FirstMove.button.y < ChessPointNow.green1[1] + 50)
                 {
+                greenpc1:
                     if (result == 6 && StartedChess.GreenEndChess[0] != 1)
                     {
                         reload("green1", 276, 837);
@@ -1653,6 +1616,7 @@ void MoveChess(const char name[10], int player, int result)
                          FirstMove.button.y > ChessPointNow.green2[1] &&
                          FirstMove.button.y < ChessPointNow.green2[1] + 50)
                 {
+                greenpc2:
                     if (result == 6 && StartedChess.GreenEndChess[1] != 1)
                     {
                         reload("green2", 276, 837);
@@ -1710,6 +1674,7 @@ void MoveChess(const char name[10], int player, int result)
                          FirstMove.button.y > ChessPointNow.green3[1] &&
                          FirstMove.button.y < ChessPointNow.green3[1] + 50)
                 {
+                greenpc3:
                     if (result == 6 && StartedChess.GreenEndChess[2] != 1)
                     {
                         reload("green3", 276, 837);
@@ -1767,6 +1732,7 @@ void MoveChess(const char name[10], int player, int result)
                          FirstMove.button.y > ChessPointNow.green4[1] &&
                          FirstMove.button.y < ChessPointNow.green4[1] + 50)
                 {
+                greenpc4:
                     if (result == 6 && StartedChess.GreenEndChess[3] != 1)
                     {
                         reload("green4", 276, 837);
@@ -1828,14 +1794,55 @@ void MoveChess(const char name[10], int player, int result)
     }
     else if (player == 4)
     {
-        int count = 0;
+        int count1 = 0, count2 = 0;
         for (int i = 0; i < 4; i++)
         {
             if (StartedChess.RedEndChess[i] == 0)
-                count++;
-            if (count == 4 && result != 6)
+                count1++;
+            else if (StartedChess.RedEndChess[i] == 2)
+                count2++;
+            if (count1 + count2 == 4 && result != 6)
                 return;
         }
+#ifdef pc_fight
+        if (count1 == 4 && result == 6)
+            count1 = 3;
+        else if (result == 6)
+            count1 = 0;
+        int dice = rand() % (4 - count1) + 1;
+        printf("redpoint:%d\n", dice);
+        while (1)
+        {
+            switch (dice)
+            {
+            case 1:
+                if (StartedChess.RedEndChess[0] == 1 || (StartedChess.RedEndChess[0] == 0 && result == 6))
+                {
+                    goto redpc1;
+                    break;
+                }
+            case 2:
+                if (StartedChess.RedEndChess[1] == 1 || (StartedChess.RedEndChess[1] == 0 && result == 6))
+                {
+                    goto redpc2;
+                    break;
+                }
+            case 3:
+                if (StartedChess.RedEndChess[2] == 1 || (StartedChess.RedEndChess[2] == 0 && result == 6))
+                {
+                    goto redpc3;
+                    break;
+                }
+            case 4:
+                if (StartedChess.RedEndChess[3] == 1 || (StartedChess.RedEndChess[3] == 0 && result == 6))
+                {
+                    goto redpc4;
+                    break;
+                }
+            }
+            dice = 1;
+        }
+#endif
         while (SDL_WaitEvent(&FirstMove))
         {
             switch (FirstMove.type)
@@ -1846,6 +1853,7 @@ void MoveChess(const char name[10], int player, int result)
                     FirstMove.button.y > ChessPointNow.red1[1] &&
                     FirstMove.button.y < ChessPointNow.red1[1] + 50)
                 {
+                redpc1:
                     if (result == 6 && StartedChess.RedEndChess[0] != 1)
                     {
                         reload("red1", 929, 612);
@@ -1903,6 +1911,7 @@ void MoveChess(const char name[10], int player, int result)
                          FirstMove.button.y > ChessPointNow.red2[1] &&
                          FirstMove.button.y < ChessPointNow.red2[1] + 50)
                 {
+                redpc2:
                     if (result == 6 && StartedChess.RedEndChess[1] != 1)
                     {
                         reload("red2", 929, 612);
@@ -1960,6 +1969,7 @@ void MoveChess(const char name[10], int player, int result)
                          FirstMove.button.y > ChessPointNow.red3[1] &&
                          FirstMove.button.y < ChessPointNow.red3[1] + 50)
                 {
+                redpc3:
                     if (result == 6 && StartedChess.RedEndChess[2] != 1)
                     {
                         reload("red3", 929, 612);
@@ -2017,6 +2027,7 @@ void MoveChess(const char name[10], int player, int result)
                          FirstMove.button.y > ChessPointNow.red4[1] &&
                          FirstMove.button.y < ChessPointNow.red4[1] + 50)
                 {
+                redpc4:
                     if (result == 6 && StartedChess.RedEndChess[3] != 1)
                     {
                         reload("red4", 929, 612);
@@ -2210,8 +2221,7 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         {
             *y == 280;
         }
-        if (result != 0)
-            result -= (845 - *x) / 53;
+        result -= (845 - *x) / 53;
         *x = 845;
         *y += result * 47;
         return;
@@ -2261,13 +2271,13 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         *y += result * 47;
         return;
     }
-    if ((*x == 633 || *x == 686) && *y + 47 * result > 756 && *y != 756)
+    if ((*x == 633 || *x == 686) && *y + 47 * result > 750 && *y != 750)
     {
         if (*x == 686)
         {
             *x = 633;
         }
-        result -= (756 - *y) / 47;
+        result -= (750 - *y) / 47;
         *y = 750;
         *x -= result * 53;
         return;
@@ -2333,9 +2343,8 @@ void EndJump(const char name[10], int *x, int *y, int result)
 {
     if (!strcmp(name, "yellow"))
     {
-        if (*y == 686 && *x > 103)
+        if (*y == 562 && *x > 103)
         {
-            printf("0\n");
             *x -= result * 53;
             if (*x <= 103)
             {
@@ -2343,18 +2352,22 @@ void EndJump(const char name[10], int *x, int *y, int result)
                 *x = 103;
             }
         }
-        if (*x == 103 && *y > 280)
+        if (*x == 103 && *y > 421)
         {
+            printf("y1:%d\n", *y);
             *y -= result * 47;
-            if (*y <= 421)
+            if (*y < 421)
             {
+                printf("y2:%d\n", *y);
                 result = (421 - *y) / 47;
                 *y = 421;
+                printf("result2:%d\n", result);
             }
         }
         if (*y == 421 && *x >= 103)
         {
             *x += result * 53;
+            printf("result3:%d\n", result);
             if (*x > 421)
             {
                 result = ((*x - 421) / 53);
@@ -2384,7 +2397,7 @@ void EndJump(const char name[10], int *x, int *y, int result)
         if (*y == 92 && *x < 474)
         {
             *x += result * 53;
-            if (*x >= 474)
+            if (*x > 474)
             {
                 result = (*x - 474) / 53;
                 *x = 474;
@@ -2422,7 +2435,7 @@ void EndJump(const char name[10], int *x, int *y, int result)
         if (*x == 845 && *y < 421)
         {
             *y += result * 47;
-            if (*y >= 421)
+            if (*y > 421)
             {
                 result = (*y - 421) / 47;
                 *y = 421;
@@ -2460,7 +2473,7 @@ void EndJump(const char name[10], int *x, int *y, int result)
         if (*y == 750 && *x > 474)
         {
             *x -= result * 53;
-            if (*x <= 474)
+            if (*x < 474)
             {
                 result = (474 - *x) / 53;
                 *x = 474;
@@ -2511,9 +2524,9 @@ void cross()
         ChessPointNow.yellow3[1] = 562;
         load_chess();
     }
-    else if (ChessPointNow.yellow3[0] == 686 && ChessPointNow.yellow3[1] == 280)
+    else if (ChessPointNow.yellow4[0] == 686 && ChessPointNow.yellow4[1] == 280)
     {
-        ChessPointNow.yellow3[1] = 562;
+        ChessPointNow.yellow4[1] = 562;
         load_chess();
     }
     /////////
@@ -2968,7 +2981,7 @@ void attack(char *name, int x, int y)
             StartedChess.BlueEndChess[0] = 0;
             EndChessNum.BlueEndChess[0] = 0;
         }
-        else if (ChessPointNow.blue2[0] == x && ChessPointNow.blue2[1] == y)
+        if (ChessPointNow.blue2[0] == x && ChessPointNow.blue2[1] == y)
         {
             ChessPointNow.blue2[0] = 800;
             ChessPointNow.blue2[1] = 145;
@@ -2976,7 +2989,7 @@ void attack(char *name, int x, int y)
             StartedChess.BlueEndChess[1] = 0;
             EndChessNum.BlueEndChess[1] = 0;
         }
-        else if (ChessPointNow.blue3[0] == x && ChessPointNow.blue3[1] == y)
+        if (ChessPointNow.blue3[0] == x && ChessPointNow.blue3[1] == y)
         {
             ChessPointNow.blue3[0] = 875;
             ChessPointNow.blue3[1] = 75;
@@ -2984,7 +2997,7 @@ void attack(char *name, int x, int y)
             StartedChess.BlueEndChess[2] = 0;
             EndChessNum.BlueEndChess[2] = 0;
         }
-        else if (ChessPointNow.blue4[0] == x && ChessPointNow.blue4[1] == y)
+        if (ChessPointNow.blue4[0] == x && ChessPointNow.blue4[1] == y)
         {
             ChessPointNow.blue4[0] = 875;
             ChessPointNow.blue4[1] = 145;
@@ -2993,7 +3006,7 @@ void attack(char *name, int x, int y)
             EndChessNum.BlueEndChess[3] = 0;
         }
         //////蓝色
-        else if (ChessPointNow.green1[0] == x && ChessPointNow.green1[1] == y)
+        if (ChessPointNow.green1[0] == x && ChessPointNow.green1[1] == y)
         {
             ChessPointNow.green1[0] = 85;
             ChessPointNow.green1[1] = 710;
@@ -3001,7 +3014,7 @@ void attack(char *name, int x, int y)
             StartedChess.GreenEndChess[0] = 0;
             EndChessNum.GreenEndChess[0] = 0;
         }
-        else if (ChessPointNow.green2[0] == x && ChessPointNow.green2[1] == y)
+        if (ChessPointNow.green2[0] == x && ChessPointNow.green2[1] == y)
         {
             ChessPointNow.green2[0] = 85;
             ChessPointNow.green2[1] = 710;
@@ -3009,7 +3022,7 @@ void attack(char *name, int x, int y)
             StartedChess.GreenEndChess[1] = 0;
             EndChessNum.GreenEndChess[1] = 0;
         }
-        else if (ChessPointNow.green3[0] == x && ChessPointNow.green3[1] == y)
+        if (ChessPointNow.green3[0] == x && ChessPointNow.green3[1] == y)
         {
             ChessPointNow.green3[0] = 165;
             ChessPointNow.green3[1] = 710;
@@ -3017,7 +3030,7 @@ void attack(char *name, int x, int y)
             StartedChess.GreenEndChess[2] = 0;
             EndChessNum.GreenEndChess[2] = 0;
         }
-        else if (ChessPointNow.green4[0] == x && ChessPointNow.green4[1] == y)
+        if (ChessPointNow.green4[0] == x && ChessPointNow.green4[1] == y)
         {
             ChessPointNow.green4[0] = 165;
             ChessPointNow.green4[1] = 790;
@@ -3026,7 +3039,7 @@ void attack(char *name, int x, int y)
             EndChessNum.GreenEndChess[3] = 0;
         }
         //////绿色
-        else if (ChessPointNow.red1[0] == x && ChessPointNow.red1[1] == y)
+        if (ChessPointNow.red1[0] == x && ChessPointNow.red1[1] == y)
         {
             ChessPointNow.red1[0] = 795;
             ChessPointNow.red1[1] = 710;
@@ -3034,7 +3047,7 @@ void attack(char *name, int x, int y)
             StartedChess.RedEndChess[0] = 0;
             EndChessNum.RedEndChess[0] = 0;
         }
-        else if (ChessPointNow.red2[0] == x && ChessPointNow.red2[1] == y)
+        if (ChessPointNow.red2[0] == x && ChessPointNow.red2[1] == y)
         {
             ChessPointNow.red2[0] = 795;
             ChessPointNow.red2[1] = 790;
@@ -3042,7 +3055,7 @@ void attack(char *name, int x, int y)
             StartedChess.RedEndChess[1] = 0;
             EndChessNum.RedEndChess[1] = 0;
         }
-        else if (ChessPointNow.red3[0] == x && ChessPointNow.red3[1] == y)
+        if (ChessPointNow.red3[0] == x && ChessPointNow.red3[1] == y)
         {
             ChessPointNow.red3[0] = 880;
             ChessPointNow.red3[1] = 710;
@@ -3050,7 +3063,7 @@ void attack(char *name, int x, int y)
             StartedChess.RedEndChess[2] = 0;
             EndChessNum.RedEndChess[2] = 0;
         }
-        else if (ChessPointNow.red4[0] == x && ChessPointNow.red4[1] == y)
+        if (ChessPointNow.red4[0] == x && ChessPointNow.red4[1] == y)
         {
             ChessPointNow.red4[0] = 880;
             ChessPointNow.red4[1] = 790;
@@ -3069,7 +3082,7 @@ void attack(char *name, int x, int y)
             StartedChess.YellowEndChess[0] = 0;
             EndChessNum.YellowEndChess[0] = 0;
         }
-        else if (ChessPointNow.yellow2[0] == x && ChessPointNow.yellow2[1] == y)
+        if (ChessPointNow.yellow2[0] == x && ChessPointNow.yellow2[1] == y)
         {
             ChessPointNow.yellow2[0] = 163;
             ChessPointNow.yellow2[1] = 68;
@@ -3077,7 +3090,7 @@ void attack(char *name, int x, int y)
             StartedChess.YellowEndChess[1] = 0;
             EndChessNum.YellowEndChess[1] = 0;
         }
-        else if (ChessPointNow.yellow3[0] == x && ChessPointNow.yellow3[1] == y)
+        if (ChessPointNow.yellow3[0] == x && ChessPointNow.yellow3[1] == y)
         {
             ChessPointNow.yellow3[0] = 85;
             ChessPointNow.yellow3[1] = 145;
@@ -3085,7 +3098,7 @@ void attack(char *name, int x, int y)
             StartedChess.YellowEndChess[2] = 0;
             EndChessNum.YellowEndChess[2] = 0;
         }
-        else if (ChessPointNow.yellow4[0] == x && ChessPointNow.yellow4[1] == y)
+        if (ChessPointNow.yellow4[0] == x && ChessPointNow.yellow4[1] == y)
         {
             ChessPointNow.yellow4[0] = 163;
             ChessPointNow.yellow4[1] = 145;
@@ -3094,7 +3107,7 @@ void attack(char *name, int x, int y)
             EndChessNum.YellowEndChess[3] = 0;
         }
         //////黄色
-        else if (ChessPointNow.green1[0] == x && ChessPointNow.green1[1] == y)
+        if (ChessPointNow.green1[0] == x && ChessPointNow.green1[1] == y)
         {
             ChessPointNow.green1[0] = 85;
             ChessPointNow.green1[1] = 710;
@@ -3102,7 +3115,7 @@ void attack(char *name, int x, int y)
             StartedChess.GreenEndChess[0] = 0;
             EndChessNum.GreenEndChess[0] = 0;
         }
-        else if (ChessPointNow.green2[0] == x && ChessPointNow.green2[1] == y)
+        if (ChessPointNow.green2[0] == x && ChessPointNow.green2[1] == y)
         {
             ChessPointNow.green2[0] = 85;
             ChessPointNow.green2[1] = 710;
@@ -3110,7 +3123,7 @@ void attack(char *name, int x, int y)
             StartedChess.GreenEndChess[1] = 0;
             EndChessNum.GreenEndChess[1] = 0;
         }
-        else if (ChessPointNow.green3[0] == x && ChessPointNow.green3[1] == y)
+        if (ChessPointNow.green3[0] == x && ChessPointNow.green3[1] == y)
         {
             ChessPointNow.green3[0] = 165;
             ChessPointNow.green3[1] = 710;
@@ -3118,7 +3131,7 @@ void attack(char *name, int x, int y)
             StartedChess.GreenEndChess[2] = 0;
             EndChessNum.GreenEndChess[2] = 0;
         }
-        else if (ChessPointNow.green4[0] == x && ChessPointNow.green4[1] == y)
+        if (ChessPointNow.green4[0] == x && ChessPointNow.green4[1] == y)
         {
             ChessPointNow.green4[0] = 165;
             ChessPointNow.green4[1] = 790;
@@ -3127,7 +3140,7 @@ void attack(char *name, int x, int y)
             EndChessNum.GreenEndChess[3] = 0;
         }
         //////绿色
-        else if (ChessPointNow.red1[0] == x && ChessPointNow.red1[1] == y)
+        if (ChessPointNow.red1[0] == x && ChessPointNow.red1[1] == y)
         {
             ChessPointNow.red1[0] = 795;
             ChessPointNow.red1[1] = 710;
@@ -3135,7 +3148,7 @@ void attack(char *name, int x, int y)
             StartedChess.RedEndChess[0] = 0;
             EndChessNum.RedEndChess[0] = 0;
         }
-        else if (ChessPointNow.red2[0] == x && ChessPointNow.red2[1] == y)
+        if (ChessPointNow.red2[0] == x && ChessPointNow.red2[1] == y)
         {
             ChessPointNow.red2[0] = 795;
             ChessPointNow.red2[1] = 790;
@@ -3143,7 +3156,7 @@ void attack(char *name, int x, int y)
             StartedChess.RedEndChess[1] = 0;
             EndChessNum.RedEndChess[1] = 0;
         }
-        else if (ChessPointNow.red3[0] == x && ChessPointNow.red3[1] == y)
+        if (ChessPointNow.red3[0] == x && ChessPointNow.red3[1] == y)
         {
             ChessPointNow.red3[0] = 880;
             ChessPointNow.red3[1] = 710;
@@ -3151,7 +3164,7 @@ void attack(char *name, int x, int y)
             StartedChess.RedEndChess[2] = 0;
             EndChessNum.RedEndChess[2] = 0;
         }
-        else if (ChessPointNow.red4[0] == x && ChessPointNow.red4[1] == y)
+        if (ChessPointNow.red4[0] == x && ChessPointNow.red4[1] == y)
         {
             ChessPointNow.red4[0] = 880;
             ChessPointNow.red4[1] = 790;
@@ -3170,7 +3183,7 @@ void attack(char *name, int x, int y)
             StartedChess.YellowEndChess[0] = 0;
             EndChessNum.YellowEndChess[0] = 0;
         }
-        else if (ChessPointNow.yellow2[0] == x && ChessPointNow.yellow2[1] == y)
+        if (ChessPointNow.yellow2[0] == x && ChessPointNow.yellow2[1] == y)
         {
             ChessPointNow.yellow2[0] = 163;
             ChessPointNow.yellow2[1] = 68;
@@ -3178,7 +3191,7 @@ void attack(char *name, int x, int y)
             StartedChess.YellowEndChess[1] = 0;
             EndChessNum.YellowEndChess[1] = 0;
         }
-        else if (ChessPointNow.yellow3[0] == x && ChessPointNow.yellow3[1] == y)
+        if (ChessPointNow.yellow3[0] == x && ChessPointNow.yellow3[1] == y)
         {
             ChessPointNow.yellow3[0] = 85;
             ChessPointNow.yellow3[1] = 145;
@@ -3186,7 +3199,7 @@ void attack(char *name, int x, int y)
             StartedChess.YellowEndChess[2] = 0;
             EndChessNum.YellowEndChess[2] = 0;
         }
-        else if (ChessPointNow.yellow4[0] == x && ChessPointNow.yellow4[1] == y)
+        if (ChessPointNow.yellow4[0] == x && ChessPointNow.yellow4[1] == y)
         {
             ChessPointNow.yellow4[0] = 163;
             ChessPointNow.yellow4[1] = 145;
@@ -3195,7 +3208,7 @@ void attack(char *name, int x, int y)
             EndChessNum.YellowEndChess[3] = 0;
         }
         //////黄色
-        else if (ChessPointNow.blue1[0] == x && ChessPointNow.blue1[1] == y)
+        if (ChessPointNow.blue1[0] == x && ChessPointNow.blue1[1] == y)
         {
             ChessPointNow.blue1[0] = 800;
             ChessPointNow.blue1[1] = 75;
@@ -3203,7 +3216,7 @@ void attack(char *name, int x, int y)
             StartedChess.BlueEndChess[0] = 0;
             EndChessNum.BlueEndChess[0] = 0;
         }
-        else if (ChessPointNow.blue2[0] == x && ChessPointNow.blue2[1] == y)
+        if (ChessPointNow.blue2[0] == x && ChessPointNow.blue2[1] == y)
         {
             ChessPointNow.blue2[0] = 800;
             ChessPointNow.blue2[1] = 145;
@@ -3211,7 +3224,7 @@ void attack(char *name, int x, int y)
             StartedChess.BlueEndChess[1] = 0;
             EndChessNum.BlueEndChess[1] = 0;
         }
-        else if (ChessPointNow.blue3[0] == x && ChessPointNow.blue3[1] == y)
+        if (ChessPointNow.blue3[0] == x && ChessPointNow.blue3[1] == y)
         {
             ChessPointNow.blue3[0] = 875;
             ChessPointNow.blue3[1] = 75;
@@ -3219,7 +3232,7 @@ void attack(char *name, int x, int y)
             StartedChess.BlueEndChess[2] = 0;
             EndChessNum.BlueEndChess[2] = 0;
         }
-        else if (ChessPointNow.blue4[0] == x && ChessPointNow.blue4[1] == y)
+        if (ChessPointNow.blue4[0] == x && ChessPointNow.blue4[1] == y)
         {
             ChessPointNow.blue4[0] = 875;
             ChessPointNow.blue4[1] = 145;
@@ -3228,7 +3241,7 @@ void attack(char *name, int x, int y)
             EndChessNum.BlueEndChess[3] = 0;
         }
         //////蓝色
-        else if (ChessPointNow.red1[0] == x && ChessPointNow.red1[1] == y)
+        if (ChessPointNow.red1[0] == x && ChessPointNow.red1[1] == y)
         {
             ChessPointNow.red1[0] = 795;
             ChessPointNow.red1[1] = 710;
@@ -3236,7 +3249,7 @@ void attack(char *name, int x, int y)
             StartedChess.RedEndChess[0] = 0;
             EndChessNum.RedEndChess[0] = 0;
         }
-        else if (ChessPointNow.red2[0] == x && ChessPointNow.red2[1] == y)
+        if (ChessPointNow.red2[0] == x && ChessPointNow.red2[1] == y)
         {
             ChessPointNow.red2[0] = 795;
             ChessPointNow.red2[1] = 790;
@@ -3244,7 +3257,7 @@ void attack(char *name, int x, int y)
             StartedChess.RedEndChess[1] = 0;
             EndChessNum.RedEndChess[1] = 0;
         }
-        else if (ChessPointNow.red3[0] == x && ChessPointNow.red3[1] == y)
+        if (ChessPointNow.red3[0] == x && ChessPointNow.red3[1] == y)
         {
             ChessPointNow.red3[0] = 880;
             ChessPointNow.red3[1] = 710;
@@ -3252,7 +3265,7 @@ void attack(char *name, int x, int y)
             StartedChess.RedEndChess[2] = 0;
             EndChessNum.RedEndChess[2] = 0;
         }
-        else if (ChessPointNow.red4[0] == x && ChessPointNow.red4[1] == y)
+        if (ChessPointNow.red4[0] == x && ChessPointNow.red4[1] == y)
         {
             ChessPointNow.red4[0] = 880;
             ChessPointNow.red4[1] = 790;
@@ -3271,7 +3284,7 @@ void attack(char *name, int x, int y)
             StartedChess.YellowEndChess[0] = 0;
             EndChessNum.YellowEndChess[0] = 0;
         }
-        else if (ChessPointNow.yellow2[0] == x && ChessPointNow.yellow2[1] == y)
+        if (ChessPointNow.yellow2[0] == x && ChessPointNow.yellow2[1] == y)
         {
             ChessPointNow.yellow2[0] = 163;
             ChessPointNow.yellow2[1] = 68;
@@ -3279,7 +3292,7 @@ void attack(char *name, int x, int y)
             StartedChess.YellowEndChess[1] = 0;
             EndChessNum.YellowEndChess[1] = 0;
         }
-        else if (ChessPointNow.yellow3[0] == x && ChessPointNow.yellow3[1] == y)
+        if (ChessPointNow.yellow3[0] == x && ChessPointNow.yellow3[1] == y)
         {
             ChessPointNow.yellow3[0] = 85;
             ChessPointNow.yellow3[1] = 145;
@@ -3287,7 +3300,7 @@ void attack(char *name, int x, int y)
             StartedChess.YellowEndChess[2] = 0;
             EndChessNum.YellowEndChess[2] = 0;
         }
-        else if (ChessPointNow.yellow4[0] == x && ChessPointNow.yellow4[1] == y)
+        if (ChessPointNow.yellow4[0] == x && ChessPointNow.yellow4[1] == y)
         {
             ChessPointNow.yellow4[0] = 163;
             ChessPointNow.yellow4[1] = 145;
@@ -3296,7 +3309,7 @@ void attack(char *name, int x, int y)
             EndChessNum.YellowEndChess[3] = 0;
         }
         //////黄色
-        else if (ChessPointNow.blue1[0] == x && ChessPointNow.blue1[1] == y)
+        if (ChessPointNow.blue1[0] == x && ChessPointNow.blue1[1] == y)
         {
             ChessPointNow.blue1[0] = 800;
             ChessPointNow.blue1[1] = 75;
@@ -3304,7 +3317,7 @@ void attack(char *name, int x, int y)
             StartedChess.BlueEndChess[0] = 0;
             EndChessNum.BlueEndChess[0] = 0;
         }
-        else if (ChessPointNow.blue2[0] == x && ChessPointNow.blue2[1] == y)
+        if (ChessPointNow.blue2[0] == x && ChessPointNow.blue2[1] == y)
         {
             ChessPointNow.blue2[0] = 800;
             ChessPointNow.blue2[1] = 145;
@@ -3312,7 +3325,7 @@ void attack(char *name, int x, int y)
             StartedChess.BlueEndChess[1] = 0;
             EndChessNum.BlueEndChess[1] = 0;
         }
-        else if (ChessPointNow.blue3[0] == x && ChessPointNow.blue3[1] == y)
+        if (ChessPointNow.blue3[0] == x && ChessPointNow.blue3[1] == y)
         {
             ChessPointNow.blue3[0] = 875;
             ChessPointNow.blue3[1] = 75;
@@ -3320,7 +3333,7 @@ void attack(char *name, int x, int y)
             StartedChess.BlueEndChess[2] = 0;
             EndChessNum.BlueEndChess[2] = 0;
         }
-        else if (ChessPointNow.blue4[0] == x && ChessPointNow.blue4[1] == y)
+        if (ChessPointNow.blue4[0] == x && ChessPointNow.blue4[1] == y)
         {
             ChessPointNow.blue4[0] = 875;
             ChessPointNow.blue4[1] = 145;
@@ -3329,7 +3342,7 @@ void attack(char *name, int x, int y)
             EndChessNum.BlueEndChess[3] = 0;
         }
         //////蓝色
-        else if (ChessPointNow.green1[0] == x && ChessPointNow.green1[1] == y)
+        if (ChessPointNow.green1[0] == x && ChessPointNow.green1[1] == y)
         {
             ChessPointNow.green1[0] = 85;
             ChessPointNow.green1[1] = 710;
@@ -3337,7 +3350,7 @@ void attack(char *name, int x, int y)
             StartedChess.GreenEndChess[0] = 0;
             EndChessNum.GreenEndChess[0] = 0;
         }
-        else if (ChessPointNow.green2[0] == x && ChessPointNow.green2[1] == y)
+        if (ChessPointNow.green2[0] == x && ChessPointNow.green2[1] == y)
         {
             ChessPointNow.green2[0] = 85;
             ChessPointNow.green2[1] = 710;
@@ -3345,7 +3358,7 @@ void attack(char *name, int x, int y)
             StartedChess.GreenEndChess[1] = 0;
             EndChessNum.GreenEndChess[1] = 0;
         }
-        else if (ChessPointNow.green3[0] == x && ChessPointNow.green3[1] == y)
+        if (ChessPointNow.green3[0] == x && ChessPointNow.green3[1] == y)
         {
             ChessPointNow.green3[0] = 165;
             ChessPointNow.green3[1] = 710;
@@ -3353,7 +3366,7 @@ void attack(char *name, int x, int y)
             StartedChess.GreenEndChess[2] = 0;
             EndChessNum.GreenEndChess[2] = 0;
         }
-        else if (ChessPointNow.green4[0] == x && ChessPointNow.green4[1] == y)
+        if (ChessPointNow.green4[0] == x && ChessPointNow.green4[1] == y)
         {
             ChessPointNow.green4[0] = 165;
             ChessPointNow.green4[1] = 790;

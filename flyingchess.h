@@ -16,12 +16,8 @@ void load_greenchess(int, int); // 加载棋子
 void load_yellowchess(int, int);
 void load_redchess(int, int);
 void load_bluechess(int, int);
-void pp2(); // 2玩家名称
-void pp3(); // 3玩家名称
-void pp4(); // 4玩家名称
-void pc2(); // 2电脑名称
-void pc3(); // 3电脑名称
-void pc4(); // 4电脑名称
+void pp(int); // 玩家名称
+void pc(int); // 电脑名称
 int Dice_point(const char *);
 void Load_dice(int, const char *);
 void reload(const char *, int, int);
