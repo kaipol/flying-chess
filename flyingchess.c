@@ -881,7 +881,6 @@ void begin(int number) // 进入棋盘 二人
 }
 int Dice_point(const char name[10]) // 骰子
 {
-    srand((unsigned)time(NULL));
     int result = rand() % 6 + 1;
     Load_dice(result, name);
     printf("result:%d\n", result);
@@ -1216,7 +1215,6 @@ void MoveChess(const char name[10], int player, int result)
         else if (result == 6)
             count1 = 0;
         int dice = rand() % (4 - count1) + 1;
-        printf("bluepoint:%d\n", dice);
         while (1)
         {
             switch (dice)
@@ -1224,28 +1222,28 @@ void MoveChess(const char name[10], int player, int result)
             case 1:
                 if (StartedChess.BlueEndChess[0] == 1 || (StartedChess.BlueEndChess[0] == 0 && result == 6))
                 {
-                    printf("1blue\n");
+                    printf("blue1\n");
                     goto bluepc1;
                     break;
                 }
             case 2:
                 if (StartedChess.BlueEndChess[1] == 1 || (StartedChess.BlueEndChess[1] == 0 && result == 6))
                 {
-                    printf("2blue\n");
+                    printf("blue2\n");
                     goto bluepc2;
                     break;
                 }
             case 3:
                 if (StartedChess.BlueEndChess[2] == 1 || (StartedChess.BlueEndChess[2] == 0 && result == 6))
                 {
-                    printf("3blue\n");
+                    printf("blue3\n");
                     goto bluepc3;
                     break;
                 }
             case 4:
                 if (StartedChess.BlueEndChess[3] == 1 || (StartedChess.BlueEndChess[3] == 0 && result == 6))
                 {
-                    printf("4blue\n");
+                    printf("blue4\n");
                     goto bluepc4;
                     break;
                 }
@@ -1515,7 +1513,6 @@ void MoveChess(const char name[10], int player, int result)
         else if (result == 6)
             count1 = 0;
         int dice = rand() % (4 - count1) + 1;
-        printf("greenpoint:%d\n", dice);
         while (1)
         {
             switch (dice)
@@ -1523,24 +1520,28 @@ void MoveChess(const char name[10], int player, int result)
             case 1:
                 if (StartedChess.GreenEndChess[0] == 1 || (StartedChess.GreenEndChess[0] == 0 && result == 6))
                 {
+                    printf("green1\n");
                     goto greenpc1;
                     break;
                 }
             case 2:
                 if (StartedChess.GreenEndChess[1] == 1 || (StartedChess.GreenEndChess[1] == 0 && result == 6))
                 {
+                    printf("green2\n");
                     goto greenpc2;
                     break;
                 }
             case 3:
                 if (StartedChess.GreenEndChess[2] == 1 || (StartedChess.GreenEndChess[2] == 0 && result == 6))
                 {
+                    printf("green3\n");
                     goto greenpc3;
                     break;
                 }
             case 4:
                 if (StartedChess.GreenEndChess[3] == 1 || (StartedChess.GreenEndChess[3] == 0 && result == 6))
                 {
+                    printf("green4\n");
                     goto greenpc4;
                     break;
                 }
@@ -1605,7 +1606,7 @@ void MoveChess(const char name[10], int player, int result)
                         jump("green1");
                         attack("green", ChessPointNow.green1[0], ChessPointNow.green1[1]);
                         if (ChessPointNow.green1[0] < 0)
-                            StartedChess.GreenEndChess[0] = 0;
+                            StartedChess.GreenEndChess[0] = 2;
                         reload("green1", ChessPointNow.green1[0], ChessPointNow.green1[1]);
                         end();
                         return;
@@ -1663,7 +1664,7 @@ void MoveChess(const char name[10], int player, int result)
                         jump("green2");
                         attack("green", ChessPointNow.green2[0], ChessPointNow.green2[1]);
                         if (ChessPointNow.green2[0] < 0)
-                            StartedChess.GreenEndChess[1] = 0;
+                            StartedChess.GreenEndChess[1] = 2;
                         reload("green2", ChessPointNow.green2[0], ChessPointNow.green2[1]);
                         end();
                         return;
@@ -1721,7 +1722,7 @@ void MoveChess(const char name[10], int player, int result)
                         jump("green3");
                         attack("green", ChessPointNow.green3[0], ChessPointNow.green3[1]);
                         if (ChessPointNow.green3[0] < 0)
-                            StartedChess.GreenEndChess[2] = 0;
+                            StartedChess.GreenEndChess[2] = 2;
                         reload("green3", ChessPointNow.green3[0], ChessPointNow.green3[1]);
                         end();
                         return;
@@ -1779,7 +1780,7 @@ void MoveChess(const char name[10], int player, int result)
                         jump("green4");
                         attack("green", ChessPointNow.green4[0], ChessPointNow.green4[1]);
                         if (ChessPointNow.green4[0] < 0)
-                            StartedChess.GreenEndChess[3] = 0;
+                            StartedChess.GreenEndChess[3] = 2;
                         reload("green4", ChessPointNow.green4[0], ChessPointNow.green4[1]);
                         end();
                         return;
@@ -1810,7 +1811,6 @@ void MoveChess(const char name[10], int player, int result)
         else if (result == 6)
             count1 = 0;
         int dice = rand() % (4 - count1) + 1;
-        printf("redpoint:%d\n", dice);
         while (1)
         {
             switch (dice)
@@ -1818,24 +1818,28 @@ void MoveChess(const char name[10], int player, int result)
             case 1:
                 if (StartedChess.RedEndChess[0] == 1 || (StartedChess.RedEndChess[0] == 0 && result == 6))
                 {
+                    printf("red1\n");
                     goto redpc1;
                     break;
                 }
             case 2:
                 if (StartedChess.RedEndChess[1] == 1 || (StartedChess.RedEndChess[1] == 0 && result == 6))
                 {
+                    printf("red2\n");
                     goto redpc2;
                     break;
                 }
             case 3:
                 if (StartedChess.RedEndChess[2] == 1 || (StartedChess.RedEndChess[2] == 0 && result == 6))
                 {
+                    printf("red3\n");
                     goto redpc3;
                     break;
                 }
             case 4:
                 if (StartedChess.RedEndChess[3] == 1 || (StartedChess.RedEndChess[3] == 0 && result == 6))
                 {
+                    printf("red4\n");
                     goto redpc4;
                     break;
                 }
@@ -1900,7 +1904,7 @@ void MoveChess(const char name[10], int player, int result)
                         jump("red1");
                         attack("red", ChessPointNow.red1[0], ChessPointNow.red1[1]);
                         if (ChessPointNow.red1[0] < 0)
-                            StartedChess.RedEndChess[0] = 0;
+                            StartedChess.RedEndChess[0] = 2;
                         reload("red1", ChessPointNow.red1[0], ChessPointNow.red1[1]);
                         end();
                         return;
@@ -1958,7 +1962,7 @@ void MoveChess(const char name[10], int player, int result)
                         jump("red2");
                         attack("red", ChessPointNow.red2[0], ChessPointNow.red2[1]);
                         if (ChessPointNow.red2[0] < 0)
-                            StartedChess.RedEndChess[1] = 0;
+                            StartedChess.RedEndChess[1] = 2;
                         reload("red2", ChessPointNow.red2[0], ChessPointNow.red2[1]);
                         end();
                         return;
@@ -2016,7 +2020,7 @@ void MoveChess(const char name[10], int player, int result)
                         jump("red3");
                         attack("red", ChessPointNow.red3[0], ChessPointNow.red3[1]);
                         if (ChessPointNow.red3[0] < 0)
-                            StartedChess.RedEndChess[2] = 0;
+                            StartedChess.RedEndChess[2] = 2;
                         reload("red3", ChessPointNow.red3[0], ChessPointNow.red3[1]);
                         end();
                         return;
@@ -2074,7 +2078,7 @@ void MoveChess(const char name[10], int player, int result)
                         jump("red4");
                         attack("red", ChessPointNow.red4[0], ChessPointNow.red4[1]);
                         if (ChessPointNow.red4[0] < 0)
-                            StartedChess.RedEndChess[3] = 0;
+                            StartedChess.RedEndChess[3] = 2;
                         reload("red4", ChessPointNow.red4[0], ChessPointNow.red4[1]);
                         end();
                         return;
@@ -2305,7 +2309,7 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         *y -= result * 47;
         return;
     }
-    if (*x == 315 && *y - result * 47 < 615 && *y != 609)
+    if (*x == 315 && *y - result * 47 < 609 && *y != 609)
     {
         result -= (*y - 609) / 47;
         *y = 562;
@@ -2352,22 +2356,25 @@ void EndJump(const char name[10], int *x, int *y, int result)
                 *x = 103;
             }
         }
+        if (*x == 103 && *y == 424)
+        {
+            *x -= result * 53;
+            *y = 421;
+            return;
+        }
         if (*x == 103 && *y > 421)
         {
-            printf("y1:%d\n", *y);
             *y -= result * 47;
-            if (*y < 421)
+            if (*y <= 421)
             {
-                printf("y2:%d\n", *y);
                 result = (421 - *y) / 47;
                 *y = 421;
-                printf("result2:%d\n", result);
             }
         }
         if (*y == 421 && *x >= 103)
         {
             *x += result * 53;
-            printf("result3:%d\n", result);
+            printf("yellowx:%d\n", *x);
             if (*x > 421)
             {
                 result = ((*x - 421) / 53);
@@ -2396,11 +2403,14 @@ void EndJump(const char name[10], int *x, int *y, int result)
         }
         if (*y == 92 && *x < 474)
         {
+            printf("x0:%d\n", *x);
             *x += result * 53;
-            if (*x > 474)
+            printf("x1:%d\n", *x);
+            if (*x >= 474)
             {
                 result = (*x - 474) / 53;
                 *x = 474;
+                printf("x2:%d\n", *x);
             }
         }
         if (*x == 474 && *y <= 374)
@@ -2435,7 +2445,7 @@ void EndJump(const char name[10], int *x, int *y, int result)
         if (*x == 845 && *y < 421)
         {
             *y += result * 47;
-            if (*y > 421)
+            if (*y >= 421)
             {
                 result = (*y - 421) / 47;
                 *y = 421;
@@ -2473,7 +2483,7 @@ void EndJump(const char name[10], int *x, int *y, int result)
         if (*y == 750 && *x > 474)
         {
             *x -= result * 53;
-            if (*x < 474)
+            if (*x <= 474)
             {
                 result = (474 - *x) / 53;
                 *x = 474;
