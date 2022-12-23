@@ -514,6 +514,9 @@ void type_chose() // 游戏模式
                 // 返回上一层
             }
             break;
+        case SDL_QUIT:
+            quit();
+            break;
         default:
             break;
         }
@@ -560,6 +563,9 @@ void p_c_fight() // 人机大战人数选择
             }
             printf("(%d,%d)\n", p_c_fightEvent.button.x, p_c_fightEvent.button.y); // 在命令行打印鼠标坐标
             break;
+        case SDL_QUIT:
+            quit();
+            break;
         default:
             break;
         }
@@ -604,6 +610,9 @@ void p_p_fight() // 人人对战人数选择
                 return;
                 // 返回上一层
             }
+            break;
+        case SDL_QUIT:
+            quit();
             break;
         default:
             break;
@@ -2260,7 +2269,7 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         *y += result * 47;
         if (*y > 750)
         {
-            result -= (*y - 750);
+            result -= (*y - 750) / 47;
             *y = 750;
             *x -= result * 53;
         }
@@ -2358,6 +2367,7 @@ void EndJump(const char name[10], int *x, int *y, int result)
         }
         if (*x == 103 && *y == 424)
         {
+            printf("enter\n");
             *x -= result * 53;
             *y = 421;
             return;
