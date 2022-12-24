@@ -2,6 +2,7 @@
 #include "SDL2/SDL_image.h"
 #include "SDL2/SDL_ttf.h"
 #include "flyingchess.h"
+#define Normal
 // 头文件
 
 // 声明图形库区
@@ -842,7 +843,7 @@ void begin(int number) // 进入棋盘 二人
     originorder(); // 刷新画笔 打印人数界面
     load_chess();
     int count = 0;
-    SDL_Event begin2Event; // 主事件
+    SDL_Event begin2Event, DeBugEvent, Dice; // 主事件
     while (SDL_WaitEvent(&begin2Event))
     {
         switch (begin2Event.type) // 事件类型
@@ -857,25 +858,33 @@ void begin(int number) // 进入棋盘 二人
             {
                 if (count == 0)
                 {
+#ifdef Normal
                     int result = Dice_point("yellow");
+#endif
                     MoveChess("yellow", 1, result);
                     count = (count + 1) % number;
                 }
                 else if (count == 1)
                 {
+#ifdef Normal
                     int result = Dice_point("blue");
+#endif
                     MoveChess("blue", 2, result);
                     count = (count + 1) % number;
                 }
                 else if (count == 2)
                 {
+#ifdef Normal
                     int result = Dice_point("green");
+#endif
                     MoveChess("green", 3, result);
                     count = (count + 1) % number;
                 }
                 else if (count == 3)
                 {
+#ifdef Normal
                     int result = Dice_point("red");
+#endif
                     MoveChess("red", 4, result);
                     count = (count + 1) % number;
                 }
@@ -891,8 +900,8 @@ void begin(int number) // 进入棋盘 二人
 int Dice_point(const char name[10]) // 骰子
 {
     int result = rand() % 6 + 1;
-    Load_dice(result, name);
     printf("result:%d\n", result);
+    Load_dice(result, name);
     return result;
 }
 void Load_dice(int result, const char name[10]) // 加载骰子
@@ -2139,7 +2148,7 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         *x += 53 * result;
         if (*x > 262)
         {
-            result -= (*x - 262) / 53;
+            result = (*x - 262) / 53;
             *x = 315;
             *y -= 47 * result;
         }
@@ -2157,7 +2166,7 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         *y -= 47 * result;
         if (*y < 92)
         {
-            result -= (92 - *y) / 47;
+            result = (92 - *y) / 47;
             *y = 92;
             *x += result * 53;
         }
@@ -2195,7 +2204,7 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         *y += result * 47;
         if (*y > 233)
         {
-            result -= (*y - 233) / 47;
+            result = (*y - 233) / 47;
             *y = 280;
             *x += result * 53;
         }
@@ -2213,7 +2222,7 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         *x += result * 53;
         if (*x > 845)
         {
-            result -= (*x - 845) / 53;
+            result = (*x - 845) / 53;
             *x = 845;
             *y += result * 47;
         }
@@ -2251,7 +2260,7 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         *x -= result * 53;
         if (*x < 686)
         {
-            result -= (686 - *x) / 53;
+            result = (686 - *x) / 53;
             *x = 633;
             *y += result * 47;
         }
@@ -2269,7 +2278,7 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         *y += result * 47;
         if (*y > 750)
         {
-            result -= (*y - 750) / 47;
+            result = (*y - 750) / 47;
             *y = 750;
             *x -= result * 53;
         }
@@ -2307,8 +2316,8 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         *y -= result * 47;
         if (*y < 609)
         {
-            result -= (609 - *y) / 47;
-            *y = 609;
+            result = (609 - *y) / 47;
+            *y = 562;
             *x -= result * 53;
         }
         return;
@@ -2325,7 +2334,7 @@ void JudgeChess(int *x, int *y, int result) // 判断棋子转弯
         *x -= 53 * result;
         if (*x < 103)
         {
-            result -= (103 - *x) / 53;
+            result = (103 - *x) / 53;
             *x = 103;
             *y -= result * 47;
         }
@@ -2367,10 +2376,9 @@ void EndJump(const char name[10], int *x, int *y, int result)
         }
         if (*x == 103 && *y == 424)
         {
-            printf("enter\n");
-            *x -= result * 53;
+            *x += result * 53;
             *y = 421;
-            return;
+            result -= (*x - 103) / 53;
         }
         if (*x == 103 && *y > 421)
         {
@@ -2413,14 +2421,11 @@ void EndJump(const char name[10], int *x, int *y, int result)
         }
         if (*y == 92 && *x < 474)
         {
-            printf("x0:%d\n", *x);
             *x += result * 53;
-            printf("x1:%d\n", *x);
             if (*x >= 474)
             {
                 result = (*x - 474) / 53;
                 *x = 474;
-                printf("x2:%d\n", *x);
             }
         }
         if (*x == 474 && *y <= 374)

@@ -1,0 +1,7 @@
+[
+{
+  "directory": "E:/Project/flychess/build",
+  "command": "C:\\TDM-GCC-64\\bin\\gcc.exe -g -o CMakeFiles\\flyingchess.dir\\flyingchess.c.obj -c E:\\Project\\flychess\\flyingchess.c",
+  "file": "E:\\Project\\flychess\\flyingchess.c"
+}
+]
