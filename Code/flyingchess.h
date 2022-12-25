@@ -34,7 +34,7 @@ void end();
 void over();
 // 函数声明
 int type = 0;
-struct ChessPointNow
+struct ChessPointNow // 棋子坐标
 {
     int yellow1[2]; // 0为X坐标，1为y坐标
     int yellow2[2];
@@ -76,7 +76,7 @@ struct EndChess
     int endgreenchess;
     int GreenEndChess[4];
 } EndChessNum = {0, {0}, 0, {0}, 0, {0}, 0, {0}};
-struct YellowJumpPonint
+struct YellowJumpPonint // 黄色点坐标
 {
     int LeftYellowPoint[5][2];   // 飞行点之前
     int TopYellowPoint[8][2];    // 飞行点之后
@@ -90,7 +90,7 @@ struct YellowJumpPonint
                  {686, 280},
                  {421, 421},
                  {20, 250}};
-const struct BlueJumpPoint
+const struct BlueJumpPoint // 蓝色点坐标
 {
     int LeftBluePoint[5][2];   // 飞行点之前
     int TopBluePoint[8][2];    // 飞行点之后
@@ -104,7 +104,7 @@ const struct BlueJumpPoint
                {{633, 609}},
                {{474, 374}},
                {{682, 16}}};
-const struct RedJumpPoint
+const struct RedJumpPoint // 红色点坐标
 {
     int LeftRedPoint[5][2];   // 飞行点之前
     int TopRedPoint[8][2];    // 飞行点之后
@@ -118,7 +118,7 @@ const struct RedJumpPoint
               {{262, 562}},
               {{527, 421}},
               {{929, 612}}};
-const struct GreenJumpPoint
+const struct GreenJumpPoint // 绿色点坐标
 {
     int LeftGreenPoint[5][2];   // 飞行点之前
     int TopGreenPoint[8][2];    // 飞行点之后
@@ -132,4 +132,3 @@ const struct GreenJumpPoint
                 {{315, 233}},
                 {{474, 468}},
                 {{276, 837}}};
-// 主函数

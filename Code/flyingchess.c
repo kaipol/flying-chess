@@ -1,8 +1,6 @@
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
-#include "SDL2/SDL_ttf.h"
 #include "flyingchess.h"
-#define Normal
 // 头文件
 
 // 声明图形库区
@@ -653,6 +651,15 @@ void load_chess() // 加载棋子
     load_redchess(ChessPointNow.red4[0], ChessPointNow.red4[1]);
     // 红色
 }
+void originorder() // 初始图形
+{
+    SDL_RenderCopy(Renderer, nowBackGroundTexture, NULL, &nowBackGroundRect);               // 复制画笔
+    SDL_RenderPresent(Renderer);                                                            // 刷新画笔
+    SDL_RenderCopy(Renderer, yellowplayBackGroundTexture, NULL, &yellowplayBackGroundRect); // 复制画笔
+    SDL_RenderPresent(Renderer);                                                            // 刷新画笔
+    SDL_RenderCopy(Renderer, oneBackGroundTexture, NULL, &oneBackGroundRect);               // 复制画笔
+    SDL_RenderPresent(Renderer);                                                            // 刷新画笔
+}
 void reload(const char name[10], int x, int y) // 改变棋子位置并重新加载
 {
     SDL_RenderCopy(Renderer, TapBackGroundTexture, NULL, &TapBackGroundRect);
@@ -858,33 +865,25 @@ void begin(int number) // 进入棋盘 二人
             {
                 if (count == 0)
                 {
-#ifdef Normal
                     int result = Dice_point("yellow");
-#endif
                     MoveChess("yellow", 1, result);
                     count = (count + 1) % number;
                 }
                 else if (count == 1)
                 {
-#ifdef Normal
                     int result = Dice_point("blue");
-#endif
                     MoveChess("blue", 2, result);
                     count = (count + 1) % number;
                 }
                 else if (count == 2)
                 {
-#ifdef Normal
                     int result = Dice_point("green");
-#endif
                     MoveChess("green", 3, result);
                     count = (count + 1) % number;
                 }
                 else if (count == 3)
                 {
-#ifdef Normal
                     int result = Dice_point("red");
-#endif
                     MoveChess("red", 4, result);
                     count = (count + 1) % number;
                 }
@@ -2530,15 +2529,6 @@ void EndJump(const char name[10], int *x, int *y, int result)
         return;
     }
 }
-void originorder() // 初始命令行
-{
-    SDL_RenderCopy(Renderer, nowBackGroundTexture, NULL, &nowBackGroundRect);               // 复制画笔
-    SDL_RenderPresent(Renderer);                                                            // 刷新画笔
-    SDL_RenderCopy(Renderer, yellowplayBackGroundTexture, NULL, &yellowplayBackGroundRect); // 复制画笔
-    SDL_RenderPresent(Renderer);                                                            // 刷新画笔
-    SDL_RenderCopy(Renderer, oneBackGroundTexture, NULL, &oneBackGroundRect);               // 复制画笔
-    SDL_RenderPresent(Renderer);                                                            // 刷新画笔
-}
 void cross()
 {
     if (ChessPointNow.yellow1[0] == 686 && ChessPointNow.yellow1[1] == 280) // ��ɫ
@@ -3447,6 +3437,8 @@ void over()
             switch (overEvent.key.keysym.sym)
             case SDLK_SPACE:
                 quit();
+        case SDL_QUIT:
+            quit();
         default:
             break;
         }
