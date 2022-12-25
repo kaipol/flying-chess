@@ -128,7 +128,6 @@ SDL_Texture *rwinBackGroundTexture = NULL; // 画笔识别图形区域
 SDL_Rect rwinBackGroundRect;               // 显示画笔图形信息，如长宽高
 // 声明图形库区
 // 声明图形库区
-
 #undef main
 int main(int argc, char *argv[]) // 主函数
 {
