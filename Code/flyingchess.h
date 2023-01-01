@@ -20,20 +20,21 @@ void pp(int); // 玩家名称
 void pc(int); // 电脑名称
 int Dice_point(const char *);
 void Load_dice(int, const char *);
-void reload(const char *, int, int);
+void Reload(const char *, int, int);
 void TurnChess(int, int);
 void MoveChess(const char *, int, int);
 void JudgeChess(int *, int *, int);
 void EndJump(const char *, int *, int *, int);
 int EndGame();
-void originorder();
-void cross();
-void jump(char *);
-void attack(char *, int, int); // 击飞棋子
-void end();
-void over();
+void OriginOrder();
+void Cross();
+void Jump(char *);
+void Attack(char *, int, int); // 击飞棋子
+void End();
+void Over();
 // 函数声明
-int type = 0;
+int Type = 0;        // 人机模式区分
+int DeBugType = 0;   // debug模式区分
 struct ChessPointNow // 棋子坐标
 {
     int yellow1[2]; // 0为X坐标，1为y坐标
