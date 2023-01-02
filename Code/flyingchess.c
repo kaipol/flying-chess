@@ -1306,8 +1306,14 @@ void MoveChess(const char name[10], int player, int result)
             if (count1 == 4 && result == 6)
                 count1 = 3;
             int dice = rand() % (4 - count1) + 1;
-            if (result == 6 && count11 != 4 && count11 != 0)
-                dice = count1 + 1;
+            for (int i = 0; i < 4; i++)
+            {
+                if (result == 6 && count11 != 0 && count11 != 4 && StartedChess.BlueEndChess[i] == 0)
+                {
+                    dice = i + 1;
+                    break;
+                }
+            }
             while (1)
             {
                 switch (dice)
@@ -1621,8 +1627,14 @@ void MoveChess(const char name[10], int player, int result)
             if (count1 == 4 && result == 6)
                 count1 = 3;
             int dice = rand() % (4 - count1) + 1;
-            if (result == 6 && count11 != 4 && count11 != 0)
-                dice = count1 + 1;
+            for (int i = 0; i < 4; i++)
+            {
+                if (result == 6 && count11 != 0 && count11 != 4 && StartedChess.GreenEndChess[i] == 0)
+                {
+                    dice = i + 1;
+                    break;
+                }
+            }
             while (1)
             {
                 switch (dice)
@@ -1936,8 +1948,14 @@ void MoveChess(const char name[10], int player, int result)
             if (count1 == 4 && result == 6)
                 count1 = 3;
             int dice = rand() % (4 - count1) + 1;
-            if (result == 6 && count11 != 4 && count11 != 0)
-                dice = count1 + 1;
+            for (int i = 0; i < 4; i++)
+            {
+                if (result == 6 && count11 != 0 && count11 != 4 && StartedChess.RedEndChess[i] == 0)
+                {
+                    dice = i + 1;
+                    break;
+                }
+            }
             while (1)
             {
                 switch (dice)
