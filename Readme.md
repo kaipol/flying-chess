@@ -8,11 +8,16 @@
 
 # 飞行棋制作过程说明 
 ## 注意
-  **&emsp;&emsp;&ensp;窗口大小为1200*900注意可能会超出电脑屏幕**
+-  **窗口大小为1200*900,注意可能会超出电脑屏幕**
+-  **多个同色棋子会堆叠在一处，可能不清楚有几个同色棋子**
 ## 特点 
 -  **使用图形库SDL2实现图形化界面。(图片来自网络)**   
 -  **拥有规则查看模式，PVE模式2-4人，PVP模式2-4人等选择**
 -  **通过控制台输出当前所处模式及提示，当前骰子点数，点击坐标，以及当前棋子**  
+-  **可通过Debug模式控制骰子点数：**
+   -  **在确定进入游戏界面按回车，出现"Enter Debug"即表示进入;**
+   -  **在游戏界面需点击骰子后才可按键盘选择数字,同时控制台会打印"Choose your point"**
+   -  **可在游戏中按ESC按钮退出Debug模式**
  
 ## 编写以及编译  
 - **使用[vscode](https://code.visualstudio.com/)编写**  
@@ -25,11 +30,11 @@
  
 ## 文件结构
 - **Code**  
-  - [**include**](Code/include)**SDL的各种头文件**  
-  - [**flyingchess.c**](Code/flyingchess.c)**主代码**
-  - [**flyingchess.h**](Code/flyingchess.h)**头文件**  
+  - [**include**](./Code/include)**SDL的各种头文件**  
+  - [**flyingchess.c**](./Code/flyingchess.c)**主代码**
+  - [**flyingchess.h**](./Code/flyingchess.h)**头文件**  
   - **SDL.dll、SDL_image.dll：运行所需的SDL动态连接库**
-- rsc  
+- **rsc**  
   &emsp;&emsp;**所需的资源图片**  
  
 ## 代码优点
@@ -44,7 +49,12 @@
 -  <span id="电脑棋子随机选择">**电脑棋子随机选择--随机数加goto实现**<span>  
   **例子--蓝棋**
 ``` c++
-            int dice = rand() % (4 - count1) + 1;  //count1为未出发棋子数
+            int count11 = count1;
+            if (count1 == 4 && result == 6)
+                count1 = 3;
+            int dice = rand() % (4 - count1) + 1;
+            if (result == 6 && count11 != 4 && count11 != 0)
+                dice = count1 + 1;//保证投到六时选择未出发的棋子
             while (1)//通过循环+判断跳过无法行走的棋子
             {
                 switch (dice)
