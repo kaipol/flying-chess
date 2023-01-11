@@ -1,6 +1,6 @@
+#include "flyingchess.h"
 #include "SDL2/SDL.h"
 #include "SDL2/SDL_image.h"
-#include "flyingchess.h"
 // 头文件
 
 // 声明图形库区
@@ -901,9 +901,12 @@ void begin(int number) // 进入棋盘 多人
             break;
         case SDL_KEYDOWN:
             switch (begin2Event.key.keysym.sym) // 按下ESC键退出调试模式
+            {
             case SDLK_ESCAPE:
                 DeBugType = 0;
-            printf("Exit Debug\n");
+                printf("Exit Debug\n");
+                break;
+            }
             break;
         case SDL_QUIT:
             quit();
