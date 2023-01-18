@@ -174,210 +174,210 @@ int main(int argc, char *argv[]) // 主函数
 // 其他函数区
 void load()                                                                                // 加载图片
 {                                                                                          // 需为完整的相对路径，".."为父目录
-    MainBackGroundSurface = IMG_Load("../rsc/image/menu.png");                             //("/*图片文件名*/")//菜单界面
+    MainBackGroundSurface = IMG_Load("../src/image/menu.png");                             //*图片文件名*/")//菜单界面
     MainBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, MainBackGroundSurface); // 将画笔放在窗口上
     MainBackGroundRect.x = 0;                                                              // 同下
     MainBackGroundRect.y = 0;                                                              // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     MainBackGroundRect.w = 1000;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     MainBackGroundRect.h = 900;                                                            // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    TypeBackGroundSurface = IMG_Load("../rsc/image/type_chose.png");                       //("/*图片文件名*/")//游戏模式选择
+    TypeBackGroundSurface = IMG_Load("../src/image/type_chose.png");                       //*图片文件名*/)//游戏模式选择
     TypeBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, TypeBackGroundSurface); // 将画笔放在窗口上
     TypeBackGroundRect.x = 0;                                                              // 同下
     TypeBackGroundRect.y = 0;                                                              // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     TypeBackGroundRect.w = 1000;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     TypeBackGroundRect.h = 900;                                                            // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    NumBackGroundSurface = IMG_Load("../rsc/image/num_chose.png");                       //("/*图片文件名*/")//人数选择
+    NumBackGroundSurface = IMG_Load("../src/image/num_chose.png");                       ///*图片文件名*/")//人数选择
     NumBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, NumBackGroundSurface); // 将画笔放在窗口上
     NumBackGroundRect.x = 0;                                                             // 同下
     NumBackGroundRect.y = 0;                                                             // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     NumBackGroundRect.w = 1000;                                                          // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     NumBackGroundRect.h = 900;                                                           // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    TapBackGroundSurface = IMG_Load("../rsc/image/chess tap.png");                       //("/*图片文件名*/")//人数选择
+    TapBackGroundSurface = IMG_Load("../src/image/chess tap.png");                       //*图片文件名*/")//人数选择
     TapBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, TapBackGroundSurface); // 将画笔放在窗口上
     TapBackGroundRect.x = 0;                                                             // 同下
     TapBackGroundRect.y = 0;                                                             // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     TapBackGroundRect.w = 1000;                                                          // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     TapBackGroundRect.h = 900;                                                           // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    RuleBackGroundSurface = IMG_Load("../rsc/image/rule.png");                             //("/*图片文件名*/")//规则界面
+    RuleBackGroundSurface = IMG_Load("../src/image/rule.png");                             //*图片文件名*/")//规则界面
     RuleBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, RuleBackGroundSurface); // 将画笔放在窗口上
     RuleBackGroundRect.x = 0;                                                              // 同下
     RuleBackGroundRect.y = 0;                                                              // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     RuleBackGroundRect.w = 1000;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     RuleBackGroundRect.h = 900;                                                            // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    BulBackGroundSurface = IMG_Load("../rsc/image/blue.png");                            //("/*图片文件名*/")//规则界面
+    BulBackGroundSurface = IMG_Load("../src/image/blue.png");                            //*图片文件名*/")//规则界面
     BulBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, BulBackGroundSurface); // 将画笔放在窗口上
     BulBackGroundRect.x = 0;                                                             // 同下
     BulBackGroundRect.y = 0;                                                             // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     BulBackGroundRect.w = 50;                                                            // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     BulBackGroundRect.h = 50;                                                            // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    YellowBackGroundSurface = IMG_Load("../rsc/image/yellow.png");                             //("/*图片文件名*/")//规则界面
+    YellowBackGroundSurface = IMG_Load("../src/image/yellow.png");                             //*图片文件名*/")//规则界面
     YellowBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, YellowBackGroundSurface); // 将画笔放在窗口上
     YellowBackGroundRect.x = 0;                                                                // 同下
     YellowBackGroundRect.y = 0;                                                                // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     YellowBackGroundRect.w = 50;                                                               // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     YellowBackGroundRect.h = 50;                                                               // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    GreenBackGroundSurface = IMG_Load("../rsc/image/green.png");                             //("/*图片文件名*/")//规则界面
+    GreenBackGroundSurface = IMG_Load("../src/image/green.png");                             //*图片文件名*/")//规则界面
     GreenBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, GreenBackGroundSurface); // 将画笔放在窗口上
     GreenBackGroundRect.x = 0;                                                               // 同下
     GreenBackGroundRect.y = 0;                                                               // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     GreenBackGroundRect.w = 50;                                                              // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     GreenBackGroundRect.h = 50;                                                              // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    RedBackGroundSurface = IMG_Load("../rsc/image/red.png");                             //("/*图片文件名*/")//规则界面
+    RedBackGroundSurface = IMG_Load("../src/image/red.png");                             //*图片文件名*/")//规则界面
     RedBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, RedBackGroundSurface); // 将画笔放在窗口上
     RedBackGroundRect.x = 0;                                                             // 同下
     RedBackGroundRect.y = 0;                                                             // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     RedBackGroundRect.w = 50;                                                            // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     RedBackGroundRect.h = 50;                                                            // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    pp2BackGroundSurface = IMG_Load("../rsc/image/pp2.png");                             //("/*图片文件名*/")//规则界面
+    pp2BackGroundSurface = IMG_Load("../src/image/pp2.png");                             //*图片文件名*/")//规则界面
     pp2BackGroundTexture = SDL_CreateTextureFromSurface(Renderer, pp2BackGroundSurface); // 将画笔放在窗口上
     pp2BackGroundRect.x = 155;                                                           // 同下
     pp2BackGroundRect.y = 230;                                                           // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     pp2BackGroundRect.w = 690;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     pp2BackGroundRect.h = 530;                                                           // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    pp3BackGroundSurface = IMG_Load("../rsc/image/pp3.png");                             //("/*图片文件名*/")//规则界面
+    pp3BackGroundSurface = IMG_Load("../src/image/pp3.png");                             //*图片文件名*/")//规则界面
     pp3BackGroundTexture = SDL_CreateTextureFromSurface(Renderer, pp3BackGroundSurface); // 将画笔放在窗口上
     pp3BackGroundRect.x = 155;                                                           // 同下
     pp3BackGroundRect.y = 230;                                                           // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     pp3BackGroundRect.w = 690;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     pp3BackGroundRect.h = 530;                                                           // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    pp4BackGroundSurface = IMG_Load("../rsc/image/pp4.png");                             //("/*图片文件名*/")//规则界面
+    pp4BackGroundSurface = IMG_Load("../src/image/pp4.png");                             //*图片文件名*/")//规则界面
     pp4BackGroundTexture = SDL_CreateTextureFromSurface(Renderer, pp4BackGroundSurface); // 将画笔放在窗口上
     pp4BackGroundRect.x = 155;                                                           // 同下
     pp4BackGroundRect.y = 230;                                                           // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     pp4BackGroundRect.w = 690;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     pp4BackGroundRect.h = 530;                                                           // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    pc2BackGroundSurface = IMG_Load("../rsc/image/pc2.png");                             //("/*图片文件名*/")//规则界面
+    pc2BackGroundSurface = IMG_Load("../src/image/pc2.png");                             //*图片文件名*/")//规则界面
     pc2BackGroundTexture = SDL_CreateTextureFromSurface(Renderer, pc2BackGroundSurface); // 将画笔放在窗口上
     pc2BackGroundRect.x = 155;                                                           // 同下
     pc2BackGroundRect.y = 230;                                                           // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     pc2BackGroundRect.w = 690;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     pc2BackGroundRect.h = 530;                                                           // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    pc3BackGroundSurface = IMG_Load("../rsc/image/pc3.png");                             //("/*图片文件名*/")//规则界面
+    pc3BackGroundSurface = IMG_Load("../src/image/pc3.png");                             //*图片文件名*/")//规则界面
     pc3BackGroundTexture = SDL_CreateTextureFromSurface(Renderer, pc3BackGroundSurface); // 将画笔放在窗口上
     pc3BackGroundRect.x = 155;                                                           // 同下
     pc3BackGroundRect.y = 230;                                                           // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     pc3BackGroundRect.w = 690;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     pc3BackGroundRect.h = 530;                                                           // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    pc4BackGroundSurface = IMG_Load("../rsc/image/pc4.png");                             //("/*图片文件名*/")//规则界面
+    pc4BackGroundSurface = IMG_Load("../src/image/pc4.png");                             //*图片文件名*/")//规则界面
     pc4BackGroundTexture = SDL_CreateTextureFromSurface(Renderer, pc4BackGroundSurface); // 将画笔放在窗口上
     pc4BackGroundRect.x = 155;                                                           // 同下
     pc4BackGroundRect.y = 230;                                                           // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     pc4BackGroundRect.w = 690;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     pc4BackGroundRect.h = 530;
 
-    oneBackGroundSurface = IMG_Load("../rsc/image/one.png");                             //("/*图片文件名*/")//规则界面
+    oneBackGroundSurface = IMG_Load("../src/image/one.png");                             // 图片文件名*/")//规则界面
     oneBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, oneBackGroundSurface); // 将画笔放在窗口上
     oneBackGroundRect.x = 1000;                                                          // 同下
     oneBackGroundRect.y = 400;                                                           // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     oneBackGroundRect.w = 200;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     oneBackGroundRect.h = 200;                                                           // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    twoBackGroundSurface = IMG_Load("../rsc/image/two.png");                             //("/*图片文件名*/")//规则界面
+    twoBackGroundSurface = IMG_Load("../src/image/two.png");                             // 图片文件名*/")//规则界面
     twoBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, twoBackGroundSurface); // 将画笔放在窗口上
     twoBackGroundRect.x = 1000;                                                          // 同下
     twoBackGroundRect.y = 400;                                                           // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     twoBackGroundRect.w = 200;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     twoBackGroundRect.h = 200;                                                           // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    threeBackGroundSurface = IMG_Load("../rsc/image/three.png");                             //("/*图片文件名*/")//规则界面
+    threeBackGroundSurface = IMG_Load("../src/image/three.png");                             // 图片文件名*/")//规则界面
     threeBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, threeBackGroundSurface); // 将画笔放在窗口上
     threeBackGroundRect.x = 1000;                                                            // 同下
     threeBackGroundRect.y = 400;                                                             // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     threeBackGroundRect.w = 200;                                                             // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     threeBackGroundRect.h = 200;                                                             // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    fourBackGroundSurface = IMG_Load("../rsc/image/four.png");                             //("/*图片文件名*/")//规则界面
+    fourBackGroundSurface = IMG_Load("../src/image/four.png");                             // 图片文件名*/")//规则界面
     fourBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, fourBackGroundSurface); // 将画笔放在窗口上
     fourBackGroundRect.x = 1000;                                                           // 同下
     fourBackGroundRect.y = 400;                                                            // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     fourBackGroundRect.w = 200;                                                            // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     fourBackGroundRect.h = 200;                                                            // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    fiveBackGroundSurface = IMG_Load("../rsc/image/five.png");                             //("/*图片文件名*/")//规则界面
+    fiveBackGroundSurface = IMG_Load("../src/image/five.png");                             // 图片文件名*/")//规则界面
     fiveBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, fiveBackGroundSurface); // 将画笔放在窗口上
     fiveBackGroundRect.x = 1000;                                                           // 同下
     fiveBackGroundRect.y = 400;                                                            // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     fiveBackGroundRect.w = 200;                                                            // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     fiveBackGroundRect.h = 200;                                                            // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    sixBackGroundSurface = IMG_Load("../rsc/image/six.png");                             //("/*图片文件名*/")//规则界面
+    sixBackGroundSurface = IMG_Load("../src/image/six.png");                             // 图片文件名*/")//规则界面
     sixBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, sixBackGroundSurface); // 将画笔放在窗口上
     sixBackGroundRect.x = 1000;                                                          // 同下
     sixBackGroundRect.y = 400;                                                           // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     sixBackGroundRect.w = 200;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     sixBackGroundRect.h = 200;                                                           // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    nowBackGroundSurface = IMG_Load("../rsc/image/now.png");                             //("/*图片文件名*/")//规则界面
+    nowBackGroundSurface = IMG_Load("../src/image/now.png");                             // 图片文件名*/")//规则界面
     nowBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, nowBackGroundSurface); // 将画笔放在窗口上
     nowBackGroundRect.x = 1000;                                                          // 同下
     nowBackGroundRect.y = 0;                                                             // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     nowBackGroundRect.w = 200;                                                           // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     nowBackGroundRect.h = 200;                                                           // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    yellowplayBackGroundSurface = IMG_Load("../rsc/image/yellowplay.png");                             //("/*图片文件名*/")//规则界面
+    yellowplayBackGroundSurface = IMG_Load("../src/image/yellowplay.png");                             // 图片文件名*/")//规则界面
     yellowplayBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, yellowplayBackGroundSurface); // 将画笔放在窗口上
     yellowplayBackGroundRect.x = 1000;                                                                 // 同下
     yellowplayBackGroundRect.y = 200;                                                                  // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     yellowplayBackGroundRect.w = 200;                                                                  // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     yellowplayBackGroundRect.h = 200;                                                                  // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    blueplayBackGroundSurface = IMG_Load("../rsc/image/blueplay.png");                             //("/*图片文件名*/")//规则界面
+    blueplayBackGroundSurface = IMG_Load("../src/image/blueplay.png");                             // 图片文件名*/")//规则界面
     blueplayBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, blueplayBackGroundSurface); // 将画笔放在窗口上
     blueplayBackGroundRect.x = 1000;                                                               // 同下
     blueplayBackGroundRect.y = 200;                                                                // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     blueplayBackGroundRect.w = 200;                                                                // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     blueplayBackGroundRect.h = 200;                                                                // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    greenplayBackGroundSurface = IMG_Load("../rsc/image/greenplay.png");                             //("/*图片文件名*/")//规则界面
+    greenplayBackGroundSurface = IMG_Load("../src/image/greenplay.png");                             // 图片文件名*/")//规则界面
     greenplayBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, greenplayBackGroundSurface); // 将画笔放在窗口上
     greenplayBackGroundRect.x = 1000;                                                                // 同下
     greenplayBackGroundRect.y = 200;                                                                 // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     greenplayBackGroundRect.w = 200;                                                                 // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     greenplayBackGroundRect.h = 200;                                                                 // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    redplayBackGroundSurface = IMG_Load("../rsc/image/redplay.png");                             //("/*图片文件名*/")//规则界面
+    redplayBackGroundSurface = IMG_Load("../src/image/redplay.png");                             // 图片文件名*/")//规则界面
     redplayBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, redplayBackGroundSurface); // 将画笔放在窗口上
     redplayBackGroundRect.x = 1000;                                                              // 同下
     redplayBackGroundRect.y = 200;                                                               // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     redplayBackGroundRect.w = 200;                                                               // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     redplayBackGroundRect.h = 200;                                                               // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    ywinBackGroundSurface = IMG_Load("../rsc/image/ywin.png");                             //("/*图片文件名*/")//规则界面
+    ywinBackGroundSurface = IMG_Load("../src/image/ywin.png");                             // 图片文件名*/")//规则界面
     ywinBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, ywinBackGroundSurface); // 将画笔放在窗口上
     ywinBackGroundRect.x = 155;                                                            // 同下
     ywinBackGroundRect.y = 230;                                                            // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     ywinBackGroundRect.w = 690;                                                            // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     ywinBackGroundRect.h = 530;                                                            // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    bwinBackGroundSurface = IMG_Load("../rsc/image/bwin.png");                             //("/*图片文件名*/")//规则界面
+    bwinBackGroundSurface = IMG_Load("../src/image/bwin.png");                             // 图片文件名*/")//规则界面
     bwinBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, bwinBackGroundSurface); // 将画笔放在窗口上
     bwinBackGroundRect.x = 155;                                                            // 同下
     bwinBackGroundRect.y = 230;                                                            // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     bwinBackGroundRect.w = 690;                                                            // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     bwinBackGroundRect.h = 530;                                                            // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    gwinBackGroundSurface = IMG_Load("../rsc/image/gwin.png");                             //("/*图片文件名*/")//规则界面
+    gwinBackGroundSurface = IMG_Load("../src/image/gwin.png");                             // 图片文件名*/")//规则界面
     gwinBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, gwinBackGroundSurface); // 将画笔放在窗口上
     gwinBackGroundRect.x = 155;                                                            // 同下
     gwinBackGroundRect.y = 230;                                                            // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
     gwinBackGroundRect.w = 690;                                                            // 数值自行改变    /*MainBackGroundSurface->w;//使用原图宽w*/  //定义宽
     gwinBackGroundRect.h = 530;                                                            // 数值自行改变    /*MainBackGroundSurface->h;//使用原图高h*/  //定义高
 
-    rwinBackGroundSurface = IMG_Load("../rsc/image/rwin.png");                             //("/*图片文件名*/")//规则界面
+    rwinBackGroundSurface = IMG_Load("../src/image/rwin.png");                             // 图片文件名*/")//规则界面
     rwinBackGroundTexture = SDL_CreateTextureFromSurface(Renderer, rwinBackGroundSurface); // 将画笔放在窗口上
     rwinBackGroundRect.x = 155;                                                            // 同下
     rwinBackGroundRect.y = 230;                                                            // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
@@ -394,7 +394,7 @@ void load_yellowchess(int x, int y)
 void load_bluechess(int x, int y)
 {
     BulBackGroundRect.x = x;                                                  // 同下
-    BulBackGroundRect.y = y;                                                  // 加载图片起始点是以窗口x=0，y=0为坐标系开始的
+    BulBackGroundRect.y = y;                                                  // 加载图片起始点是以窗口x=0,y=0为坐标系开始的
     SDL_RenderCopy(Renderer, BulBackGroundTexture, NULL, &BulBackGroundRect); // 复制画笔
     SDL_RenderPresent(Renderer);                                              // 刷新画笔 打印人数界面
 }
@@ -2685,7 +2685,7 @@ void Cross()
     {
         Reload("yellow4", ChessPointNow.yellow4[0], 562);
     }
-    /////////
+    //////
     if (ChessPointNow.blue1[0] == 633 && ChessPointNow.blue1[1] == 609)
     {
         Reload("blue1", 315, ChessPointNow.blue1[1]);
@@ -2702,7 +2702,6 @@ void Cross()
     {
         Reload("blue4", 315, ChessPointNow.blue4[1]);
     }
-    ////////////////
     if (ChessPointNow.green1[0] == 315 && ChessPointNow.green1[1] == 233)
     {
         Reload("green1", 633, ChessPointNow.green1[1]);
@@ -2719,7 +2718,7 @@ void Cross()
     {
         Reload("green4", 633, ChessPointNow.green4[1]);
     }
-    //////////////
+    /////
     if (ChessPointNow.red1[0] == 262 && ChessPointNow.red1[1] == 562)
     {
         Reload("red1", ChessPointNow.red1[0], 280);
@@ -2831,7 +2830,7 @@ void Jump(char name[10])
             }
         }
     }
-    //////////////////////////////
+    ///
     if (!strcmp(name, "blue1"))
     {
         for (int i = 0; i < 4; i++)
@@ -2924,7 +2923,7 @@ void Jump(char name[10])
             }
         }
     }
-    /////////////////////////////
+    //
     if (!strcmp(name, "green1"))
     {
         for (int i = 0; i < 4; i++)
@@ -3017,7 +3016,7 @@ void Jump(char name[10])
             }
         }
     }
-    /////////////////////////////////
+    //////
     if (!strcmp(name, "red1"))
     {
         for (int i = 0; i < 4; i++)
@@ -3149,7 +3148,7 @@ void Attack(char *name, int x, int y)
             StartedChess.BlueEndChess[3] = 0;
             EndChessNum.BlueEndChess[3] = 0;
         }
-        //////蓝色
+        /// 蓝色
         if (ChessPointNow.green1[0] == x && ChessPointNow.green1[1] == y)
         {
             ChessPointNow.green1[0] = 85;
@@ -3182,7 +3181,7 @@ void Attack(char *name, int x, int y)
             StartedChess.GreenEndChess[3] = 0;
             EndChessNum.GreenEndChess[3] = 0;
         }
-        //////绿色
+        /// 绿色
         if (ChessPointNow.red1[0] == x && ChessPointNow.red1[1] == y)
         {
             ChessPointNow.red1[0] = 795;
@@ -3250,7 +3249,7 @@ void Attack(char *name, int x, int y)
             StartedChess.YellowEndChess[3] = 0;
             EndChessNum.YellowEndChess[3] = 0;
         }
-        //////黄色
+        /// 黄色
         if (ChessPointNow.green1[0] == x && ChessPointNow.green1[1] == y)
         {
             ChessPointNow.green1[0] = 85;
@@ -3283,7 +3282,7 @@ void Attack(char *name, int x, int y)
             StartedChess.GreenEndChess[3] = 0;
             EndChessNum.GreenEndChess[3] = 0;
         }
-        //////绿色
+        /// 绿色
         if (ChessPointNow.red1[0] == x && ChessPointNow.red1[1] == y)
         {
             ChessPointNow.red1[0] = 795;
@@ -3351,7 +3350,7 @@ void Attack(char *name, int x, int y)
             StartedChess.YellowEndChess[3] = 0;
             EndChessNum.YellowEndChess[3] = 0;
         }
-        //////黄色
+        /// 黄色
         if (ChessPointNow.blue1[0] == x && ChessPointNow.blue1[1] == y)
         {
             ChessPointNow.blue1[0] = 800;
@@ -3384,7 +3383,7 @@ void Attack(char *name, int x, int y)
             StartedChess.BlueEndChess[3] = 0;
             EndChessNum.BlueEndChess[3] = 0;
         }
-        //////蓝色
+        /// 蓝色
         if (ChessPointNow.red1[0] == x && ChessPointNow.red1[1] == y)
         {
             ChessPointNow.red1[0] = 795;
@@ -3452,7 +3451,7 @@ void Attack(char *name, int x, int y)
             StartedChess.YellowEndChess[3] = 0;
             EndChessNum.YellowEndChess[3] = 0;
         }
-        //////黄色
+        /// 黄色
         if (ChessPointNow.blue1[0] == x && ChessPointNow.blue1[1] == y)
         {
             ChessPointNow.blue1[0] = 800;
@@ -3485,7 +3484,7 @@ void Attack(char *name, int x, int y)
             StartedChess.BlueEndChess[3] = 0;
             EndChessNum.BlueEndChess[3] = 0;
         }
-        //////蓝色
+        /// 蓝色
         if (ChessPointNow.green1[0] == x && ChessPointNow.green1[1] == y)
         {
             ChessPointNow.green1[0] = 85;
@@ -3518,7 +3517,7 @@ void Attack(char *name, int x, int y)
             StartedChess.GreenEndChess[3] = 0;
             EndChessNum.GreenEndChess[3] = 0;
         }
-        //////绿色
+        /// 绿色
     }
 }
 void End()
